@@ -11,7 +11,7 @@ jobs:
       - name: Install python dependencies
         run: pip3 install chevron toml
       - name: Install basictex
-        run: brew install --cask basictex pandoc
+        run: brew install pandoc --cask basictex
       - name: Update PATH
         run: echo "/Library/TeX/texbin/" >> $GITHUB_PATH
       - name: Install latex dependencies
