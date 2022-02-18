@@ -1,59 +1,66 @@
+<!-- Summary -->
 {{# summary }}
-{{ title_header }} {{ title }}
+# {{ title }}
 
-{{ text }}
+{{ body }}
 {{/summary}}
 
+<!-- Experience -->
 {{# experience }}
-{{ title_header }} {{ title }}
+# {{ title }}
 
 {{# list }}
-{{ subtitle_header }} {{ title }}
+## {{ title }}
 
-{{ text }}
+**{{from}} - {{to}}** {{short}}
+
+{{ body }}
+
 {{/list}}
 {{/experience}}
 
+<!-- Education -->
+
 {{# education }}
-{{ title_header }} {{ title }}
+# {{ title }}
 
 {{# list }}
-{{ subtitle_header }} {{ title }}
+**{{ title }}**. {{date}}. {{ center }}
 
-{{ text }}
 {{/list}}
 {{/education}}
 
-{{# courses }}
-{{ title_header }} {{ title }}
+<!-- Formation -->
+
+{{# formation }}
+# {{ title }}
 
 {{# list }}
-{{ subtitle_header }} {{ title }}
+**{{ title }}:** {{ date }} {{ body }} <{{{link}}}>
 
-{{ text }}
 {{/list}}
-{{/courses}}
+{{/formation}}
+
+<!-- Github -->
 
 {{# github }}
-{{ title_header }} {{ title }}
+# {{ title }}
 
 {{# list }}
-{{ subtitle_header }} {{ title }}
+**{{ title }}:** {{ body }} <{{{ link }}}>
 
-{{ text }}
 {{/list}}
 {{/github}}
 
+<!-- Other information -->
+
 {{# other }}
-{{ title_header }} {{ title }}
+# {{ title }}
 
 {{# list }}
-{{ subtitle_header }} {{ title }}
+## {{ title }}
 
-{{ text }}
+{{ body }}
+
 {{/list}}
 {{/other}}
-
-{{# footnotes }}
-[^{{ index }}]: {{ content }}
-{{/footnotes}}

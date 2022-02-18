@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  build:
+    runs-on: macos-latest # Should have Arial installed
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install python dependencies
+        run: pip install chevron toml
+      - name: Install basictex
+        run: brew install --cask basictex
+      - name: Install latex dependencies
+        run: |
+          sudo tlmgr update --self
+          sudo tlmgr install enumitem sectsty
+      - name: Create pdf file
+        run: make
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Altair_Bueno
+          path: out/cv.pdf

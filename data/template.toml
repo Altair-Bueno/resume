@@ -1,6 +1,4 @@
-title_header = '#'
-subtitle_header = '##'
-
+# Pandoc configuration
 [pandoc]
 # Author
 author = [
@@ -10,7 +8,7 @@ author = [
 date = "2022-02-18"
 # Font (must be installed on your system)
 mainfont = "Arial"
-# The name tu put on your resume
+# The name to put on your resume
 name = "Altair Bueno"
 # keywords added to the PDF file
 keywords = [
@@ -19,13 +17,13 @@ keywords = [
 ]
 # left-column: a list of lines you want in the left column, directly under the name on the first page.
 left-column = [
-    "Software Engineer Student",
-    "Email business.altair.bueno@outlook.com"
+    "Software Engineer",
+    "**Email** business.altair.bueno@outlook.com"
 ]
 # right-column: a list of lines you want in the right column, directly under the name on the first page.
 right-column = [
-    "Website altair-bueno.github.io",
-    "GitHub github.com/Altair-Bueno",
+    "**Website** altair-bueno.github.io",
+    "**GitHub** github.com/Altair-Bueno",
 ]
 
 # fontsize : default 10pt.
@@ -38,30 +36,76 @@ right-column = [
 
 [summary]
 title = "Summary"
-text = "This is some sample text"
+body = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis 
+aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+officia deserunt mollit anim id est laborum."""
 
-# [experience]
-# title = "Experience"
-# text = ""
+[experience]
+title = "Experience"
 
-# [education]
-# title = "Education"
+[[experience.list]]
+title = "Neque sodales ut etiam sit amet"
+from = "May 2020"
+to = "September 2021"
+short = "Remote full time"
+body = """Neque sodales ut etiam sit amet. Nunc sed id semper risus in hendrerit 
+gravida rutrum. Massa ultricies mi quis hendrerit dolor magna. Lorem donec massa 
+sapien faucibus et molestie ac feugiat sed. Risus sed vulputate odio ut. Erat 
+imperdiet sed euismod nisi porta lorem mollis. Scelerisque in dictum non consectetur 
+a erat. Ullamcorper sit amet risus nullam eget felis. Tincidunt id aliquet risus 
+feugiat in ante metus. Arcu vitae elementum curabitur vitae nunc sed. Eu feugiat 
+pretium nibh ipsum consequat. Faucibus purus in massa tempor nec feugiat."""
 
-# [courses]
-# title = "Courses"
+[[experience.list]]
+title = "Sit amet est placerat in egestas"
+from = "May 2019"
+to = "September May 2020"
+body = """Sit amet est placerat in egestas erat imperdiet sed euismod. Magna ac 
+placerat vestibulum lectus mauris ultrices eros in. Amet mauris commodo quis imperdiet. 
+In vitae turpis massa sed elementum tempus. Volutpat commodo sed egestas egestas 
+fringilla phasellus. Pretium vulputate sapien nec sagittis. Ac turpis egestas integer 
+eget. Venenatis a condimentum vitae sapien pellentesque. Posuere lorem ipsum dolor 
+sit amet consectetur adipiscing elit duis. Cras pulvinar mattis nunc sed blandit 
+libero. Natoque penatibus et magnis dis parturient montes nascetur. Malesuada nunc 
+vel risus commodo viverra maecenas accumsan. Amet commodo nulla facilisi nullam vehicula 
+ipsum a arcu. Enim sed faucibus turpis in. At volutpat diam ut venenatis tellus in metus 
+vulputate eu. Egestas integer eget aliquet nibh praesent."""
 
-# [github]
-# title = "Github"
+[education]
+title = "Education"
+
+[[education.list]]
+title = "Bachelor of Software Engineering"
+date = "May 2021"
+center = "University of Málaga, Spain"
+
+[formation]
+title = "Formation"
+
+[[formation.list]]
+title = "Sample formation"
+date = "2021"
+link = "https://example.org"
+
+[github]
+title = "Github"
+
+[[github.list]]
+title = "rquote"
+body = 'SPA made with Rust, WASM, Yew and Animechan API'
+link = "https://github.com/Altair-Bueno/rquote"
+
+[[github.list]]
+title = "cw"
+body = "A faster GNU wc built with Rust"
+link = "https://github.com/Altair-Bueno/cw"
 
 # [other]
 # title = "Miscellaneous"
 
-# Lists 
-
-# [[experience.list]]
-# title = "Experience n1"
-# text = 'Example experience'
-
-#[[footnotes]]
-#index = 1
-#content = "example.org"
+# [[other.list]]
+# title = "Strongly typed languages"
+# body = "I love typed languages"
