@@ -1,0 +1,67 @@
+title_header = '#'
+subtitle_header = '##'
+
+[pandoc]
+# Author
+author = [
+    "Altair Bueno",
+]
+# Date (on UNIX use `date '+%Y-%m-%d'`)
+date = "2022-02-18"
+# Font (must be installed on your system)
+mainfont = "Arial"
+# The name tu put on your resume
+name = "Altair Bueno"
+# keywords added to the PDF file
+keywords = [
+    "Altair Bueno",
+    "Resume",
+]
+# left-column: a list of lines you want in the left column, directly under the name on the first page.
+left-column = [
+    "Software Engineer Student",
+    "Email business.altair.bueno@outlook.com"
+]
+# right-column: a list of lines you want in the right column, directly under the name on the first page.
+right-column = [
+    "Website altair-bueno.github.io",
+    "GitHub github.com/Altair-Bueno",
+]
+
+# fontsize : default 10pt.
+# fontenc : default T1.
+# urlcolor : used in PDF, default blue.
+# linkcolor : used in PDF, default magenta.
+# numbersections : number sections, default off.
+# name-color : the SVG name of the font color used for your name on the resume. For example DarkSlateGray. Note that this option also changes the font used for your name to bold and sans serif.
+# section-color : the SVG name of the font color used for sections. For example Tomato. Note that this option also changes the section font to bold and sans serif.
+
+[summary]
+title = "Summary"
+text = "This is some sample text"
+
+# [experience]
+# title = "Experience"
+# text = ""
+
+# [education]
+# title = "Education"
+
+# [courses]
+# title = "Courses"
+
+# [github]
+# title = "Github"
+
+# [other]
+# title = "Miscellaneous"
+
+# Lists 
+
+# [[experience.list]]
+# title = "Experience n1"
+# text = 'Example experience'
+
+#[[footnotes]]
+#index = 1
+#content = "example.org"
