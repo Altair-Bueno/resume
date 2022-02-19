@@ -5,9 +5,11 @@
 - LaTeX 
   - macOS: Basictex
   - Linux: TexLive
-- [Pandoc](https://pandoc.org/)
+- Make
 - [Python 3](https://www.python.org)
 - Arial Font
+
+On the terminal run:
 
 ```bash
 # LaTeX packages
@@ -17,6 +19,8 @@ sudo tlmgr install enumitem sectsty
 pip install chevron toml
 ```
 ## Generate the resume PDF
+
+On the terminal run:
 
 ```bash
 make

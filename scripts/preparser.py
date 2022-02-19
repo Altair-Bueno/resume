@@ -3,12 +3,16 @@ from dateutil.parser import parse
 from toml import load,dump
 from sys import argv
 
+__DEFAULT_VALUES = {
+    'date':str(date.today()),
+    'fontsize': '10pt',
+    'fontenc':'T1',
+    'urlcolor':'blue',
+    'linkcolor':'magenta',
+}
+
 def set_default_values(data)-> dict:
-    if data['pandoc'] == None: data['pandoc'] = {}
-    data['pandoc']['date'] = str(date.today())
-
-
-    return data
+    return __DEFAULT_VALUES | data
 
 def modify_data(data):
     data = set_default_values(data)

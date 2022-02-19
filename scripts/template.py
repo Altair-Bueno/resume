@@ -13,7 +13,7 @@ def main():
 
     data = load(data_file)
 
-    result = render(og_file,data)
+    result = render(og_file,data,def_ldel='<<',def_rdel='>>')
     dst_file.write(result)
 
     og_file.close()

@@ -12,13 +12,10 @@ clean:
 
 # Aditional formulas
 
-out/cv.pdf: $(PANDOC_TEMPLATE) out out/cv.md out/metadata.json
-	pandoc $(PANDOC_ARGUMENTS) --output=$@ out/cv.md
+out/cv.pdf: out out/cv.tex
+	cd out; xelatex cv.tex -output-directory=../out
 
-out/cv.md: scripts/template.py out/template.toml src/cv.md.mustache out
-	python3 $(patsubst out,$@,$^)
-
-out/metadata.json: scripts/metadata.py out/template.toml out
+out/cv.tex: scripts/template.py out/template.toml templates/jb2-modern.tex out
 	python3 $(patsubst out,$@,$^)
 
 out/template.toml: scripts/preparser.py data/template.toml
