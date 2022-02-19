@@ -21,8 +21,8 @@ out/cv.md: scripts/template.py out/template.toml src/cv.md.mustache out
 out/metadata.json: scripts/metadata.py out/template.toml out
 	python3 $(patsubst out,$@,$^)
 
-out/template.toml: data/template.toml
-	cp $^ $@
+out/template.toml: scripts/preparser.py data/template.toml
+	python3 $^ $@
 
 out:
 	mkdir $@

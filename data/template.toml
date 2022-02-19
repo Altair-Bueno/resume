@@ -4,13 +4,13 @@
 author = [
     "Altair Bueno",
 ]
-# Date (on UNIX use `date '+%Y-%m-%d'`)
-date = "2022-02-18"
-# Font (must be installed on your system)
+# date: Date to show on you resume
+# date = "YYYY-MM-DD
+# mainfont: Font to use (must be installed on your system)
 mainfont = "Arial"
-# The name to put on your resume
+# name: The name to put on your resume
 name = "Altair Bueno"
-# keywords added to the PDF file
+# keywords: keywords added to the PDF file
 keywords = [
     "Altair Bueno",
     "Resume",
@@ -95,12 +95,12 @@ title = "Github"
 
 [[github.list]]
 title = "rquote"
-body = 'SPA made with Rust, WASM, Yew and Animechan API'
+summary = 'SPA made with Rust, WASM and Boostrap'
 link = "https://github.com/Altair-Bueno/rquote"
 
 [[github.list]]
 title = "cw"
-body = "A faster GNU wc built with Rust"
+summary = "A faster GNU wc built with Rust"
 link = "https://github.com/Altair-Bueno/cw"
 
 # [other]
@@ -108,4 +108,4 @@ link = "https://github.com/Altair-Bueno/cw"
 
 # [[other.list]]
 # title = "Strongly typed languages"
-# body = "I love typed languages"
+# summary = "I love typed languages"
