@@ -16,7 +16,7 @@ On the terminal run:
 sudo tlmgr update --self
 sudo tlmgr install enumitem sectsty
 # Python packages
-pip install chevron toml
+pip install chevron toml python-dateutil
 ```
 ## Generate the resume PDF
 

@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install python dependencies
-        run: pip3 install chevron toml
+        run: pip3 install chevron toml python-dateutil
       - name: Install required packages
         run: |
           brew install --cask basictex
