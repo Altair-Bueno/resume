@@ -9,6 +9,7 @@ keywords = ["Altair Bueno","Resume",]
 # fontsize : default 10pt.
 # fontenc : default T1.
 # urlcolor : used in PDF, default blue.
+urlcolor = 'blue'
 # linkcolor : used in PDF, default magenta.
 # numbersections : number sections, default off.
 
@@ -17,15 +18,15 @@ keywords = ["Altair Bueno","Resume",]
 name = 'Software Engineer'
 [[left-column]]
 name = 'Email'
-link = 'mailto:business.altair.bueno@outlook.com'
+link = {to = 'mailto:business.altair.bueno@outlook.com',text = "business.altair.bueno@outlook.com" }
 
 # right-column: a list of lines you want in the right column, directly under the name on the first page.
 [[right-column]]
 name = 'Website'
-link = 'https://altair-bueno.github.io'
+link = {to = 'https://altair-bueno.github.io',text = 'altair-bueno.github.io'}
 [[right-column]]
 name = 'GitHub'
-link = 'https://github.com/Altair-Bueno'
+link = {to = 'https://github.com/Altair-Bueno',text = 'Altair-Bueno'}
 
 [summary]
 title = "Summary"
@@ -36,44 +37,71 @@ aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugia
 nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
 officia deserunt mollit anim id est laborum."""
 
+[skills]
+title = "Skills"
+cols = 6
+list = [
+    "Rust","Tokio","Yew",
+    "Java", "Hibernate",
+    "Python","Docker",
+    "Git","GitHub",
+    "Shell","UML",
+]
+
 [experience]
 title = "Experience"
 
 [[experience.list]]
-title = "Neque sodales ut etiam sit amet"
+company = "AWS"
 from = "May 2020"
 to = "September 2021"
-short = "Remote full time"
-body = """Neque sodales ut etiam sit amet. Nunc sed id semper risus in hendrerit 
-gravida rutrum. Massa ultricies mi quis hendrerit dolor magna. Lorem donec massa 
-sapien faucibus et molestie ac feugiat sed. Risus sed vulputate odio ut. Erat 
-imperdiet sed euismod nisi porta lorem mollis. Scelerisque in dictum non consectetur 
-a erat. Ullamcorper sit amet risus nullam eget felis. Tincidunt id aliquet risus 
-feugiat in ante metus. Arcu vitae elementum curabitur vitae nunc sed. Eu feugiat 
-pretium nibh ipsum consequat. Faucibus purus in massa tempor nec feugiat."""
+role = "Frontend Developer"
+description = [
+    "Short desc 1",
+    "Short desc 2",
+    "Sit amet est placerat in egestas erat imperdiet sed euismod. Magna ac",
+    "Vitae turpis massa sed elementum tempu"
+]
+location = "Madrid, Spain"
 
 [[experience.list]]
-title = "Sit amet est placerat in egestas"
-from = "May 2019"
-to = "September May 2020"
-body = """Sit amet est placerat in egestas erat imperdiet sed euismod. Magna ac 
-placerat vestibulum lectus mauris ultrices eros in. Amet mauris commodo quis imperdiet. 
-In vitae turpis massa sed elementum tempus. Volutpat commodo sed egestas egestas 
-fringilla phasellus. Pretium vulputate sapien nec sagittis. Ac turpis egestas integer 
-eget. Venenatis a condimentum vitae sapien pellentesque. Posuere lorem ipsum dolor 
-sit amet consectetur adipiscing elit duis. Cras pulvinar mattis nunc sed blandit 
-libero. Natoque penatibus et magnis dis parturient montes nascetur. Malesuada nunc 
-vel risus commodo viverra maecenas accumsan. Amet commodo nulla facilisi nullam vehicula 
-ipsum a arcu. Enim sed faucibus turpis in. At volutpat diam ut venenatis tellus in metus 
-vulputate eu. Egestas integer eget aliquet nibh praesent."""
+company = "Google"
+to = "May 2022"
+from = "September 2021"
+role = "Backend developer"
+description = [
+    "Short desc 1",
+    "Short desc 2",
+    "Sit amet est placerat in egestas erat imperdiet sed euismod. Magna ac",
+    "Vitae turpis massa sed elementum tempu"
+]
+location = "Madrid, Spain"
+
 
 [education]
 title = "Education"
 
 [[education.list]]
 title = "Bachelor of Software Engineering"
-date = "May 2021"
-center = "University of Málaga, Spain"
+date = "2023"
+institution = "University of Málaga, Spain"
+
+[[education.list]]
+title = "First Certificate in English"
+date = "2018"
+institution = "Cambridge Assesment"
+
+[[education.list]]
+title = "Preliminary English Test"
+date = "2016"
+institution = "Cambridge English"
+
+[[education.list]]
+title = "ISE I"
+date = "2015"
+institution = "Trinity College London"
+
+
 
 [formation]
 title = "Formation"
@@ -81,7 +109,7 @@ title = "Formation"
 [[formation.list]]
 title = "Sample formation"
 date = "2021"
-link = "https://example.org"
+link = {to = "https://example.org", text = "example.org"}
 
 [github]
 title = "Github"
@@ -89,12 +117,12 @@ title = "Github"
 [[github.list]]
 title = "rquote"
 summary = 'SPA made with Rust, WASM and Boostrap'
-link = "https://github.com/Altair-Bueno/rquote"
+link = { to = "https://github.com/Altair-Bueno/rquote",text = "Altair-Bueno/rquote"}
 
 [[github.list]]
 title = "cw"
 summary = "A faster GNU wc built with Rust"
-link = "https://github.com/Altair-Bueno/cw"
+link = { to = "https://github.com/Altair-Bueno/cw",text = "Altair-Bueno/cw"}
 
 # [other]
 # title = "Miscellaneous"

@@ -14,7 +14,6 @@
 % TODO: Fix links. they should look good
 
 \documentclass[<<fontsize>>]{article}
-
 \usepackage{hyperref}
 \usepackage{geometry}
 \usepackage{enumitem}
@@ -24,10 +23,12 @@
 \usepackage[<<fontenc>>]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{fontspec}
+\usepackage{sectsty}
+\usepackage{multicol}
+
+% Document configuration 
 
 \setmainfont{<<mainfont>>}
-
-% The following metadata will show up in the PDF properties
 \hypersetup{
   colorlinks = true,
   urlcolor=<<urlcolor>>,
@@ -38,7 +39,6 @@
   pdfsubject = {Curriculum Vitae},
   pdfpagemode = UseNone
 }
-
 \geometry{
   body={6.5in, 9.0in},
   left=1.0in,
@@ -58,9 +58,8 @@
 \thispagestyle{empty}
 
 % Custom section fonts
-\usepackage{sectsty}
 \sectionfont{\rmfamily\mdseries\Large}
-\subsectionfont{\rmfamily\mdseries\itshape\large}
+\subsectionfont{\rmfamily\mdseries\bfseries\large}
 
 % Section numbers or not (default)
 <<# numbersections >>\setcounter{secnumdepth}{5}<</ numbersections >>
@@ -68,9 +67,9 @@
 
 % By putting an empty \item[] at the start of the list, the list
 % starts on a new line.
-\setlist[itemize]{leftmargin=1em,label={--},before=\item[]}
+\setlist[itemize]{leftmargin=1em,before=\item[]}
+%\setlist[itemize]{leftmargin=1em,label={--},before=\item[]} % label changes the bullet character
 \setlist[description]{leftmargin=0em, style=sameline}
-
 % Don't use monospace font for URLs
 \urlstyle{same}
 
@@ -83,61 +82,82 @@
 
 \begin{minipage}[t]{0.495\textwidth}
   <<#left-column>>
-  \textbf{<<name>>} \url{<<link>>} \\
+  \textbf{<<name>>} <<#link>>\href{<<to>>}{<<text>>}<</link>>\\
   <</left-column>>
 \end{minipage} % Don't use empty lines after \end and the next \begin{minipage}.
 \begin{minipage}[t]{0.495\textwidth}
   <<#right-column>>
-  \textbf{<<name>>} \url{<<link>>} \\
+  \textbf{<<name>>} <<#link>>\href{<<to>>}{<<text>>}<</link>>\\
   <</right-column>>
 \end{minipage}
 
-% TODO skills section
 
 %%%%%%%% Summary %%%%%%%%
 
 <<# summary >>
 \section{<<title>>}
+
 <<body>>
 <</ summary >>
-
-%%%%%%%% Experience %%%%%%%%
-
-<<# experience >>
-\section{<< title >>}
-
-<<# list >>
-\subsection{<< title >>}
-
-\textbf{<<from>> - <<to>>} <<short>>
-
-<< body >>
-
-<</list>>
-<</experience>>
 
 %%%%%%%% Education %%%%%%%%
 
 <<# education >>
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 \section{<< title >>}
 
 \begin{itemize}
   \tightlist
   <<# list >>
-    \item \textbf{<< title >>}. <<date>>. << center >>
+  \item \textbf{<< title >>}. << institution >> <<# date >>(<<.>>)<</date>>
   <</list>>
 \end{itemize}
 <</education>>
 
+%%%%%%%% Skills %%%%%%%%
+
+<<# skills>>
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\section{<<title>>}
+
+\begin{multicols}{<<cols>>}
+  \begin{itemize}
+    <<#list>>
+    \item \textbf{<<.>>}
+    <</list>>
+  \end{itemize}
+\end{multicols}
+<</skills>>
+
+%%%%%%%% Experience %%%%%%%%
+
+<<# experience >>
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\section{<< title >>}
+
+<<# list >>
+\subsection{<< company >>\hfill \small <<from>> - <<to>>}
+\textit{<<role>><<#location>>. <<.>><</location>>}
+\begin{itemize}
+  \tightlist
+  <<#description>>
+  \item <<.>>
+  <</description>>
+\end{itemize}
+<</list>>
+<</experience>>
+
+
 %%%%%%%% Formation %%%%%%%%
 
 <<# formation >>
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 \section{<< title >>}
 
 \begin{itemize}
   \tightlist
   <<# list >>
-    \item \textbf{<< title >>}. <<date>>. << body >>. \url{<< link >>}
+    \item \textbf{<< title >>}. <<#link>>\href{<<to>>}{<<text>>}<</ link >> <<# date >>(<<.>>)<</date>>
   <</list>>
 \end{itemize}
 <</formation>>
@@ -145,12 +165,13 @@
 %%%%%%%% Github %%%%%%%%
 
 <<# github >>
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 \section{<< title >>}
 
 \begin{itemize}
   \tightlist
   <<# list >>
-    \item \textbf{<< title >>}. <<summary>>. \url{<< link >>}
+    \item \textbf{<< title >>}. <<summary>>. <<#link>>\href{<<to>>}{<<text>>}<</ link >>
   <</list>>
 \end{itemize}
 <</github>>
@@ -158,6 +179,7 @@
 %%%%%%%% Other information %%%%%%%%
 
 <<# other >>
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 \section{<< title >>}
 
 \begin{itemize}
