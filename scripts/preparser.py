@@ -1,10 +1,8 @@
-from datetime import date
 from dateutil.parser import parse
 from toml import load,dump
 from sys import argv
 
 __DEFAULT_VALUES = {
-    'date':str(date.today()),
     'fontsize': '10pt',
     'fontenc':'T1',
     'urlcolor':'blue',

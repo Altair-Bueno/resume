@@ -1,40 +1,31 @@
 # Author
-author = [
-    "Altair Bueno",
-]
-# date: Date to show on you resume
-# date = "YYYY-MM-DD
+author = ["Altair Bueno",]
 # mainfont: Font to use (must be installed on your system)
 mainfont = "Arial"
 # name: The name to put on your resume
 name = "Altair Bueno"
 # keywords: keywords added to the PDF file
-keywords = [
-    "Altair Bueno",
-    "Resume",
-]
+keywords = ["Altair Bueno","Resume",]
 # fontsize : default 10pt.
 # fontenc : default T1.
 # urlcolor : used in PDF, default blue.
 # linkcolor : used in PDF, default magenta.
 # numbersections : number sections, default off.
-# name-color : the SVG name of the font color used for your name on the resume. For example DarkSlateGray. Note that this option also changes the font used for your name to bold and sans serif.
-# section-color : the SVG name of the font color used for sections. For example Tomato. Note that this option also changes the section font to bold and sans serif.
 
 # left-column: a list of lines you want in the left column, directly under the name on the first page.
 [[left-column]]
 name = 'Software Engineer'
 [[left-column]]
 name = 'Email'
-link = 'business.altair.bueno@outlook.com'
+link = 'mailto:business.altair.bueno@outlook.com'
 
 # right-column: a list of lines you want in the right column, directly under the name on the first page.
 [[right-column]]
 name = 'Website'
-link = 'altair-bueno.github.io'
+link = 'https://altair-bueno.github.io'
 [[right-column]]
 name = 'GitHub'
-link = 'github.com/Altair-Bueno'
+link = 'https://github.com/Altair-Bueno'
 
 [summary]
 title = "Summary"
