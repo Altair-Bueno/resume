@@ -1,4 +1,5 @@
 <!-- Summary -->
+
 {{# summary }}
 # {{ title }}
 
@@ -6,6 +7,7 @@
 {{/summary}}
 
 <!-- Experience -->
+
 {{# experience }}
 # {{ title }}
 
@@ -25,8 +27,7 @@
 # {{ title }}
 
 {{# list }}
-**{{ title }}**. {{date}}. {{ center }}
-
+- **{{ title }}**. {{date}}. {{ center }}
 {{/list}}
 {{/education}}
 
@@ -36,8 +37,7 @@
 # {{ title }}
 
 {{# list }}
-**{{ title }}:** {{ date }} {{ body }} <{{{link}}}>
-
+- **{{ title }}**, {{ date }} {{ body }} <{{{link}}}>
 {{/list}}
 {{/formation}}
 
@@ -47,8 +47,7 @@
 # {{ title }}
 
 {{# list }}
-**{{ title }}:** {{ body }} <{{{ link }}}>
-
+- **{{ title }}**. {{ summary }} <{{{ link }}}>
 {{/list}}
 {{/github}}
 
@@ -58,8 +57,7 @@
 # {{ title }}
 
 {{# list }}
-## {{ title }}
-
+- **{{ title }}**. {{ summary }}
 {{ body }}
 
 {{/list}}
