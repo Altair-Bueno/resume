@@ -10,17 +10,16 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install python dependencies
         run: pip3 install chevron toml
-      - name: Install basictex and pandoc with brew
+      - name: Install required packages
         run: |
-          brew install pandoc 
           brew install --cask basictex
       - name: Update PATH
         run: echo "/Library/TeX/texbin/" >> $GITHUB_PATH
-      - name: Install latex dependencies
+      - name: Install LateX packages
         run: |
           sudo tlmgr update --self
           sudo tlmgr install enumitem sectsty
-      - name: Create pdf file
+      - name: Create resume
         run: make
       - uses: actions/upload-artifact@v2
         with:
