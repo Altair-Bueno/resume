@@ -26,6 +26,7 @@
 \usepackage{sectsty}
 \usepackage{multicol}
 
+\def\resumeruler{\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}}
 % Document configuration 
 
 \setmainfont{<<mainfont>>}
@@ -79,18 +80,22 @@
 % Place name at left
 {\huge << name >>}
 
+%%%%%%%% Info columns %%%%%%%%
+
+<<# column >>
 \bigskip
 
 \begin{minipage}[t]{0.495\textwidth}
-  <<#left-column>>
+  <<#left>>
   \textbf{<<name>>} <<#link>>\href{<<to>>}{<<text>>}<</link>>\\
-  <</left-column>>
+  <</left>>
 \end{minipage} % Don't use empty lines after \end and the next \begin{minipage}.
 \begin{minipage}[t]{0.495\textwidth}
-  <<#right-column>>
+  <<#right>>
   \textbf{<<name>>} <<#link>>\href{<<to>>}{<<text>>}<</link>>\\
-  <</right-column>>
+  <</right>>
 \end{minipage}
+<</ column >>
 
 
 %%%%%%%% Summary %%%%%%%%
@@ -104,13 +109,13 @@
 %%%%%%%% Education %%%%%%%%
 
 <<# education >>
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+<<# ruler >>\resumeruler<</ ruler >>
 \section{<< title >>}
 
 \begin{itemize}
   \tightlist
   <<# list >>
-  \item \textbf{<< title >>}. << institution >> <<# date >>(<<.>>)<</date>>
+  \item \textbf{<< title >>}. << institution >><<# description >>. << . >><</ description >> <<# date >>(<< . >>)<</ date >>
   <</list>>
 \end{itemize}
 <</education>>
@@ -118,7 +123,7 @@
 %%%%%%%% Skills %%%%%%%%
 
 <<# skills>>
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+<<# ruler >>\resumeruler<</ ruler >>
 \section{<<title>>}
 
 \begin{multicols}{<<cols>>}
@@ -133,12 +138,12 @@
 %%%%%%%% Experience %%%%%%%%
 
 <<# experience >>
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+<<# ruler >>\resumeruler<</ ruler >>
 \section{<< title >>}
 
 <<# list >>
-\subsection{<< company >>\hfill \small <<from>> - <<to>>}
-\textit{<<role>><<#location>>. <<.>><</location>>}
+\subsection{<< company >>\hfill \small <<from>><<# to >> - << . >><</ to >>}
+\textit{<<role>>. <<location>>}
 \begin{itemize}
   \tightlist
   <<#description>>
@@ -152,7 +157,7 @@
 %%%%%%%% Formation %%%%%%%%
 
 <<# formation >>
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+<<# ruler >>\resumeruler<</ ruler >>
 \section{<< title >>}
 
 \begin{itemize}
@@ -166,7 +171,7 @@
 %%%%%%%% Github %%%%%%%%
 
 <<# github >>
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+<<# ruler >>\resumeruler<</ ruler >>
 \section{<< title >>}
 
 \begin{itemize}
@@ -180,13 +185,13 @@
 %%%%%%%% Other information %%%%%%%%
 
 <<# other >>
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+<<# ruler >>\resumeruler<</ ruler >>
 \section{<< title >>}
 
 \begin{itemize}
   \tightlist
   <<# list >>
-    \item \textbf{<< title >>}. <<summary>>
+    \item \textbf{<< title >>}<<#summary>>. <<.>><</summary>>
   <</list>>
 \end{itemize}
 <</other>>

@@ -10,42 +10,46 @@ keywords = ["Altair Bueno","Resume","Rust", "Software Engineer",]
 urlcolor = 'blue'
 # linkcolor: Link color (default magenta)
 # numbersections: Enable numbered sections (default false)
+# ruler: Enable rulers in between sections (default false)
+ruler = true
 
-# left-column: a list of lines you want in the left column, directly under the 
+# Contact info and links right under your name
+[column]
+# left: a list of lines you want in the left column, directly under the 
 # name on the first page.
-[[left-column]]
+[[column.left]]
 # name: Name of the element. will appear on bold text
 name = 'Software Engineer'
 
-[[left-column]]
+[[column.left]]
 # name: Name of the element. will appear on bold text
 name = 'Email'
-# link: to address and text to show up (\href{to}{text})
+# link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = {to = 'mailto:business.altair.bueno@outlook.com',text = "business.altair.bueno@outlook.com" }
 
 
-# right-column: a list of lines you want in the right column, directly under the
+# right: a list of lines you want in the right column, directly under the
 # name on the first page.
-[[right-column]]
+[[column.right]]
 # name: Name of the element. will appear on bold text
 name = 'Website'
-# link: to address and text to show up (\href{to}{text})
+# link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = {to = 'https://altair-bueno.github.io',text = 'altair-bueno.github.io'}
 
-[[right-column]]
+[[column.right]]
 # name: Name of the element. will appear on bold text
 name = 'GitHub'
-# link: to address and text to show up (\href{to}{text})
+# link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = {to = 'https://github.com/Altair-Bueno',text = 'Altair-Bueno'}
 
-[[right-column]]
+[[column.right]]
 # name: Name of the element. will appear on bold text
 name = "LinkedIn"
-# link: to address and text to show up (\href{to}{text})
-link = {to = "https://es.linkedin.com/in/pablo-espinosa-tarrio", text = "Altair-Bueno"}
+# link: to address and text to show up (\href{to}{text}) (default: hidden)
+link = {to = "https://linkedin.com/", text = "Altair-Bueno"}
 
 
-# Summary section
+# Summary section (default: hidden)
 [summary]
 # title: Header title for summary section
 title = "Summary"
@@ -58,7 +62,7 @@ nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qu
 officia deserunt mollit anim id est laborum."""
 
 
-# Skills section
+# Skills section (default: hidden)
 [skills]
 # title: Header title for skills section
 title = "Skills"
@@ -77,7 +81,7 @@ list = [
 ]
 
 
-# Experience section
+# Experience section (default: hidden)
 [experience]
 # title: Header title for experience section
 title = "Experience"
@@ -85,9 +89,9 @@ title = "Experience"
 [[experience.list]]
 # company: Where you worked at
 company = "AWS"
-# from: Starting date. It needs to be a valid date (see preparser.py)
+# from: Starting date. 
 from = "May 2020"
-# to: Ending date
+# to: Ending date (default: hidden)
 to = "September 2021"
 # role: Job rol 
 role = "Frontend Developer"
@@ -105,9 +109,9 @@ location = "Madrid, Spain"
 [[experience.list]]
 # company: Where you worked at
 company = "Google"
-# to: Ending date
+# to: Ending date (default: hidden)
 to = "May 2022"
-# from: Starting date. It needs to be a valid date (see preparser.py)
+# from: Starting date. 
 from = "September 2021"
 # role: Job rol 
 role = "Backend developer"
@@ -130,11 +134,13 @@ title = "Education"
 
 [[education.list]]
 # title: name of the certification
-title = "Bachelor of Software Engineering"
-# date: when did you acquire this certification
-date = "2023"
+title = "Software Engineering Degree"
+# date: when did you acquire this certification (default: hidden)
+date = "Unfinished"
 # institution: where did you acquire this certification
 institution = "University of Málaga, Spain"
+# description: more information, like grades (default: hidden)
+description = '2 subjects with honors. 9/10 average mark'
 
 [[education.list]]
 # title: name of the certification
@@ -161,7 +167,7 @@ date = "2015"
 institution = "Trinity College London"
 
 
-# Formation section
+# Formation section (default: hidden)
 [formation]
 # title: Header title for formation section
 title = "Formation"
@@ -169,13 +175,13 @@ title = "Formation"
 [[formation.list]]
 # title: name of the certification
 title = "Sample formation"
-# date: when did you acquire this certification
+# date: when did you acquire this certification (default: hidden)
 date = "2021"
-# link: to address and text to show up (\href{to}{text})
+# link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = {to = "https://example.org", text = "example.org"}
 
 
-# Github section
+# Github section (default: hidden)
 [github]
 # title: Header title for GitHub section
 title = "Github"
@@ -185,7 +191,7 @@ title = "Github"
 title = "rquote"
 # summary: small summary describing the proyect
 summary = 'SPA made with Rust, WASM and Boostrap'
-# link: to address and text to show up (\href{to}{text})
+# link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/rquote",text = "Altair-Bueno/rquote"}
 
 [[github.list]]
@@ -193,7 +199,7 @@ link = { to = "https://github.com/Altair-Bueno/rquote",text = "Altair-Bueno/rquo
 title = "cw"
 # summary: small summary describing the proyect
 summary = "A faster GNU wc built with Rust"
-# link: to address and text to show up (\href{to}{text})
+# link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/cw",text = "Altair-Bueno/cw"}
 
 [[github.list]]
@@ -201,17 +207,17 @@ link = { to = "https://github.com/Altair-Bueno/cw",text = "Altair-Bueno/cw"}
 title = "resume"
 # summary: small summary describing the proyect
 summary = "Automatic resume generator using GitHub Actions and \\LaTeX"
-# link: to address and text to show up (\href{to}{text})
+# link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/resume",text = "Altair-Bueno/resume"}
 
 
 # Other section
-# [other]
-# # title: Header title for other section
-# title = "Miscellaneous"
+[other]
+# title: Header title for other section
+title = "Miscellaneous"
 
-# [[other.list]]
-# # title: bold text to serve as title
-# title = "Strongly typed languages"
-# # summary: small description
-# summary = "I love typed languages"
+[[other.list]]
+# title: bold text to serve as title
+title = "Strongly typed languages"
+# summary: small description (default: hidden)
+summary = "I love typed languages"
