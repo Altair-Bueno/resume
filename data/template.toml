@@ -1,13 +1,13 @@
 # mainfont: Font to use (must be installed on your system)
 mainfont = "Arial"
 # pdftitle: metadata pdftitle field
-pdftitle = "Altair Bueno: Resume"
+pdftitle = "Altair Bueno's resume"
 # pdfsubject: metadata pdfsubject field
 pdfsubject = 'Resume'
 # name: The name to show on your resume
 name = "Altair Bueno Calvente"
 # keywords: keywords added to the PDF file metadata
-keywords = ["Altair Bueno","Resume","Rust", "Software Engineer",]
+keywords = ["Altair Bueno Calvente","Resume", "Software Engineer",]
 # fontsize: (default 10pt)
 # fontenc: Font encoding (default T1)
 # urlcolor: URL color (default blue)
@@ -46,11 +46,7 @@ name = 'GitHub'
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = {to = 'https://github.com/Altair-Bueno',text = 'Altair-Bueno'}
 
-[[column.right]]
-# name: Name of the element. will appear on bold text
-name = "LinkedIn"
-# link: to address and text to show up (\href{to}{text}) (default: hidden)
-link = {to = "https://linkedin.com/", text = "Altair-Bueno"}
+# TODO add linkedin
 
 
 # Summary section (default: hidden)
@@ -58,12 +54,8 @@ link = {to = "https://linkedin.com/", text = "Altair-Bueno"}
 # title: Header title for summary section
 title = "Summary"
 # body: Paragraph body for summary section
-body = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis 
-aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
-nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
-officia deserunt mollit anim id est laborum."""
+body = """
+"""# TODO describe myself
 
 
 # Skills section (default: hidden)
@@ -78,57 +70,39 @@ cols = 6
 list = [
     "Rust","Tokio",
     "Rocket","Yew",
+    "WASM","C",
     "Java", "Hibernate",
     "Python","Docker",
     "Git","GitHub",
-    "Bash","UML",
+    "Bash/sh","UML",
+    "VMware"
 ]
 
 
-# Experience section (default: hidden)
-[experience]
-# title: Header title for experience section
-title = "Experience"
+# # Experience section (default: hidden)
+# [experience]
+# # title: Header title for experience section
+# title = "Experience"
 
-[[experience.list]]
-# company: Where you worked at
-company = "AWS"
-# from: Starting date. 
-from = "May 2020"
-# to: Ending date (default: hidden)
-to = "September 2021"
-# role: Job rol 
-role = "Frontend Developer"
-# description: Bullet list of things you accomplished while you were working at
-# this job
-description = [
-    "Short desc 1",
-    "Short desc 2",
-    "Sit amet est placerat in egestas erat imperdiet sed euismod. Magna ac",
-    "Vitae turpis massa sed elementum tempu"
-]
-# location: Where the job took place
-location = "Madrid, Spain"
-
-[[experience.list]]
-# company: Where you worked at
-company = "Google"
-# to: Ending date (default: hidden)
-to = "May 2022"
-# from: Starting date. 
-from = "September 2021"
-# role: Job rol 
-role = "Backend developer"
-# description: Bullet list of things you accomplished while you were working at
-# this job
-description = [
-    "Short desc 1",
-    "Short desc 2",
-    "Sit amet est placerat in egestas erat imperdiet sed euismod. Magna ac",
-    "Vitae turpis massa sed elementum tempu"
-]
-# location: Where the job took place
-location = "Madrid, Spain"
+# [[experience.list]]
+# # company: Where you worked at
+# company = "AWS"
+# # from: Starting date. 
+# from = "May 2020"
+# # to: Ending date (default: hidden)
+# to = "September 2021"
+# # role: Job rol 
+# role = "Frontend Developer"
+# # description: Bullet list of things you accomplished while you were working at
+# # this job
+# description = [
+#     "Short desc 1",
+#     "Short desc 2",
+#     "Sit amet est placerat in egestas erat imperdiet sed euismod. Magna ac",
+#     "Vitae turpis massa sed elementum tempu"
+# ]
+# # location: Where the job took place
+# location = "Madrid, Spain"
 
 
 # Education section
@@ -144,7 +118,7 @@ date = "Unfinished"
 # institution: where did you acquire this certification
 institution = "University of Málaga, Spain"
 # description: more information, like grades (default: hidden)
-description = '2 subjects with honors. 9/10 average mark'
+# description = '2 subjects with honors. 9/10 average mark'
 
 [[education.list]]
 # title: name of the certification
@@ -171,18 +145,18 @@ date = "2015"
 institution = "Trinity College London"
 
 
-# Formation section (default: hidden)
-[formation]
-# title: Header title for formation section
-title = "Formation"
+# # Formation section (default: hidden)
+# [formation]
+# # title: Header title for formation section
+# title = "Formation"
 
-[[formation.list]]
-# title: name of the certification
-title = "Sample formation"
-# date: when did you acquire this certification (default: hidden)
-date = "2021"
-# link: to address and text to show up (\href{to}{text}) (default: hidden)
-link = {to = "https://example.org", text = "example.org"}
+# [[formation.list]]
+# # title: name of the certification
+# title = "Sample formation"
+# # date: when did you acquire this certification (default: hidden)
+# date = "2021"
+# # link: to address and text to show up (\href{to}{text}) (default: hidden)
+# link = {to = "https://example.org", text = "example.org"}
 
 
 # Github section (default: hidden)
@@ -194,7 +168,7 @@ title = "Github"
 # title: name of the proyect
 title = "rquote"
 # summary: small summary describing the proyect
-summary = 'SPA made with Rust, WASM and Boostrap'
+summary = "High performant SPA made with Rust, Yew, WASM and Boostrap"
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/rquote",text = "Altair-Bueno/rquote"}
 
@@ -202,7 +176,8 @@ link = { to = "https://github.com/Altair-Bueno/rquote",text = "Altair-Bueno/rquo
 # title: name of the proyect
 title = "cw"
 # summary: small summary describing the proyect
-summary = "A faster GNU wc built with Rust"
+summary = """A faster GNU wc alternative and library that supports different 
+text encodings, built with Rust"""
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/cw",text = "Altair-Bueno/cw"}
 
@@ -210,18 +185,29 @@ link = { to = "https://github.com/Altair-Bueno/cw",text = "Altair-Bueno/cw"}
 # title: name of the proyect
 title = "resume"
 # summary: small summary describing the proyect
-summary = "Automatic resume generator using GitHub Actions and \\LaTeX"
+summary = """Resume written in \\LaTeX that updates and compiles using GitHub Actions CI"""
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/resume",text = "Altair-Bueno/resume"}
 
+[[github.list]]
+title = "fuzzy-disco"
+summary = """Post sharing social network that uses Rust/Rocket, MongoDB for the 
+API backend and Vue.js for the SPA frontend"""
+link = { to = "https://github.com/Altair-Bueno/fuzzy-disco",text = "Altair-Bueno/fuzzy-disco"}
 
-# Other section
-[other]
-# title: Header title for other section
-title = "Miscellaneous"
+[[github.list]]
+title = "Demeter"
+summary = "Dotfiles and shell scripts backup from my UNIX machine"
+link = { to = "https://github.com/Altair-Bueno/Demeter",text = "Altair-Bueno/Demeter"}
 
-[[other.list]]
-# title: bold text to serve as title
-title = "Strongly typed languages"
-# summary: small description (default: hidden)
-summary = "I love typed languages"
+
+# # Other section
+# [other]
+# # title: Header title for other section
+# title = "Miscellaneous"
+
+# [[other.list]]
+# # title: bold text to serve as title
+# title = "Strongly typed languages"
+# # summary: small description (default: hidden)
+# summary = "I love typed languages"
