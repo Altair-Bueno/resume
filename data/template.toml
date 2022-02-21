@@ -1,5 +1,9 @@
 # mainfont: Font to use (must be installed on your system)
 mainfont = "Arial"
+# pdftitle: metadata pdftitle field
+pdftitle = "Altair Bueno: Resume"
+# pdfsubject: metadata pdfsubject field
+pdfsubject = 'Resume'
 # name: The name to show on your resume
 name = "Altair Bueno Calvente"
 # keywords: keywords added to the PDF file metadata
