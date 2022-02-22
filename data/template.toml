@@ -7,7 +7,7 @@ pdfsubject = 'Resume'
 # name: The name to show on your resume
 name = "Altair Bueno Calvente"
 # keywords: keywords added to the PDF file metadata
-keywords = ["Altair Bueno Calvente","Resume", "Software Engineer",]
+keywords = ["Altair Bueno Calvente", "Resume", "Software Engineer"]
 # fontsize: (default 10pt)
 # fontenc: Font encoding (default T1)
 # urlcolor: URL color (default blue)
@@ -29,11 +29,11 @@ name = 'Software Engineer'
 # name: Name of the element. will appear on bold text
 name = 'Email'
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
-link = {to = 'mailto:business.altair.bueno@outlook.com',text = "business.altair.bueno@outlook.com" }
+link = { to = 'mailto:business.altair.bueno@outlook.com', text = "business.altair.bueno@outlook.com" }
 
 [[column.left]]
 name = 'Phone'
-link = {to = "tel:34655134802",text = "+34 655 134 802"}
+link = { to = "tel:34655134802", text = "+34 655 134 802" }
 
 
 # right: a list of lines you want in the right column, directly under the
@@ -42,35 +42,35 @@ link = {to = "tel:34655134802",text = "+34 655 134 802"}
 # name: Name of the element. will appear on bold text
 name = 'Website'
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
-link = {to = 'https://altair-bueno.github.io',text = 'altair-bueno.github.io'}
+link = { to = 'https://altair-bueno.github.io', text = 'altair-bueno.github.io' }
 
 [[column.right]]
 # name: Name of the element. will appear on bold text
 name = 'GitHub'
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
-link = {to = 'https://github.com/Altair-Bueno',text = 'Altair-Bueno'}
+link = { to = 'https://github.com/Altair-Bueno', text = 'Altair-Bueno' }
 
 [[column.right]]
 name = "Linkedin"
-link = {to = "https://www.linkedin.com/in/altair-bueno-calvente-92155a232/",text = "Altair Bueno Calvente"}
+link = { to = "https://www.linkedin.com/in/altair-bueno-calvente-92155a232/", text = "Altair Bueno Calvente" }
 
 # Summary section (default: hidden)
 [summary]
 # title: Header title for summary section
 title = "Summary"
 # body: Paragraph body for summary section
-body = """TODO"""# TODO describe myself
+body = """TODO""" # TODO describe myself
 
 
 # Skills section (default: hidden)
 [skills]
 # title: Header title for skills section
 title = "Skills"
-# cols: Number of colums to show for the skills list
+# cols: Number of columns to show for the skills list
 # WARNING: if any skill is too large, it may overflow the `multicols`
 # package and look weird
 cols = 7
-# list: A list of skills to show. They will distribute evenly on different colums
+# list: A list of skills to show. They will distribute evenly on different columns
 list = [
     "Rust",
     "Tokio",
@@ -80,7 +80,7 @@ list = [
     "C",
     "Haskell",
     "Java",
-    "Spring", 
+    "Spring",
     "Hibernate",
     "Python",
     "Docker",
@@ -180,40 +180,41 @@ description = "Reading and writting skills with merit"
 title = "Github"
 
 [[github.list]]
-# title: name of the proyect
+# title: name of the project
 title = "rquote"
-# summary: small summary describing the proyect
-summary = "High performant SPA made with Rust, Yew, WASM and Bootstrap"
+# summary: small summary describing the project
+summary = "High performant SPA made with Rust, Yew, WASM and Bootstrap with Vercel's CD"
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
-link = { to = "https://github.com/Altair-Bueno/rquote",text = "Altair-Bueno/rquote"}
+link = { to = "https://github.com/Altair-Bueno/rquote", text = "Altair-Bueno/rquote" }
 
 [[github.list]]
-# title: name of the proyect
+# title: name of the project
 title = "cw"
-# summary: small summary describing the proyect
+# summary: small summary describing the project
 summary = """A faster GNU wc alternative and library that supports different 
-text encodings, built with Rust"""
+text encodings, built with Rust. Includes Rust FFI bindings for C"""
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
-link = { to = "https://github.com/Altair-Bueno/cw",text = "Altair-Bueno/cw"}
+link = { to = "https://github.com/Altair-Bueno/cw", text = "Altair-Bueno/cw" }
 
 [[github.list]]
-# title: name of the proyect
+# title: name of the project
 title = "resume"
-# summary: small summary describing the proyect
+# summary: small summary describing the project
 summary = """Resume written in \\LaTeX that updates and compiles using GitHub Actions CI"""
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
-link = { to = "https://github.com/Altair-Bueno/resume",text = "Altair-Bueno/resume"}
+link = { to = "https://github.com/Altair-Bueno/resume", text = "Altair-Bueno/resume" }
 
 [[github.list]]
 title = "fuzzy-disco"
-summary = """Post sharing social network that uses Rust/Rocket, MongoDB for the 
-API backend and Vue.js for the SPA frontend"""
-link = { to = "https://github.com/Altair-Bueno/fuzzy-disco",text = "Altair-Bueno/fuzzy-disco"}
+summary = """Post sharing social network that uses Rust/Rocket, MongoDB and 
+Docker for the API backend. It includes a SPA frontend made with Vue"""
+link = { to = "https://github.com/Altair-Bueno/fuzzy-disco", text = "Altair-Bueno/fuzzy-disco" }
 
 [[github.list]]
 title = "Demeter"
-summary = "Dotfiles and shell scripts backup from my UNIX machine"
-link = { to = "https://github.com/Altair-Bueno/Demeter",text = "Altair-Bueno/Demeter"}
+summary = """Dotfiles backup from my personal macOS machine. It includes some
+zsh scripts I commonly use"""
+link = { to = "https://github.com/Altair-Bueno/Demeter", text = "Altair-Bueno/Demeter" }
 
 
 # # Other section
