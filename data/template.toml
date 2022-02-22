@@ -168,7 +168,7 @@ title = "Github"
 # title: name of the proyect
 title = "rquote"
 # summary: small summary describing the proyect
-summary = "High performant SPA made with Rust, Yew, WASM and Boostrap"
+summary = "High performant SPA made with Rust, Yew, WASM and Bootstrap"
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/rquote",text = "Altair-Bueno/rquote"}
 
