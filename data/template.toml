@@ -31,6 +31,10 @@ name = 'Email'
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = {to = 'mailto:business.altair.bueno@outlook.com',text = "business.altair.bueno@outlook.com" }
 
+[[column.left]]
+name = 'Phone'
+link = {to = "tel:34655134802",text = "+34 655 134 802"}
+
 
 # right: a list of lines you want in the right column, directly under the
 # name on the first page.
@@ -46,16 +50,16 @@ name = 'GitHub'
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = {to = 'https://github.com/Altair-Bueno',text = 'Altair-Bueno'}
 
-# TODO add linkedin
-
+[[column.right]]
+name = "Linkedin"
+link = {to = "https://www.linkedin.com/in/altair-bueno-calvente-92155a232/",text = "Altair Bueno Calvente"}
 
 # Summary section (default: hidden)
 [summary]
 # title: Header title for summary section
 title = "Summary"
 # body: Paragraph body for summary section
-body = """
-"""# TODO describe myself
+body = """TODO"""# TODO describe myself
 
 
 # Skills section (default: hidden)
@@ -65,17 +69,27 @@ title = "Skills"
 # cols: Number of colums to show for the skills list
 # WARNING: if any skill is too large, it may overflow the `multicols`
 # package and look weird
-cols = 6
+cols = 7
 # list: A list of skills to show. They will distribute evenly on different colums
 list = [
-    "Rust","Tokio",
-    "Rocket","Yew",
-    "WASM","C",
-    "Java", "Hibernate",
-    "Python","Docker",
-    "Git","GitHub",
-    "Bash/sh","UML",
-    "VMware"
+    "Rust",
+    "Tokio",
+    "Rocket",
+    "Yew",
+    "WASM",
+    "C",
+    "Haskell",
+    "Java",
+    "Spring", 
+    "Hibernate",
+    "Python",
+    "Docker",
+    "Git",
+    "GitHub",
+    "Bash/sh",
+    "UML",
+    "VMware",
+    "NodeJS",
 ]
 
 
@@ -118,32 +132,33 @@ date = "Unfinished"
 # institution: where did you acquire this certification
 institution = "University of Málaga, Spain"
 # description: more information, like grades (default: hidden)
-# description = '2 subjects with honors. 9/10 average mark'
+description = '2 subjects with honors. 8.03/10 average mark'
 
 [[education.list]]
 # title: name of the certification
-title = "First Certificate in English"
+title = "English B2 First"
 # date: when did you acquire this certification
 date = "2018"
 # institution: where did you acquire this certification
-institution = "Cambridge Assesment"
+institution = "Cambridge"
+description = "Overall score 171"
 
 [[education.list]]
 # title: name of the certification
-title = "Preliminary English Test"
+title = "English B1 Preliminary"
 # date: when did you acquire this certification
 date = "2016"
 # institution: where did you acquire this certification
-institution = "Cambridge English"
+institution = "Cambridge"
 
 [[education.list]]
 # title: name of the certification
-title = "ISE I"
+title = "English B1 ISE I"
 # date: when did you acquire this certification
 date = "2015"
 # institution: where did you acquire this certification
 institution = "Trinity College London"
-
+description = "Reading and writting skills with merit"
 
 # # Formation section (default: hidden)
 # [formation]
