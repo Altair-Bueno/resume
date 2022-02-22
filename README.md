@@ -31,4 +31,4 @@ The resume will be available at `out/cv.pdf`
 # License
 
 All software is licensed under the MIT license ([see](LICENSE)), except for the
-LaTeX template. For more information read the [license](templates/README.md#license)
+LaTeX template. For more information read its [license](templates/README.md#license)
