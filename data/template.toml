@@ -62,7 +62,10 @@ link = { to = "https://www.linkedin.com/in/altair-bueno-calvente-92155a232/", te
 # title: Header title for summary section
 title = "Summary"
 # body: Paragraph body for summary section
-body = """TODO""" # TODO describe myself
+body = """Results-oriented finance professional with over 10 years of experience 
+in publicly traded and privately held enterprises. Proven track record in 
+complex and capital-intensive global industries, delivering value and innovation 
+in Finance, Strategy, and Corporate Planning."""
 
 
 # Skills section (default: hidden)
@@ -106,17 +109,16 @@ list = [
 # company = "AWS"
 # # from: Starting date. 
 # from = "May 2020"
-# # to: Ending date (default: hidden)
+# # to: Ending date. Use 'Today' if is current (default: hidden)
 # to = "September 2021"
 # # role: Job rol 
 # role = "Frontend Developer"
 # # description: Bullet list of things you accomplished while you were working at
 # # this job
 # description = [
-#     "Short desc 1",
-#     "Short desc 2",
-#     "Sit amet est placerat in egestas erat imperdiet sed euismod. Magna ac",
-#     "Vitae turpis massa sed elementum tempu"
+#     "Lead a team of 6 people to manage, operate, and support low latency post-trade brokerage platform",
+#     "Improved the performance of straight-through processing by tuning database applications",
+#     "Reduced number of major incidents by 23% through problem management"
 # ]
 # # location: Where the job took place
 # location = "Madrid, Spain"
@@ -131,7 +133,7 @@ title = "Education"
 # title: name of the certification
 title = "Software Engineering Degree"
 # date: when did you acquire this certification (default: hidden)
-date = "Unfinished"
+date = "Current"
 # institution: where did you acquire this certification
 institution = "University of Málaga, Spain"
 # description: more information, like grades (default: hidden)
@@ -139,24 +141,24 @@ description = '2 subjects with honors. 8.03/10 average mark'
 
 [[education.list]]
 # title: name of the certification
-title = "English B2 First"
+title = "B2 First"
 # date: when did you acquire this certification
 date = "2018"
 # institution: where did you acquire this certification
-institution = "Cambridge"
-description = "Overall score 171"
+institution = "Cambridge Assessment English"
+description = "171 average mark"
 
 [[education.list]]
 # title: name of the certification
-title = "English B1 Preliminary"
+title = "B1 Preliminary"
 # date: when did you acquire this certification
 date = "2016"
 # institution: where did you acquire this certification
-institution = "Cambridge"
+institution = "Cambridge Assessment English"
 
 [[education.list]]
 # title: name of the certification
-title = "English B1 ISE I"
+title = "B1 ISE I"
 # date: when did you acquire this certification
 date = "2015"
 # institution: where did you acquire this certification
@@ -166,11 +168,11 @@ description = "Reading and writting skills with merit"
 # # Formation section (default: hidden)
 # [formation]
 # # title: Header title for formation section
-# title = "Formation"
+# title = "Certifications"
 
 # [[formation.list]]
 # # title: name of the certification
-# title = "Sample formation"
+# title = "VMware ESXi basics"
 # # date: when did you acquire this certification (default: hidden)
 # date = "2021"
 # # link: to address and text to show up (\href{to}{text}) (default: hidden)
