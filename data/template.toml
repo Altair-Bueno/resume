@@ -35,6 +35,9 @@ link = { to = 'mailto:business.altair.bueno@outlook.com', text = "business.altai
 name = 'Phone'
 link = { to = "tel:34655134802", text = "+34 655 134 802" }
 
+[[column.left]]
+name = 'Location'
+text = 'Málaga, Spain'
 
 # right: a list of lines you want in the right column, directly under the
 # name on the first page.
