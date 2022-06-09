@@ -18,7 +18,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: resume.pdf
         tag: latest
-        asset_name: Altair Bueno.pdf
+        asset_name: resume.pdf
         overwrite: true
   BuildResume:
     runs-on: macos-latest # Should have Arial installed
