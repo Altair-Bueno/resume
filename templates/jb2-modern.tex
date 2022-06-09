@@ -25,6 +25,7 @@
 \usepackage{multicol}
 
 \def\resumeruler{\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}}
+
 % Document configuration 
 
 \setmainfont{<<mainfont>>}
@@ -38,11 +39,13 @@
   pdfsubject = {<< pdfsubject >>},
   pdfpagemode = UseNone
 }
-\geometry{
-  body={6.5in, 9.0in},
-  left=1.0in,
-  top=1.0in
-}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
 
 % Fix  for "! Undefined control sequence. <recently read> \tightlist",
 % see: https://github.com/osener/markup.rocks/issues/4
