@@ -7,8 +7,7 @@ jobs:
   UpdateLatestTag:
     name: Publish binaries
     runs-on: ubuntu-latest
-    depends-on:
-      - BuildResume
+    needs: BuildResume
     steps:
     - uses: actions/download-artifact@v3
       with:
