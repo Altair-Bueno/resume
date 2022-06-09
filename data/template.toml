@@ -7,7 +7,12 @@ pdfsubject = 'Resume'
 # name: The name to show on your resume
 name = "Altair Bueno Calvente"
 # keywords: keywords added to the PDF file metadata
-keywords = ["Altair Bueno Calvente", "Resume", "Software Engineer"]
+keywords = [
+    "Altair Bueno Calvente", 
+    "Resume", 
+    "Software Engineer", 
+    "University of Málaga"
+]
 # fontsize: (default 10pt)
 # fontenc: Font encoding (default T1)
 # urlcolor: URL color (default blue)
@@ -19,7 +24,7 @@ ruler = true
 
 # Contact info and links right under your name
 [column]
-# left: a list of lines you want in the left column, directly under the 
+# left: list of lines you want in the left column, directly under the 
 # name on the first page.
 [[column.left]]
 # name: Name of the element. will appear on bold text
@@ -54,7 +59,7 @@ name = 'GitHub'
 link = { to = 'https://github.com/Altair-Bueno', text = 'Altair-Bueno' }
 
 [[column.right]]
-name = "Linkedin"
+name = "LinkedIn"
 link = { to = "https://www.linkedin.com/in/altair-bueno-calvente-92155a232/", text = "Altair Bueno Calvente" }
 
 # Summary section (default: hidden)
@@ -62,11 +67,12 @@ link = { to = "https://www.linkedin.com/in/altair-bueno-calvente-92155a232/", te
 # title: Header title for summary section
 title = "Summary"
 # body: Paragraph body for summary section
-body = """Results-oriented finance professional with over 10 years of experience 
-in publicly traded and privately held enterprises. Proven track record in 
-complex and capital-intensive global industries, delivering value and innovation 
-in Finance, Strategy, and Corporate Planning."""
-
+body = """
+Software Engineering Student with experience leading small teams. Seeking a
+challenging job to further improve my skills. Backend developer with great
+interest on building high performant microservices. Functional programming 
+advocate.
+"""
 
 # Skills section (default: hidden)
 [skills]
@@ -75,7 +81,7 @@ title = "Skills"
 # cols: Number of columns to show for the skills list
 # WARNING: if any skill is too large, it may overflow the `multicols`
 # package and look weird
-cols = 7
+cols = 5
 # list: A list of skills to show. They will distribute evenly on different columns
 list = [
     "Rust",
@@ -84,18 +90,15 @@ list = [
     "Yew",
     "WASM",
     "C",
-    "Haskell",
-    "Java",
+    "Java SE/EE",
     "Spring",
-    "Hibernate",
     "Python",
     "Docker",
     "Git",
     "GitHub",
-    "Bash/sh",
-    "UML",
-    "VMware",
-    "NodeJS",
+    "Bash/Zsh",
+    "UML 2.5",
+    "vmware ESX",
 ]
 
 
@@ -137,7 +140,7 @@ date = "Current"
 # institution: where did you acquire this certification
 institution = "University of Málaga, Spain"
 # description: more information, like grades (default: hidden)
-description = '2 subjects with honors. 8.03/10 average mark'
+description = '2 subjects with honors. 8.08/10 average mark'
 
 [[education.list]]
 # title: name of the certification
@@ -163,7 +166,7 @@ title = "B1 ISE I"
 date = "2015"
 # institution: where did you acquire this certification
 institution = "Trinity College London"
-description = "Reading and writting skills with merit"
+description = "Reading and writing skills with merit"
 
 # # Formation section (default: hidden)
 # [formation]
@@ -179,16 +182,21 @@ description = "Reading and writting skills with merit"
 # link = {to = "https://example.org", text = "example.org"}
 
 
-# Github section (default: hidden)
+# GitHub section (default: hidden)
 [github]
 # title: Header title for GitHub section
-title = "Github"
+title = "GitHub"
+
+[[github.list]]
+title = "ubay-spring"
+summary = """Auction platform built with Spring Boot, Java and Docker"""
+link = { to = "https://github.com/Altair-Bueno/ubay-spring", text = "Altair-Bueno/ubay-spring" }
 
 [[github.list]]
 # title: name of the project
 title = "rquote"
 # summary: small summary describing the project
-summary = "High performant SPA made with Rust, Yew, WASM and Bootstrap with Vercel's CD"
+summary = "High performant SPA built with Rust, Yew and Bootstrap"
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/rquote", text = "Altair-Bueno/rquote" }
 
@@ -196,8 +204,7 @@ link = { to = "https://github.com/Altair-Bueno/rquote", text = "Altair-Bueno/rqu
 # title: name of the project
 title = "cw"
 # summary: small summary describing the project
-summary = """A faster GNU wc alternative and library that supports different 
-text encodings, built with Rust. Includes Rust FFI bindings for C"""
+summary = """An alternative to GNU wc written in Rust. Exposes FFI bindings to C"""
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/cw", text = "Altair-Bueno/cw" }
 
@@ -205,20 +212,19 @@ link = { to = "https://github.com/Altair-Bueno/cw", text = "Altair-Bueno/cw" }
 # title: name of the project
 title = "resume"
 # summary: small summary describing the project
-summary = """Resume written in \\LaTeX that updates and compiles using GitHub Actions CI"""
+summary = """Resume written in \\LaTeX \\ and updated using GitHub Actions"""
 # link: to address and text to show up (\href{to}{text}) (default: hidden)
 link = { to = "https://github.com/Altair-Bueno/resume", text = "Altair-Bueno/resume" }
 
 [[github.list]]
 title = "fuzzy-disco"
-summary = """Post sharing social network that uses Rust/Rocket, MongoDB and 
-Docker for the API backend. It includes a SPA frontend made with Vue"""
+summary = """Post sharing platform built with Rust, Rocket, MongoDB and 
+Docker. Includes SPA made with Vue"""
 link = { to = "https://github.com/Altair-Bueno/fuzzy-disco", text = "Altair-Bueno/fuzzy-disco" }
 
 [[github.list]]
 title = "Demeter"
-summary = """Dotfiles backup from my personal macOS machine. It includes some
-zsh scripts I commonly use"""
+summary = """Dotfiles backup from my UNIX like machines"""
 link = { to = "https://github.com/Altair-Bueno/Demeter", text = "Altair-Bueno/Demeter" }
 
 
