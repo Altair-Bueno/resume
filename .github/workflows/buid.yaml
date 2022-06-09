@@ -4,24 +4,27 @@ on:
       - "*"
 
 jobs:
-  build:
+  build_resume:
     runs-on: macos-latest # Should have Arial installed
     steps:
       - uses: actions/checkout@v2
-      - name: Install python dependencies
-        run: pip3 install chevron toml python-dateutil
-      - name: Install required packages
+
+      - name: Install required software
         run: |
           brew install --cask basictex
-      - name: Update PATH
-        run: echo "/Library/TeX/texbin/" >> $GITHUB_PATH
-      - name: Install LateX packages
+          echo "/Library/TeX/texbin/" >> $GITHUB_PATH
+          brew install poetry
+
+      - name: Install dependencies
         run: |
-          sudo tlmgr update --self
-          sudo tlmgr install enumitem sectsty
-      - name: Create resume
+          make deps
+
+      - name: Build resume
         run: make
-      - uses: actions/upload-artifact@v2
+      
+      # Upload artifacts
+      - name: Upload resume
+        uses: actions/upload-artifact@v2
         with:
-          name: Altair_Bueno
-          path: out/cv.pdf
+          name: "Altair Bueno.pdf"
+          path: out/resume.pdf

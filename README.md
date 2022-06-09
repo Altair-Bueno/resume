@@ -1,34 +1,37 @@
-# How to build
+# Resume
 
-## Install required dependencies
+Altair's resume
 
-- LaTeX 
-  - macOS: Basictex
-  - Linux: TexLive
-- Make
-- [Python 3](https://www.python.org)
+# Building
+
+## Required software
+
+- A LaTeX distribution
+- GNU Make
 - Arial Font
+- [Poetry](https://python-poetry.org/)
 
-On the terminal run:
+## Building the resume
 
-```bash
-# LaTeX packages
-sudo tlmgr update --self
-sudo tlmgr install enumitem sectsty
-# Python packages
-pip install chevron toml python-dateutil
-```
-## Generate the resume PDF
+This project uses GNU MakeFile to simplify the building process of the resume.
+The quickest way to build the resume from scratch is to run `make all`. This
+will install the required dependencies and build the PDF
 
-On the terminal run:
+## MakeFile command list
 
 ```bash
-make
+# Install dependencies
+make deps
+# Build the resume
+make build
+# Install dependencies and build
+make all
+# Cleanup
+make clean
 ```
-
-The resume will be available at `out/cv.pdf`
 
 # License
 
-All software is licensed under the MIT license ([see](LICENSE)), except for the
-LaTeX template. For more information read its [license](templates/README.md#license)
+All software is licensed under the MIT license ([license](LICENSE)), except for
+the [LaTeX template](templates/README.md#license). All the data belongs to
+Altair Bueno
