@@ -4,7 +4,7 @@ on:
       - "*"
 
 jobs:
-  build_resume:
+  Build resume:
     runs-on: macos-latest # Should have Arial installed
     steps:
       - uses: actions/checkout@v2
@@ -26,5 +26,5 @@ jobs:
       - name: Upload resume
         uses: actions/upload-artifact@v2
         with:
-          name: "Altair Bueno.pdf"
+          name: "Altair Bueno.zip"
           path: out/resume.pdf
