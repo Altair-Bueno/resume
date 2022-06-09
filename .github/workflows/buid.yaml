@@ -4,7 +4,7 @@ on:
       - "*"
 
 jobs:
-  Build resume:
+  BuildResume:
     runs-on: macos-latest # Should have Arial installed
     steps:
       - uses: actions/checkout@v2
