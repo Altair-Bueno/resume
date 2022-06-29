@@ -1,8 +1,12 @@
 on:
   push:
-    branches:
-      - "*"
-
+    paths:
+      - data/*
+      - scripts/*
+      - templates/*
+      - Makefile
+      - pyproject.toml
+      - "*.lock"
 jobs:
   UpdateLatestTag:
     name: Publish binaries
