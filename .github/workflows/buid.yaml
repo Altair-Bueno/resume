@@ -29,11 +29,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install required software
+      - name: Install poetry
+        run: pipx install poetry
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'poetry'
+
+      - name: Config poetry
+        run: |
+          poetry env use "3.10"
+
+      - name: Install BasicTex
         run: |
           brew install --cask basictex
           echo "/Library/TeX/texbin/" >> $GITHUB_PATH
-          brew install poetry
 
       - name: Install dependencies
         run: |
