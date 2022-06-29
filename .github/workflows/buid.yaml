@@ -1,6 +1,7 @@
 on:
   push:
     paths:
+      - .github/workflows/build.yaml
       - data/*
       - scripts/*
       - templates/*
