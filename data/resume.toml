@@ -140,7 +140,7 @@ date = "Current"
 # institution: where did you acquire this certification
 institution = "University of Málaga, Spain"
 # description: more information, like grades (default: hidden)
-description = '2 subjects with honors. 8.08/10 average mark'
+description = '4 subjects with honors. 8.21/10 average mark'
 
 [[education.list]]
 # title: name of the certification
