@@ -1,0 +1,128 @@
+meta:
+  title: John Appleseed's Resume
+  canonical: http://json-schema.org/draft-04/schema#
+  version: v1.0.0
+  lastModified: 2022-07-19T11:27:45+0000
+  latex:
+    mainfont: Arial
+    fontsize: "11pt"
+    fontenc: "T1"
+    urlcolor: blue
+    linkcolor: magenta
+    numbersections: true
+    ruler: true
+    skills:
+      cols: 5
+  keywords: [ Sample ]
+
+basics:
+  name: John Appleseed
+  label: Software Developer
+  # image:
+  email: user@example.com
+  phone: +1-202-555-0125
+  url: https://example.com
+  summary: >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+    tempor incididunt ut labore et dolore magna aliqua. Duis ultricies lacus 
+    sed turpis tincidunt. Commodo ullamcorper a lacus vestibulum sed. A 
+    pellentesque sit amet porttitor eget dolor morbi non. Molestie a iaculis at 
+    erat pellentesque adipiscing commodo elit
+  location:
+    address: 2712 Broadway St
+    postalCode: CA 94115
+    countryCode: US
+    region: California
+  profiles:
+    - network: Twitter
+      username: appleseed
+      url: https://twitter.com/appleseed
+    - network: LinkedIn
+      username: appleseed
+      url: https://linkedin.com/appleseed
+work:
+  - name: Apple
+    position: Test Subject
+    url: https://apple.com
+    startDate: "2020-01-10"
+    endDate: "2021-04-02"
+    summary: > 
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+      tempor incididunt ut labore et dolore magna aliqua
+    highlights:
+      - Ut enim ad minim veniam
+      - Duis aute irure dolor in reprehenderit
+      - Excepteur sint occaecat cupidatat non proident
+volunteer:
+  - organization: Microsoft
+    position: Volunteer
+    url: https://microsoft.com
+    startDate: "2017-04-03"
+    endDate: "2018-03-04"
+    summary: >
+      Quis imperdiet massa tincidunt nunc pulvinar sapien et. Habitant morbi 
+      tristique senectus et netus
+    highlights:
+      - Auctor neque vitae tempus quam pellentesque nec nam aliquam
+      - Nam libero justo laoreet sit amet
+education:
+  - institution: MIT
+    url: https://mit.edu
+    area: Computer science
+    studyType: Bachelor
+    startDate: "2006-08-01"
+    endDate: "2010-06-01"
+    score: "9.0"
+    courses:
+      - Advanced UML design
+awards:
+  - title: Sample medal
+    date: "2009-04-03"
+    awarder: MIT
+    summary: Best sample resume
+certificates:
+  - name: ESX management
+    issuer: VMWare
+    url: https://vmware.com
+publications:
+  - name: Serverless service maintenance
+    publisher: MIT
+    releaseDate: "2010-01-01"
+    url: https://example.org
+    summary: >
+      Non curabitur gravida arcu ac tortor dignissim convallis aenean et. 
+      Aliquam ultrices sagittis orci a scelerisque purus semper eget
+skills:
+  - name: Web Development
+    level: Master
+    keywords:
+      - Vue
+      - JavaScript
+      - Node
+      - Deno
+      - Bun
+languages:
+  - language: English
+    fluency: Native speaker
+interests:
+  - name: Nature
+    keywords:
+      - Wildlife
+      - Forests
+projects:
+  - name: Example project
+    description: Eget arcu dictum varius duis at consectetur lorem donec massa
+    highlights:
+      - Nunc congue nisi vitae suscipit tellus mauris a diam
+      - Donec ultrices tincidunt arcu non sodales neque
+    keywords:
+      - Vue
+      - JavaScript
+      - Node
+    startDate: "2020-01-02"
+    url: https://example.org
+    roles:
+      - Team lead
+    entity: MIT
+    type: Web Application
+

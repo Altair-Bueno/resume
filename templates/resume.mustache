@@ -1,0 +1,100 @@
+% LaTeX Resume Pandoc Template jb2resume.latex
+%
+% Copyright (c) 2022, Altair Bueno
+% Based on:
+%    - John Bokma's Pandoc template:
+%      https://github.com/john-bokma/resume-pandoc/blob/470b58a42bcc1bd16de8b1aabc91f26219c4226a/templates/jb2-modern.latex
+%    - https://github.com/john-bokma/resume-pandoc/templates/jb2resume.latex
+%    - Jason Blevins' LaTeX CV Template;
+%      http://jblevins.org/projects/cv-template/
+%
+% GitHub: https://github.com/john-bokma/resume-pandoc/
+
+
+\documentclass[<< fontsize >>]{article}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{underscore}
+\usepackage[parfill]{parskip}
+\usepackage{lmodern}
+\usepackage[<< fontenc >>]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{fontspec}
+\usepackage{sectsty}
+\usepackage{multicol}
+
+\newcommand{\resumeruler}{\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}}
+
+% Document configuration 
+
+\setmainfont{<< mainfont >>}
+\hypersetup{
+  colorlinks = true,
+  urlcolor=<< urlcolor >>,
+  linkcolor=<< linkcolor >>,
+  pdfauthor = {<< name >>},
+  pdfkeywords = {<<# keywords >><<.>>, <</ keywords >>},
+  pdftitle = {<< title >>},
+  pdfsubject = {<< subject >>},
+  pdfpagemode = UseNone
+}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+% Fix  for "! Undefined control sequence. <recently read> \tightlist",
+% see: https://github.com/osener/markup.rocks/issues/4
+% I have this issue with Pandoc 1.17.2
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Page number is top right, and it is possible to control the rest of
+% the header.
+\pagestyle{myheadings}
+\markright{<< name >>}
+\thispagestyle{empty}
+
+% Custom section fonts
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\bfseries\large}
+
+% Section numbers or not (default)
+<<# numbersections >>\setcounter{secnumdepth}{5}<</ numbersections >>
+<<^ numbersections >>\setcounter{secnumdepth}{0}<</ numbersections >>
+
+% By putting an empty \item[] at the start of the list, the list
+% starts on a new line.
+\setlist[itemize]{leftmargin=1em,before=\item[]}
+%\setlist[itemize]{leftmargin=1em,label={--},before=\item[]} % label changes the bullet character
+\setlist[description]{leftmargin=0em, style=sameline}
+% Don't use monospace font for URLs
+\urlstyle{same}
+
+\begin{document}
+
+% Place name at left
+{\huge << name >>}
+
+% All document sections are partials that can be individually removed
+<<# column >><<> columns >><</ column >>
+
+<<# summary >><<> summary >><</ summary >>
+
+<<# education >><<> education >><</ education >>
+
+<<# skills >><<> skills >><</ skills >>
+
+<<# experience >><<> experience >><</ experience >>
+
+<<# formation >><<> formation >><</ formation >>
+
+<<# project >><<> project >><</ project >>
+
+<<# other >><<> other >><</ other >>
+
+\end{document}
