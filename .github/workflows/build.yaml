@@ -1,13 +1,7 @@
 on:
   push:
-    paths:
-      - .github/workflows/build.yaml
-      - data/*
-      - scripts/*
-      - templates/*
-      - Makefile
-      - pyproject.toml
-      - "*.lock"
+    branches:
+      - master
 jobs:
   UpdateLatestTag:
     name: Publish binaries
