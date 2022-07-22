@@ -2,3 +2,6 @@ out
 .vscode
 .idea
 .venv
+*.log
+**.local
+**__pycache__
