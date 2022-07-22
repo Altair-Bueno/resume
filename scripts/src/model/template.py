@@ -300,8 +300,8 @@ class TemplateScheme(BaseModel):
     linkcolor = "magenta"
     numbersections = False
     ruler = False
-    column: Optional[ColumnSection]
-    summary: Optional[SummarySection]
+    column: ColumnSection
+    summary: SummarySection
     skills: Optional[SkillSection]
     experience: Optional[ExperienceSection]
     education: Optional[EducationSection]
