@@ -13,14 +13,7 @@ from pydantic.generics import GenericModel
 from .jsonresume import EducationItem, Certificate
 from .jsonresume import Project as ProjectItem
 from .jsonresume import ResumeSchema, WorkItem
-from ..util.extract import (
-    keywords,
-    mail_column,
-    phone_column,
-    website_column,
-    label_column,
-    location_column,
-)
+from ..util import extract
 from ..util.other import from_award, from_publication
 
 Content = TypeVar("Content")
@@ -40,13 +33,13 @@ def sort_by_date(elements: List[Content]) -> List[Content]:
 
 
 class Link(BaseModel):
-    """
-    Represents a LaTeX \\href
+    """Represents a LaTeX \\href
 
-    Attributes:
+    Attributes
+    ==========
 
     - to: Where should the link point to
-    - content (optional): Linked text
+    - content: Linked text
     """
 
     to: str
@@ -54,11 +47,10 @@ class Link(BaseModel):
 
 
 class Date(BaseModel):
-    """
-    Represents a time period. Invalid dates such as `Present` or `Current` are
-    allowed for the end attribute
+    """Represents a date. If the end date is `None`, only the start date will be shown
 
     Attributes
+    ==========
 
     - start: Start of the period
     - end: End of the period
@@ -69,21 +61,15 @@ class Date(BaseModel):
 
 
 class Column(BaseModel):
-    """
-    Represents an entry on an information column
-
-    Attributes
-
-    - title: Bold text
-    """
+    """Represents an entry on an information column for the Column Section"""
 
     title: str
-    link: Optional[Link]
     content: Optional[str]
+    link: Optional[Link]
 
 
 class Experience(BaseModel):
-    """Represents an individual job"""
+    """Represents an individual job on the Experience section"""
 
     company: str
     role: str
@@ -93,7 +79,7 @@ class Experience(BaseModel):
 
 
 class Education(BaseModel):
-    """Represents education received"""
+    """Represents education received on the Education Section"""
 
     title: str
     summary: Optional[str]
@@ -102,7 +88,7 @@ class Education(BaseModel):
 
 
 class Qualification(BaseModel):
-    """"""
+    """Represents an individual certification on the Qualification section"""
 
     title: str
     date: Optional[str]
@@ -110,6 +96,7 @@ class Qualification(BaseModel):
 
 
 class Project(BaseModel):
+    """Represents an individual project on the Project section"""
     title: str
     summary: str
     link: Optional[Link]
@@ -121,11 +108,13 @@ class Other(BaseModel):
 
 
 class GenericSection(GenericModel, Generic[Content]):
+    """Generic section used as a base class for other sections"""
     title: str
     list: List[Content]
 
 
 class OtherSection(GenericSection[Other]):
+    """The other section combines information from the `awards` and `publication` fields of a JSON resume"""
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[OtherSection]:
         # volunteer
@@ -144,6 +133,7 @@ class OtherSection(GenericSection[Other]):
 
 
 class ProjectSection(GenericSection[Project]):
+    """The project section displays the same information as the `project` field of a JSON resume"""
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[ProjectSection]:
         if not jsonresume.projects:
@@ -160,6 +150,7 @@ class ProjectSection(GenericSection[Project]):
 
 
 class QualificationSection(GenericSection[Qualification]):
+    """The cualification section displays the same information as the `certifications` field of a JSON resume"""
     @classmethod
     def from_jsonresume(
         cls, jsonresume: ResumeSchema
@@ -179,6 +170,7 @@ class QualificationSection(GenericSection[Qualification]):
 
 
 class EducationSection(GenericSection[Education]):
+    """The education section displays the same information as the `education` field of a JSON resume"""
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[EducationSection]:
         if not jsonresume.education:
@@ -198,6 +190,7 @@ class EducationSection(GenericSection[Education]):
 
 
 class ExperienceSection(GenericSection[Experience]):
+    """The experience section displays the same information as the `work` field of a JSON resume"""
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[ExperienceSection]:
         if not jsonresume.work:
@@ -225,6 +218,7 @@ class ExperienceSection(GenericSection[Experience]):
 
 
 class SkillSection(GenericSection[str]):
+    """The skills section displays the names of the skills from the `skills` field of a JSON resume"""
     cols: int = 6
 
     @classmethod
@@ -241,6 +235,7 @@ class SkillSection(GenericSection[str]):
 
 
 class SummarySection(BaseModel):
+    """The summary section displays the contents `basics.summary` of a JSON resume"""
     title: str
     content: str
 
@@ -250,17 +245,18 @@ class SummarySection(BaseModel):
 
 
 class ColumnSection(BaseModel):
+    """The column section displays two columns with useful information from the author generated from the `basics` field of a JSON resume"""
     left: List[Column]
     right: List[Column]
 
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> ColumnSection:
         basic_columns_strategies = [
-            label_column,
-            mail_column,
-            phone_column,
-            location_column,
-            website_column,
+            extract.label_column,
+            extract.mail_column,
+            extract.phone_column,
+            extract.location_column,
+            extract.website_column,
         ]
         basic_columns = (f(jsonresume) for f in basic_columns_strategies)
         profile_columns = (
@@ -275,10 +271,7 @@ class ColumnSection(BaseModel):
 
 
 class TemplateScheme(BaseModel):
-    """
-    Represents all posible
-    """
-
+    """The model used to generate a LaTeX document"""
     mainfont: str
     title: str
     subject: str = "Resume"
@@ -306,19 +299,19 @@ class TemplateScheme(BaseModel):
 
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> TemplateScheme:
-        extract = lambda x: glom(jsonresume, x, default=None)
+        inner = lambda x: glom(jsonresume, x, default=None)
 
         return TemplateScheme(
-            mainfont=extract("meta.latex.mainfont"),
-            title=extract("meta.title"),
-            name=extract("basics.name"),
-            keywords=keywords(jsonresume),
-            fontsize=extract("meta.latex.fontsize"),
-            fontenc=extract("meta.latex.fontenc"),
-            urlcolor=extract("meta.latex.urlcolor"),
-            linkcolor=extract("meta.latex.linkcolor"),
-            numbersections=extract("meta.latex.numbersections"),
-            ruler=extract("meta.latex.ruler"),
+            mainfont=inner("meta.latex.mainfont"),
+            title=inner("meta.title"),
+            name=inner("basics.name"),
+            keywords=extract.keywords(jsonresume),
+            fontsize=inner("meta.latex.fontsize"),
+            fontenc=inner("meta.latex.fontenc"),
+            urlcolor=inner("meta.latex.urlcolor"),
+            linkcolor=inner("meta.latex.linkcolor"),
+            numbersections=inner("meta.latex.numbersections"),
+            ruler=inner("meta.latex.ruler"),
             column=ColumnSection.from_jsonresume(jsonresume),
             summary=SummarySection.from_jsonresume(jsonresume),
             skills=SkillSection.from_jsonresume(jsonresume),

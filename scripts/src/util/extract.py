@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from itertools import chain
 from typing import List
 from urllib.parse import urlparse
@@ -6,22 +8,47 @@ import phonenumbers
 from glom import glom
 from iso3166 import countries
 
-from ..model import jsonresume
 from ..model import template
+from ..model.jsonresume import ResumeSchema
 
 
-def label_column(data: jsonresume.ResumeSchema):
+def label_column(data: ResumeSchema) -> template.Column:
+    """Generates a Column using `basics.label`"""
     title = data.basics.label
     return template.Column(title=title)
 
 
-def mail_column(data: jsonresume.ResumeSchema):
+def mail_column(data: ResumeSchema) -> template.Column:
+    """Generates a Column using `basics.email`
+
+    Example
+    =======
+
+    **Software Developer**
+
+    More information
+    ================
+
+    - RFC6068: https://datatracker.ietf.org/doc/html/rfc6068
+    """
     email = data.basics.email
     email_link = template.Link(to=f"mailto:{email}", content=email)
     return template.Column(title="Email", link=email_link)
 
 
-def phone_column(data: jsonresume.ResumeSchema):
+def phone_column(data: ResumeSchema):
+    """Generates a Column using `basics.phone`
+
+    Example
+    =======
+
+    **Phone**: [+11 1111](tel:+111111)
+
+    More information
+    ================
+
+    - RFC3966: https://datatracker.ietf.org/doc/html/rfc3966
+    """
     phone = phonenumbers.parse(data.basics.phone, None)
     phone_content = phonenumbers.format_number(
         phone, phonenumbers.PhoneNumberFormat.INTERNATIONAL
@@ -32,21 +59,46 @@ def phone_column(data: jsonresume.ResumeSchema):
     return template.Column(title="Phone", link=phone_link)
 
 
-def location_column(data: jsonresume.ResumeSchema):
+def location_column(data: ResumeSchema):
+    """Generates a Column using `basics.location`
+
+    Example
+    =======
+
+    **Location**: Madrid, Spain
+    """
     location = data.basics.location
     country = countries.get(location.countryCode)
     content = f"{location.region}, {country.name}"
     return template.Column(title="Location", content=content)
 
 
-def website_column(data: jsonresume.ResumeSchema):
+def website_column(data: ResumeSchema):
+    """Generates a Colum using `basics.url`.
+
+    Example
+    =======
+
+    **Website**: [example.org](https://example.org)
+    """
     website = data.basics.url
     website_content = urlparse(website).netloc
     website_link = template.Link(to=website, content=website_content)
     return template.Column(title="Website", link=website_link)
 
 
-def keywords(data: jsonresume.ResumeSchema) -> List[str]:
+def keywords(data: ResumeSchema) -> List[str]:
+    """Extracts keywords from:
+
+    - `meta.keywords`
+    - `work._.name`
+    - `work._.position`
+    - `education._.institution`
+    - `education._.area`
+    - `skills._.name`
+    - `skills._.keywords`
+    - `projects._.keywords`
+    """
     meta = glom(data, "meta.keywords", default=[])
 
     work = data.work or []
