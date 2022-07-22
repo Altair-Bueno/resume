@@ -8,8 +8,8 @@ meta:
     urlcolor: blue
     ruler: true
     skills:
-      cols: 5
-  keywords: [ Altair Bueno Calvente, Resume, Curriculum Vitae, Software Engineer, University Of Málaga, ]
+      cols: 8
+  keywords: [ Altair Bueno Calvente, Resume, Curriculum Vitae, Software Engineer, University of Málaga, ]
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
@@ -68,7 +68,28 @@ education:
 # awards:
 # certificates:
 # publications:
-# skills: # TODO complete skills
+skills:
+  - name: Rust
+    level: Advanced
+    keywords: [ Rocket, Tokio, Axum, Yew, WASM ]
+  - name: Java
+    level: Advanced
+    keywords: [ Spring, Spring Boot, Java EE, Jakarta EE, ]
+  - name: Python
+    level: Medium
+    keywords: [ Pydantic, Flask, Fast API, ]
+  - name: Docker
+    level: Advanced
+    keywords: [ Docker, Docker Compose, Docker Swarm, ]
+  - name: Git
+    level: Medium
+    keywords: [ GitHub, ]
+  - name: Unix
+    level: Medium
+    keywords: [ Linux, BSD, macOS ]
+  - name: UML 2.5
+    level: Medium
+    keywords: [ OOP, ]
 languages:
   - language: Spanish
     fluency: Native speaker
