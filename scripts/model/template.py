@@ -144,30 +144,25 @@ class GenericSection(GenericModel, Generic[Content]):
 class OtherSection(GenericSection[Other]):
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[OtherSection]:
-        def inner(x):  # TODO not ready
-            return Other(title="Not implemented", summary="Not implemented")
-
-        def volunteer():
-            return (
-                [inner(x) for x in jsonresume.volunteer] if jsonresume.volunteer else []
+        def from_award(award):
+            return Other(
+                title=award.title, summary=f"{award.awarder}. {award.date.year}"
             )
 
-        def awards():
-            return [inner(x) for x in jsonresume.awards] if jsonresume.awards else []
-
-        def publications():
-            return (
-                [inner(x) for x in jsonresume.publications]
-                if jsonresume.publications
-                else []
+        def from_publication(publication):
+            return Other(
+                title=publication.name,
+                summary=f"\\href{{{publication.url}}}{{{publication.publisher}}} {publication.releaseDate.year}",
             )
 
-        def interests():
-            return (
-                [inner(x) for x in jsonresume.interests] if jsonresume.interests else []
-            )
-
-        elements = volunteer() + awards() + publications() + interests()
+        # volunteer
+        # publications
+        # interests
+        elements = chain(
+            map(from_award, jsonresume.awards or []),
+            map(from_publication, jsonresume.publications or []),
+        )
+        elements = list(elements)
 
         if elements:
             return OtherSection(title="Other", list=elements)
