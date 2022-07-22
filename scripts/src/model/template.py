@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import date
 from itertools import chain
+from math import ceil
 from typing import Optional, TypeVar, Generic, List
 from urllib.parse import urlparse
 
@@ -12,7 +13,14 @@ from pydantic.generics import GenericModel
 from .jsonresume import EducationItem, Certificate
 from .jsonresume import Project as ProjectItem
 from .jsonresume import ResumeSchema, WorkItem
-from ..util.extract import keywords, mail_column, phone_column, website_column
+from ..util.extract import (
+    keywords,
+    mail_column,
+    phone_column,
+    website_column,
+    label_column,
+    location_column,
+)
 
 Content = TypeVar("Content")
 
@@ -258,9 +266,11 @@ class ColumnSection(BaseModel):
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> ColumnSection:
         basic_columns_strategies = [
+            label_column,
             mail_column,
             phone_column,
-            website_column
+            location_column,
+            website_column,
         ]
         basic_columns = (f(jsonresume) for f in basic_columns_strategies)
         profile_columns = (
@@ -270,7 +280,7 @@ class ColumnSection(BaseModel):
 
         columns = chain(basic_columns, profile_columns)
         columns = list(columns)
-        middle = len(columns) // 2
+        middle = ceil(len(columns) / 2)
         return ColumnSection(left=columns[:middle], right=columns[middle:])
 
 

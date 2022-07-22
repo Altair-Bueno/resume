@@ -4,9 +4,15 @@ from urllib.parse import urlparse
 
 import phonenumbers
 from glom import glom
+from iso3166 import countries
 
 from ..model import jsonresume
 from ..model import template
+
+
+def label_column(data: jsonresume.ResumeSchema):
+    title = data.basics.label
+    return template.Column(title=title)
 
 
 def mail_column(data: jsonresume.ResumeSchema):
@@ -20,12 +26,17 @@ def phone_column(data: jsonresume.ResumeSchema):
     phone_content = phonenumbers.format_number(
         phone, phonenumbers.PhoneNumberFormat.INTERNATIONAL
     )
-    phone_to = phonenumbers.format_number(
-        phone, phonenumbers.PhoneNumberFormat.E164
-    )
+    phone_to = phonenumbers.format_number(phone, phonenumbers.PhoneNumberFormat.E164)
     phone_to = f"tel:{phone_to}"
     phone_link = template.Link(to=phone_to, content=phone_content)
     return template.Column(title="Phone", link=phone_link)
+
+
+def location_column(data: jsonresume.ResumeSchema):
+    location = data.basics.location
+    country = countries.get(location.countryCode)
+    content = f"{location.region}, {country.name}"
+    return template.Column(title="Location", content=content)
 
 
 def website_column(data: jsonresume.ResumeSchema):
