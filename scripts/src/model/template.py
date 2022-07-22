@@ -2,10 +2,9 @@ from __future__ import annotations
 
 from datetime import date
 from itertools import chain
-from typing import List, Optional, TypeVar, Generic
+from typing import Optional, TypeVar, Generic, List
 from urllib.parse import urlparse
 
-import phonenumbers
 from glom import glom
 from pydantic import BaseModel, root_validator
 from pydantic.generics import GenericModel
@@ -13,35 +12,9 @@ from pydantic.generics import GenericModel
 from .jsonresume import EducationItem, Certificate
 from .jsonresume import Project as ProjectItem
 from .jsonresume import ResumeSchema, WorkItem
+from ..util.extract import keywords, mail_column, phone_column, website_column
 
 Content = TypeVar("Content")
-
-
-def extract_keywords(jsonresume: ResumeSchema):
-    meta = glom(jsonresume, "meta.keywords", default=[])
-
-    work = jsonresume.work or []
-    work = map(lambda x: (x.name, x.position), work)
-    work = chain.from_iterable(work)
-
-    education = jsonresume.education or []
-    education = map(lambda x: (x.institution, x.area), education)
-    education = chain.from_iterable(education)
-
-    skills = jsonresume.skills or []
-    skills = map(lambda x: [x.name] + (x.keywords or []), skills)
-    skills = chain.from_iterable(skills)
-
-    projects = jsonresume.projects or []
-    projects = map(lambda x: x.keywords, projects)
-    projects = filter(None, projects)
-    projects = chain.from_iterable(projects)
-
-    res = chain(meta, work, education, skills, projects)
-    res = filter(None, res)
-    res = set(res)
-
-    return res
 
 
 def sort_by_date(elements: List[Content]) -> List[Content]:
@@ -284,41 +257,19 @@ class ColumnSection(BaseModel):
 
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> ColumnSection:
-        def mail_col():
-            email = jsonresume.basics.email
-            email_link = Link(to=f"mailto:{email}", content=email)
-            return Column(title="Email", link=email_link)
+        basic_columns_strategies = [
+            mail_column,
+            phone_column,
+            website_column
+        ]
+        basic_columns = (f(jsonresume) for f in basic_columns_strategies)
+        profile_columns = (
+            Column(title=p.network, link=Link(to=p.url, content=p.username))
+            for p in jsonresume.basics.profiles
+        )
 
-        def phone_col():
-            phone = phonenumbers.parse(jsonresume.basics.phone, None)
-            phone_content = phonenumbers.format_number(
-                phone, phonenumbers.PhoneNumberFormat.INTERNATIONAL
-            )
-            phone_to = phonenumbers.format_number(
-                phone, phonenumbers.PhoneNumberFormat.E164
-            )
-            phone_to = f"tel:{phone_to}"
-            phone_link = Link(to=phone_to, content=phone_content)
-            return Column(title="Phone", link=phone_link)
-
-        def website_col():
-            website = jsonresume.basics.url
-            website_content = urlparse(website).netloc
-            website_link = Link(to=website, content=website_content)
-            return Column(title="Website", link=website_link)
-
-        def profiles_cols():
-            return [
-                Column(title=p.network, link=Link(to=p.url, content=p.username))
-                for p in jsonresume.basics.profiles
-            ]
-
-        columns = [
-            Column(title=jsonresume.basics.label),
-            mail_col(),
-            phone_col(),
-            website_col(),
-        ] + profiles_cols()
+        columns = chain(basic_columns, profile_columns)
+        columns = list(columns)
         middle = len(columns) // 2
         return ColumnSection(left=columns[:middle], right=columns[middle:])
 
@@ -361,7 +312,7 @@ class TemplateScheme(BaseModel):
             mainfont=extract("meta.latex.mainfont"),
             title=extract("meta.title"),
             name=extract("basics.name"),
-            keywords=extract_keywords(jsonresume),
+            keywords=keywords(jsonresume),
             fontsize=extract("meta.latex.fontsize"),
             fontenc=extract("meta.latex.fontenc"),
             urlcolor=extract("meta.latex.urlcolor"),
