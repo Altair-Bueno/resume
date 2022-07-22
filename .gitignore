@@ -4,3 +4,4 @@ out
 .venv
 *.log
 **.local
+**__pycache__
