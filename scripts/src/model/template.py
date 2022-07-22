@@ -21,6 +21,7 @@ from ..util.extract import (
     label_column,
     location_column,
 )
+from ..util.other import from_award, from_publication
 
 Content = TypeVar("Content")
 
@@ -127,17 +128,6 @@ class GenericSection(GenericModel, Generic[Content]):
 class OtherSection(GenericSection[Other]):
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[OtherSection]:
-        def from_award(award):
-            return Other(
-                title=award.title, summary=f"{award.awarder}. {award.date.year}"
-            )
-
-        def from_publication(publication):
-            return Other(
-                title=publication.name,
-                summary=f"\\href{{{publication.url}}}{{{publication.publisher}}}. {publication.releaseDate.year}",
-            )
-
         # volunteer
         # publications
         # interests
