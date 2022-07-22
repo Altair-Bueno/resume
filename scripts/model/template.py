@@ -29,7 +29,8 @@ def extract_keywords(jsonresume: ResumeSchema):
     education = chain.from_iterable(education)
 
     skills = jsonresume.skills or []
-    skills = map(lambda x: x.name, skills)
+    skills = map(lambda x: [x.name] + (x.keywords or []), skills)
+    skills = chain.from_iterable(skills)
 
     projects = jsonresume.projects or []
     projects = map(lambda x: x.keywords, projects)
@@ -264,7 +265,7 @@ class SkillSection(GenericSection[str]):
         return SkillSection(
             title="Skills",
             list=skills,
-            cols=glom(jsonresume, 'meta.latex.skills.cols', default=6)
+            cols=glom(jsonresume, "meta.latex.skills.cols", default=6),
         )
 
 
