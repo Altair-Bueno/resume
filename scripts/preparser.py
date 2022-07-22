@@ -8,9 +8,16 @@ from model.template import TemplateScheme
 
 
 def main():
-    with open(argv[1], "r") as origin, open(argv[2], "w") as destination:
-        jsonresume = ResumeSchema(**load(origin, Loader=SafeLoader))
-        data = TemplateScheme.from_jsonresume(jsonresume)
+    origin_filename = argv[1]
+    destination_filename = argv[2]
+
+    with open(origin_filename, "r") as origin:
+        d = load(origin, Loader=SafeLoader)
+
+    jsonresume = ResumeSchema(**d)
+    data = TemplateScheme.from_jsonresume(jsonresume)
+
+    with open(destination_filename, "w") as destination:
         dump(data.dict(), destination, indent=2)
 
 
