@@ -261,7 +261,11 @@ class SkillSection(GenericSection[str]):
             return None
 
         skills = [s.name for s in jsonresume.skills]
-        return SkillSection(title="Skills", list=skills)
+        return SkillSection(
+            title="Skills",
+            list=skills,
+            cols=glom(jsonresume, 'meta.latex.skills.cols', default=6)
+        )
 
 
 class SummarySection(BaseModel):
