@@ -42,11 +42,23 @@ basics:
       url: https://linkedin.com/appleseed
 work:
   - name: Apple
-    position: Test Subject
+    position: Software Developer
     url: https://apple.com
     startDate: "2020-01-10"
     endDate: "2021-04-02"
     summary: > 
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+      tempor incididunt ut labore et dolore magna aliqua
+    highlights:
+      - Ut enim ad minim veniam
+      - Duis aute irure dolor in reprehenderit
+      - Excepteur sint occaecat cupidatat non proident
+  - name: Microsoft
+    position: Software Developer
+    url: https://apple.com
+    startDate: "2021-01-10"
+    endDate: "2021-04-02"
+    summary: >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
       tempor incididunt ut labore et dolore magna aliqua
     highlights:
@@ -84,6 +96,7 @@ certificates:
   - name: ESX management
     issuer: VMWare
     url: https://vmware.com
+    date: '2020-03-03'
 publications:
   - name: Serverless service maintenance
     publisher: MIT
@@ -120,7 +133,7 @@ projects:
       - JavaScript
       - Node
     startDate: "2020-01-02"
-    url: https://example.org
+    url: https://github.com/hello/world
     roles:
       - Team lead
     entity: MIT
