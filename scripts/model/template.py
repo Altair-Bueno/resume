@@ -33,6 +33,7 @@ def extract_keywords(jsonresume: ResumeSchema):
 
     projects = jsonresume.projects or []
     projects = map(lambda x: x.keywords, projects)
+    projects = filter(None, projects)
     projects = chain.from_iterable(projects)
 
     res = chain(meta, work, education, skills, projects)
@@ -152,7 +153,7 @@ class OtherSection(GenericSection[Other]):
         def from_publication(publication):
             return Other(
                 title=publication.name,
-                summary=f"\\href{{{publication.url}}}{{{publication.publisher}}} {publication.releaseDate.year}",
+                summary=f"\\href{{{publication.url}}}{{{publication.publisher}}}. {publication.releaseDate.year}",
             )
 
         # volunteer
