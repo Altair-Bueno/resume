@@ -10,9 +10,9 @@ from glom import glom
 from pydantic import BaseModel, root_validator
 from pydantic.generics import GenericModel
 
-from jsonresume import EducationItem
-from jsonresume import Project as ProjectItem
-from jsonresume import ResumeSchema, WorkItem
+from .jsonresume import EducationItem
+from .jsonresume import Project as ProjectItem
+from .jsonresume import ResumeSchema, WorkItem
 
 Content = TypeVar("Content")
 
@@ -177,19 +177,20 @@ class ProjectSection(GenericSection[Project]):
         return ProjectSection(title="Projects", list=projects)
 
 
-class FormationSection(GenericSection[Qualification]):
+class QualificationSection(GenericSection[Qualification]):
     @classmethod
-    def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[FormationSection]:
+    def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[QualificationSection]:
         if not jsonresume.certificates:
             return None
 
         def inner(f):
+            print(f.url,f.issuer)
             return Qualification(
                 title=f.name, date=f.date, link=Link(to=f.url, text=f.issuer)
             )
 
         formation = [inner(f) for f in sort_by_date(jsonresume.certificates)]
-        return FormationSection(title="Qualifications", list=formation)
+        return QualificationSection(title="Qualifications", list=formation)
 
 
 class EducationSection(GenericSection[Education]):
@@ -328,7 +329,7 @@ class TemplateScheme(BaseModel):
     skills: Optional[SkillSection]
     experience: Optional[ExperienceSection]
     education: Optional[EducationSection]
-    formation: Optional[FormationSection]
+    formation: Optional[QualificationSection]
     project: Optional[ProjectSection]
     other: Optional[OtherSection]
 
@@ -357,7 +358,7 @@ class TemplateScheme(BaseModel):
             skills=SkillSection.from_jsonresume(jsonresume),
             experience=ExperienceSection.from_jsonresume(jsonresume),
             education=EducationSection.from_jsonresume(jsonresume),
-            formation=FormationSection.from_jsonresume(jsonresume),
+            formation=QualificationSection.from_jsonresume(jsonresume),
             project=ProjectSection.from_jsonresume(jsonresume),
             other=OtherSection.from_jsonresume(jsonresume),
         )

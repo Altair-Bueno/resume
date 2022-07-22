@@ -3,8 +3,8 @@ from sys import argv
 
 from yaml import load, SafeLoader
 
-from jsonresume import ResumeSchema
-from template import TemplateScheme
+from model.jsonresume import ResumeSchema
+from model.template import TemplateScheme
 
 
 def main():
