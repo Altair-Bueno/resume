@@ -10,7 +10,7 @@ from glom import glom
 from pydantic import BaseModel, root_validator
 from pydantic.generics import GenericModel
 
-from .jsonresume import EducationItem
+from .jsonresume import EducationItem, Certificate
 from .jsonresume import Project as ProjectItem
 from .jsonresume import ResumeSchema, WorkItem
 
@@ -18,14 +18,28 @@ Content = TypeVar("Content")
 
 
 def extract_keywords(jsonresume: ResumeSchema):
-    # TODO extract keywords
     meta = glom(jsonresume, "meta.keywords", default=[])
 
     work = jsonresume.work or []
     work = map(lambda x: (x.name, x.position), work)
     work = chain.from_iterable(work)
 
-    return set(chain(meta, work))
+    education = jsonresume.education or []
+    education = map(lambda x: (x.institution, x.area), education)
+    education = chain.from_iterable(education)
+
+    skills = jsonresume.skills or []
+    skills = map(lambda x: x.name, skills)
+
+    projects = jsonresume.projects or []
+    projects = map(lambda x: x.keywords, projects)
+    projects = chain.from_iterable(projects)
+
+    res = chain(meta, work, education, skills, projects)
+    res = filter(None, res)
+    res = set(res)
+
+    return res
 
 
 def sort_by_date(elements: List[Content]) -> List[Content]:
@@ -52,7 +66,7 @@ class Link(BaseModel):
     """
 
     to: str
-    content: Optional[str]
+    content: str
 
 
 class Date(BaseModel):
@@ -67,7 +81,7 @@ class Date(BaseModel):
     """
 
     start: str
-    end: str = "Current"
+    end: Optional[str]
 
 
 class Column(BaseModel):
@@ -179,14 +193,17 @@ class ProjectSection(GenericSection[Project]):
 
 class QualificationSection(GenericSection[Qualification]):
     @classmethod
-    def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[QualificationSection]:
+    def from_jsonresume(
+        cls, jsonresume: ResumeSchema
+    ) -> Optional[QualificationSection]:
         if not jsonresume.certificates:
             return None
 
-        def inner(f):
-            print(f.url,f.issuer)
+        def inner(f: Certificate):
             return Qualification(
-                title=f.name, date=f.date, link=Link(to=f.url, text=f.issuer)
+                title=f.name,
+                date=str(f.date.year),
+                link=Link(to=f.url, content=f.issuer),
             )
 
         formation = [inner(f) for f in sort_by_date(jsonresume.certificates)]
@@ -199,16 +216,13 @@ class EducationSection(GenericSection[Education]):
         if not jsonresume.education:
             return None
 
-        def inner(education: EducationItem) -> Education:
-            if education.endDate:
-                date = education.endDate.year
-            else:
-                date = None
+        def inner(e: EducationItem) -> Education:
+            d = glom(e, "endDate.year", default=None)
             return Education(
-                title=f"{education.area}, {education.studyType}",
-                institution=education.institution,
-                summary=education.score,
-                date=date,
+                title=f"{e.area}, {e.studyType}",
+                institution=e.institution,
+                summary=e.score,
+                date=d,
             )
 
         education = [inner(e) for e in sort_by_date(jsonresume.education)]
