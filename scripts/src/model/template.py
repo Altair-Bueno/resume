@@ -97,6 +97,7 @@ class Qualification(BaseModel):
 
 class Project(BaseModel):
     """Represents an individual project on the Project section"""
+
     title: str
     summary: str
     link: Optional[Link]
@@ -109,12 +110,14 @@ class Other(BaseModel):
 
 class GenericSection(GenericModel, Generic[Content]):
     """Generic section used as a base class for other sections"""
+
     title: str
     list: List[Content]
 
 
 class OtherSection(GenericSection[Other]):
     """The other section combines information from the `awards` and `publication` fields of a JSON resume"""
+
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[OtherSection]:
         # volunteer
@@ -134,6 +137,7 @@ class OtherSection(GenericSection[Other]):
 
 class ProjectSection(GenericSection[Project]):
     """The project section displays the same information as the `project` field of a JSON resume"""
+
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[ProjectSection]:
         if not jsonresume.projects:
@@ -151,6 +155,7 @@ class ProjectSection(GenericSection[Project]):
 
 class QualificationSection(GenericSection[Qualification]):
     """The cualification section displays the same information as the `certifications` field of a JSON resume"""
+
     @classmethod
     def from_jsonresume(
         cls, jsonresume: ResumeSchema
@@ -171,6 +176,7 @@ class QualificationSection(GenericSection[Qualification]):
 
 class EducationSection(GenericSection[Education]):
     """The education section displays the same information as the `education` field of a JSON resume"""
+
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[EducationSection]:
         if not jsonresume.education:
@@ -191,6 +197,7 @@ class EducationSection(GenericSection[Education]):
 
 class ExperienceSection(GenericSection[Experience]):
     """The experience section displays the same information as the `work` field of a JSON resume"""
+
     @classmethod
     def from_jsonresume(cls, jsonresume: ResumeSchema) -> Optional[ExperienceSection]:
         if not jsonresume.work:
@@ -219,6 +226,7 @@ class ExperienceSection(GenericSection[Experience]):
 
 class SkillSection(GenericSection[str]):
     """The skills section displays the names of the skills from the `skills` field of a JSON resume"""
+
     cols: int = 6
 
     @classmethod
@@ -236,6 +244,7 @@ class SkillSection(GenericSection[str]):
 
 class SummarySection(BaseModel):
     """The summary section displays the contents `basics.summary` of a JSON resume"""
+
     title: str
     content: str
 
@@ -246,6 +255,7 @@ class SummarySection(BaseModel):
 
 class ColumnSection(BaseModel):
     """The column section displays two columns with useful information from the author generated from the `basics` field of a JSON resume"""
+
     left: List[Column]
     right: List[Column]
 
@@ -272,6 +282,7 @@ class ColumnSection(BaseModel):
 
 class TemplateScheme(BaseModel):
     """The model used to generate a LaTeX document"""
+
     mainfont: str
     title: str
     subject: str = "Resume"

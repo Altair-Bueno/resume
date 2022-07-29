@@ -76,19 +76,19 @@ skills:
     level: Advanced
     keywords: [ Spring, Spring Boot, Java EE, Jakarta EE, ]
   - name: Python
-    level: Medium
+    level: Intermediate
     keywords: [ Pydantic, Flask, Fast API, ]
   - name: Docker
     level: Advanced
     keywords: [ Docker, Docker Compose, Docker Swarm, ]
   - name: Git
-    level: Medium
+    level: Intermediate
     keywords: [ GitHub, ]
   - name: Unix
-    level: Medium
+    level: Intermediate
     keywords: [ Linux, BSD, macOS ]
   - name: UML 2.5
-    level: Medium
+    level: Intermediate
     keywords: [ OOP, ]
 languages:
   - language: Spanish
