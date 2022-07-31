@@ -52,7 +52,7 @@ jobs:
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         git add --all
-        git commit -am "build: Updated README"
+        git commit -am "Actions: Updated thumbnail"
         git push
   BuildResume:
     runs-on: macos-latest # Should have Arial installed

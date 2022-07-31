@@ -2,6 +2,8 @@
 
 Altair's resume
 
+![Thumbnail](.github/resources/thumbnail.png)
+
 # Building
 
 ## Required software
