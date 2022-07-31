@@ -25,7 +25,9 @@ jobs:
     needs: BuildResume
     steps:
     - name: Install dependencies
-      run: sudo apt-get install poppler-utils
+      run: |
+        sudo apt-get update 
+        sudo apt-get install poppler-utils
     - uses: actions/checkout@v2
     - name: Install poetry
       run: pipx install poetry
@@ -43,7 +45,7 @@ jobs:
     - name: Install
       run: poetry install
     - name: Create thumbnail
-      run: poetry run python scripts/thumbnail.py out/resume.pdf out/image.png 
+      run: poetry run python scripts/thumbnail.py out/resume.pdf .github/resources/thumbnail.png
     - name: Upload changes
       continue-on-error: true
       run: |
