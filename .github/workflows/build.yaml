@@ -19,6 +19,39 @@ jobs:
         tag: latest
         asset_name: resume.pdf
         overwrite: true
+  UpdateThumbnail:
+    name: Update thumbnail
+    runs-on: ubuntu-latest
+    needs: BuildResume
+    steps:
+    - name: Install dependencies
+      run: sudo apt-get install poppler-utils
+    - uses: actions/checkout@v2
+    - name: Install poetry
+      run: pipx install poetry
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'poetry'
+    - name: Config poetry
+      run: |
+        poetry env use "3.10"
+    - uses: actions/download-artifact@v3
+      with:
+        name: "Altair Bueno.zip"
+        path: out/
+    - name: Install
+      run: poetry install
+    - name: Create thumbnail
+      run: poetry run python scripts/thumbnail.py out/resume.pdf out/image.png 
+    - name: Upload changes
+      continue-on-error: true
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add --all
+        git commit -am "build: Updated README"
+        git push
   BuildResume:
     runs-on: macos-latest # Should have Arial installed
     steps:
