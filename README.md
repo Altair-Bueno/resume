@@ -25,7 +25,9 @@ will install the required dependencies and build the PDF
 # Install dependencies
 make deps
 # Build the resume
-make build
+make resume
+# Generate the resume thumbnail (requires poppler)
+make thumbnail
 # Install dependencies and build
 make all
 # Cleanup
