@@ -1,0 +1,12 @@
+DateTime 
+python-dateutil 
+chevron 
+pydantic 
+PyYAML 
+glom 
+phonenumbers 
+iso3166 
+typer 
+pdf2image 
+datamodel-code-generator[http]
+black
