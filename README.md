@@ -8,10 +8,10 @@ Altair's resume
 
 ## Required software
 
+- Python3.11
 - A LaTeX distribution
 - GNU Make
 - Arial Font
-- [Poetry](https://python-poetry.org/)
 
 ## Building the resume
 
