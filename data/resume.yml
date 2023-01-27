@@ -9,22 +9,29 @@ meta:
     ruler: true
     skills:
       cols: 8
-  keywords: [ Altair Bueno Calvente, Resume, Curriculum Vitae, Software Engineer, University of Málaga, ]
+  keywords:
+    [
+      Altair Bueno Calvente,
+      Resume,
+      Curriculum Vitae,
+      Software Engineer,
+      University of Málaga,
+    ]
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
   image: https://avatars.githubusercontent.com/u/67512202
   email: business.altair.bueno@outlook.com
-  phone: '+34655134802'
-  url: 'https://altair-bueno.github.io'
+  phone: "+34655134802"
+  url: "https://altair-bueno.github.io"
   summary: >
     Software Engineering Student with experience leading small teams. Seeking a
     challenging job to further improve my skills. Backend developer with great
-    interest on building high performant microservices. Functional programming 
+    interest on building high performant microservices. Functional programming
     advocate.
   location:
     # address:
-    postalCode: '29001'
+    postalCode: "29001"
     city: Málaga
     countryCode: ES
     region: Málaga
@@ -42,28 +49,28 @@ education:
     url: https://www.uma.es
     area: Software Engineering
     studyType: Bachelor
-    startDate: '2019-09-01'
+    startDate: "2019-09-01"
     # endDate: '2023-06-01'
-    score: "4 subjects with honors. 8.21 average mark"
+    score: "5 subjects with honors. 8.28 average mark"
   - institution: Cambridge English
     url: https://www.cambridgeenglish.org/
     area: Certification
     studyType: B2 First English
-    startDate: '2016-01-01'
-    endDate: '2018-01-01'
-    score: '171 average mark'
+    startDate: "2016-01-01"
+    endDate: "2018-01-01"
+    score: "171 average mark"
   - institution: Cambridge English
     url: https://www.cambridgeenglish.org/
     area: Certification
     studyType: B1 Preliminary English
-    startDate: '2015-01-01'
-    endDate: '2016-01-01'
+    startDate: "2015-01-01"
+    endDate: "2016-01-01"
   - institution: Trinity College London
     url: https://www.trinitycollege.com/
     area: Certification
     studyType: B1 ISE I English
-    startDate: '2014-01-01'
-    endDate: '2015-01-01'
+    startDate: "2014-01-01"
+    endDate: "2015-01-01"
     score: Reading and writing skills with merit
 # awards:
 # certificates:
@@ -71,25 +78,25 @@ education:
 skills:
   - name: Rust
     level: Advanced
-    keywords: [ Rocket, Tokio, Axum, Yew, WASM ]
+    keywords: [Rocket, Tokio, Axum, Yew, WASM]
   - name: Java
     level: Advanced
-    keywords: [ Spring, Spring Boot, Java EE, Jakarta EE, ]
+    keywords: [Spring, Spring Boot, Java EE, Jakarta EE]
   - name: Python
     level: Intermediate
-    keywords: [ Pydantic, Flask, Fast API, ]
+    keywords: [Pydantic, Flask, Fast API]
   - name: Docker
     level: Advanced
-    keywords: [ Docker, Docker Compose, Docker Swarm, ]
+    keywords: [Docker, Docker Compose, Docker Swarm]
   - name: Git
     level: Intermediate
-    keywords: [ GitHub, ]
+    keywords: [GitHub]
   - name: Unix
     level: Intermediate
-    keywords: [ Linux, BSD, macOS ]
+    keywords: [Linux, BSD, macOS]
   - name: UML 2.5
     level: Intermediate
-    keywords: [ OOP, ]
+    keywords: [OOP]
 languages:
   - language: Spanish
     fluency: Native speaker
@@ -100,34 +107,35 @@ projects:
   - name: ubay-spring
     description: Auction platform built with Spring Boot, Java and Docker
     # highlights:
-    keywords: [ Docker, Spring Boot, Java, ]
-    startDate: '2022-05-16'
-    endDate: '2022-06-06'
+    keywords: [Docker, Spring Boot, Java]
+    startDate: "2022-05-16"
+    endDate: "2022-06-06"
     url: https://github.com/Altair-Bueno/ubay-spring
-    roles: [ Team lead, Developer, ]
+    roles: [Team lead, Developer]
     entity: University of Málaga
     type: Web application
   - name: rquote
     description: High performant SPA built with Rust, Yew and Bootstrap
-    keywords: [ Rust, Yew, SPA, Bootstrap, ]
+    keywords: [Rust, Yew, SPA, Bootstrap]
     url: https://github.com/Altair-Bueno/rquote
-    roles: [ Main developer ]
+    roles: [Main developer]
     type: Web application
   - name: cw
-    description: An alternative to GNU wc written in Rust. Exposes FFI bindings to C
-    keywords: [ Rust, Tokio, wc, FFI, ]
+    description:
+      An alternative to GNU wc written in Rust. Exposes FFI bindings to C
+    keywords: [Rust, Tokio, wc, FFI]
     url: https://github.com/Altair-Bueno/cw
-    roles: [ Main developer ]
+    roles: [Main developer]
     type: CLI application
   - name: resume
     description: Resume written in LaTeX and updated using GitHub Actions
-    keywords: [ GitHub Actions, Python, LaTeX, Resume, ]
+    keywords: [GitHub Actions, Python, LaTeX, Resume]
     url: https://github.com/Altair-Bueno/resume
     type: Automation
   - name: fuzzy-disco
     description: >
       Post sharing platform built with Rust, Rocket, MongoDB, Docker and Vue
-    keywords: [ Rust, Rocket, MongoDB, Docker, ]
+    keywords: [Rust, Rocket, MongoDB, Docker]
     roles:
       - Backend developer
     url: https://github.com/Altair-Bueno/fuzzy-disco
