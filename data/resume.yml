@@ -10,13 +10,11 @@ meta:
     skills:
       cols: 8
   keywords:
-    [
-      Altair Bueno Calvente,
-      Resume,
-      Curriculum Vitae,
-      Software Engineer,
-      University of Málaga,
-    ]
+    - Altair Bueno Calvente
+    - Resume
+    - Curriculum Vitae
+    - Software Engineer
+    - University of Málaga
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
