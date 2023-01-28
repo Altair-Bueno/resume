@@ -61,10 +61,10 @@ jobs:
           python-version: ${{ env._PYTHON_VERSION }}
           cache: "pip"
 
-      - name: Install BasicTex
-        run: |
-          brew install --cask basictex
-          echo "/Library/TeX/texbin/" >> $GITHUB_PATH
+      - uses: wtfjoke/setup-tectonic@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          tectonic-version: 0.12.0
 
       - name: Install dependencies
         run: |

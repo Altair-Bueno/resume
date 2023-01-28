@@ -30,7 +30,7 @@ SCHEME_CCFLAGS    =
 MUSTACHE_CC       = $(VENV_DIR)/bin/chevron
 MUSTACHE_CCFLAGS  = -l "<<" -r ">>" -w -p $(TEMPLATE_DIR)
 
-LATEX_CC          = xelatex
+LATEX_CC          = tectonic
 LATEX_CCFLAGS     =
 
 FORMATTER_CC      = $(VENV_DIR)/bin/black
@@ -43,7 +43,7 @@ LATEX_DEPS        = enumitem \
 resume: $(TARGET) $(PREPARSER_SCRIPT)
 scheme: $(SCHEME_FILE) $(SCHEME_SCRIPT)
 thumbnail: $(THUMBNAIL_FILE) $(THUMBNAIL_SCRIPT)
-deps: deps/python deps/latex
+deps: deps/python
 clean: clean/out
 all: deps build thumbnail
 fmt:
@@ -53,16 +53,12 @@ fmt:
 deps/python: $(VENV_DIR) requirements.txt
 	$(VENV_DIR)/bin/pip-sync requirements.txt
 
-deps/latex:
-	sudo tlmgr update --self
-	sudo tlmgr install $(LATEX_DEPS)
-
 # build
 $(THUMBNAIL_FILE): $(TARGET)
 	$(THUMBNAIL_CC) $(THUMBNAIL_CCFLAGS) $(TARGET) $@
 
 $(OUT_DIR)/%.pdf: $(OUT_DIR)/%.tex
-	$(LATEX_CC) $(LATEX_CCFLAGS) -output-directory=$(OUT_DIR) $<
+	$(LATEX_CC) $(LATEX_CCFLAGS) --outdir=$(OUT_DIR) --color=always $<
 
 $(OUT_DIR)/%.tex: $(OUT_DIR)/%.json $(TEMPLATE_FILE)
 	$(MUSTACHE_CC) $(MUSTACHE_CCFLAGS) -d $^ > $@
