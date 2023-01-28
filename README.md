@@ -9,9 +9,11 @@ Altair's resume
 ## Required software
 
 - Python3.11
-- A LaTeX distribution
+- [Tectonic](https://github.com/tectonic-typesetting/tectonic)
 - GNU Make
 - Arial Font
+
+> Note: Arial might be already installed on the system
 
 ## Building the resume
 
@@ -26,7 +28,7 @@ will install the required dependencies and build the PDF
 make deps
 # Build the resume
 make resume
-# Generate the resume thumbnail (requires poppler)
+# Generate the resume thumbnail (requires poppler-utils)
 make thumbnail
 # Install dependencies and build
 make all
