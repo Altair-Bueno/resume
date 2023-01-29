@@ -1,0 +1,10 @@
+out
+.vscode
+.idea
+.venv
+*.log
+**.local
+**__pycache__
+
+.git
+.github
