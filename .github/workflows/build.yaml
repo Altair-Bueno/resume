@@ -17,7 +17,7 @@ jobs:
           name: "Altair Bueno.zip"
       - uses: actions/download-artifact@v3
         with:
-          name: "thumbnail.zip"
+          name: "thumbnail.png"
       - name: Upload resume to `latest`
         uses: svenstaro/upload-release-action@v2
         with:
