@@ -4,6 +4,8 @@ on:
       - master
 env:
   _PYTHON_VERSION: "3.11"
+  _TECTONIC_VERSION: "0.12.0"
+  _DENO_VERSION: v1.x
 jobs:
   UpdateLatestTag:
     name: Publish binaries
@@ -73,15 +75,21 @@ jobs:
             ~/.deno
             ~/.cache/deno
           key: ${{ runner.os }}-deno-${{ hashFiles('**/deno.lock') }}
+      # TODO add key to cache
+      - uses: actions/cache@v3
+        name: Tectonic Cache
+        with:
+          path: ~/.cache/Tectonic
+          key: ${{ runner.os }}-tectonic-${{ env._TECTONIC_VERSION }}
 
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
+          deno-version: ${{ env._DENO_VERSION }}
 
       - uses: wtfjoke/setup-tectonic@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          tectonic-version: 0.12.0
+          tectonic-version: ${{ env._TECTONIC_VERSION }}
 
       - name: Build resume
         run: make
