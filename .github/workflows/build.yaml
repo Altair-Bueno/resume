@@ -43,7 +43,7 @@ jobs:
         run: |
           sudo apt-get update 
           sudo apt-get install poppler-utils
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ env._PYTHON_VERSION }}
@@ -65,7 +65,7 @@ jobs:
   BuildResume:
     runs-on: macos-latest # Should have Arial installed
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/cache@v3
         with:
