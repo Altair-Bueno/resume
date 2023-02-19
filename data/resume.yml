@@ -2,19 +2,7 @@ meta:
   title: Altair Bueno's Resume
   canonical: http://json-schema.org/draft-04/schema#
   version: v1.0.0
-  lastModified: 2022-07-19T11:27:45+0000
-  latex:
-    mainfont: Arial
-    urlcolor: blue
-    ruler: true
-    skills:
-      cols: 8
-  keywords:
-    - Altair Bueno Calvente
-    - Resume
-    - Curriculum Vitae
-    - Software Engineer
-    - University of Málaga
+  lastModified: 2023-02-19
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
@@ -41,60 +29,58 @@ basics:
       username: Altair Bueno Calvente
       url: https://www.linkedin.com/in/altair-bueno-calvente-92155a232/
 # work:
+#   - name: Google
+#     position: Software developer
+#     url: example.org
+#     startDate: 2019-01-09
+#     endDate: 2020-01-01
+#     summary: Remote
+#     highlights:
+#       - "Led a team"
 # volunteer:
 education:
   - institution: University of Málaga
     url: https://www.uma.es
     area: Software Engineering
     studyType: Bachelor
-    startDate: "2019-09-01"
-    # endDate: '2023-06-01'
+    startDate: 2019-09-01
+    endDate: 2023-06-01
     score: "5 subjects with honors. 8.28 average mark"
   - institution: Cambridge English
     url: https://www.cambridgeenglish.org/
-    area: Certification
-    studyType: B2 First English
-    startDate: "2016-01-01"
-    endDate: "2018-01-01"
+    area: B2 First English
+    studyType: Certification
+    startDate: 2016-01-01
+    endDate: 2018-01-01
     score: "171 average mark"
   - institution: Cambridge English
     url: https://www.cambridgeenglish.org/
-    area: Certification
-    studyType: B1 Preliminary English
-    startDate: "2015-01-01"
-    endDate: "2016-01-01"
+    area: B1 Preliminary English
+    studyType: Certification
+    startDate: 2015-01-01
+    endDate: 2016-01-01
   - institution: Trinity College London
     url: https://www.trinitycollege.com/
-    area: Certification
-    studyType: B1 ISE I English
-    startDate: "2014-01-01"
-    endDate: "2015-01-01"
+    area: B1 ISE I English
+    studyType: Certification
+    startDate: 2014-01-01
+    endDate: 2015-01-01
     score: Reading and writing skills with merit
 # awards:
 # certificates:
 # publications:
 skills:
-  - name: Rust
-    level: Advanced
-    keywords: [Rocket, Tokio, Axum, Yew, WASM]
-  - name: Java
-    level: Advanced
-    keywords: [Spring, Spring Boot, Java EE, Jakarta EE]
-  - name: Python
-    level: Intermediate
-    keywords: [Pydantic, Flask, Fast API]
-  - name: Docker
-    level: Advanced
-    keywords: [Docker, Docker Compose, Docker Swarm]
-  - name: Git
-    level: Intermediate
-    keywords: [GitHub]
-  - name: Unix
-    level: Intermediate
-    keywords: [Linux, BSD, macOS]
-  - name: UML 2.5
-    level: Intermediate
-    keywords: [OOP]
+  - name: Languages
+    keywords: [Rust, Java, TypeScript, Python]
+  - name: Frameworks
+    keywords: [Spring Boot, Rocket, FastAPI]
+  - name: Libraries
+    keywords: [Tokio, Pydantic, Java EE, Jakarta EE]
+  - name: Databases
+    keywords: [MongoDB, PostgreSQL]
+  - name: Developer tools
+    keywords:
+      [Docker, Docker compose, Kubernetes, JetBrains, Git, GitHub, Linux]
 languages:
   - language: Spanish
     fluency: Native speaker
@@ -104,7 +90,7 @@ languages:
 projects:
   - name: ubay-spring
     description: Auction platform built with Spring Boot, Java and Docker
-    # highlights:
+    highlights: []
     keywords: [Docker, Spring Boot, Java]
     startDate: "2022-05-16"
     endDate: "2022-06-06"
@@ -114,6 +100,7 @@ projects:
     type: Web application
   - name: rquote
     description: High performant SPA built with Rust, Yew and Bootstrap
+    highlights: []
     keywords: [Rust, Yew, SPA, Bootstrap]
     url: https://github.com/Altair-Bueno/rquote
     roles: [Main developer]
@@ -121,23 +108,28 @@ projects:
   - name: cw
     description:
       An alternative to GNU wc written in Rust. Exposes FFI bindings to C
+    highlights: []
     keywords: [Rust, Tokio, wc, FFI]
     url: https://github.com/Altair-Bueno/cw
     roles: [Main developer]
     type: CLI application
   - name: resume
     description: Resume written in LaTeX and updated using GitHub Actions
+    highlights: []
     keywords: [GitHub Actions, Python, LaTeX, Resume]
     url: https://github.com/Altair-Bueno/resume
     type: Automation
   - name: fuzzy-disco
     description: >
       Post sharing platform built with Rust, Rocket, MongoDB, Docker and Vue
+    highlights: []
     keywords: [Rust, Rocket, MongoDB, Docker]
     roles:
       - Backend developer
     url: https://github.com/Altair-Bueno/fuzzy-disco
     type: Web application
   - name: demeter
+    keywords: []
+    highlights: []
     description: Dotfiles backup from my UNIX-like machines
     url: https://github.com/Altair-Bueno/Demeter

@@ -3,8 +3,8 @@
  *
  */
 
-import $temp from "npm:handlebars";
-const { default: Handlebars } = $temp;
+import Handlebars from "npm:handlebars";
+import isoCountries from "npm:i18n-iso-countries";
 import { parse } from "https://deno.land/std/flags/mod.ts";
 import * as yaml from "https://deno.land/std/encoding/yaml.ts";
 
@@ -26,14 +26,31 @@ if (args.h || args.help) {
 const data = yaml.parse(await Deno.readTextFile(args.d));
 
 // Helpers
-function urlEncode(obj: Record<string, string>): string {
-  return new URLSearchParams(obj).toString();
-}
-
-Handlebars.registerHelper("urlEncode", urlEncode);
+Handlebars.registerHelper("isoCountriesGetName", isoCountries.getName);
+Handlebars.registerHelper("urlEncode", (x) =>
+  new URLSearchParams(x).toString()
+);
+Handlebars.registerHelper(
+  "shortFormatDate",
+  (locale: string, startDate, endDate) => {
+    const from = new Date(startDate);
+    const to = new Date(endDate);
+    return Intl.DateTimeFormat(locale, {
+      month: "short",
+      year: "numeric",
+    }).formatRange(from, to);
+  }
+);
+Handlebars.registerHelper("formatYear", (locale, date) => {
+  return Intl.DateTimeFormat(locale, { year: "numeric" }).format(
+    new Date(date)
+  );
+});
+Handlebars.registerHelper("host", (x) => new URL(x).host);
 
 // Compile and run
-const tasksPromises = args._.map(async (templatePath: string) => {
+const tasksPromises = args._.map(async (x: string | number) => {
+  const templatePath = String(x);
   const template = await Deno.readTextFile(templatePath);
   const compiledTemplate = Handlebars.compile(template, args.hbs);
   const output = compiledTemplate(data);

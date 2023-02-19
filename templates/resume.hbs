@@ -1,7 +1,7 @@
 %-------------------------
 % Rezume, a latex resume template for developers
 % Author : Nanu Panchamurthy
-% Based off of: https://github.com/sb2nov/resume
+% Based off of: https://www.overleaf.com/latex/templates/rezume/kfrvqywfkwjs
 % License : MIT
 
 % Hope this resume template helps you land an awesome job. If you found this helpful, please consider starring the github repo here, .
@@ -162,15 +162,15 @@
 % Make sure all the details are correct, you can add more links in the first row of second column if needed
 
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  \textbf{\Huge {{ basics.name }} \vspace{2pt}} & % row = 1, col = 1
-  Location: {{ basics.location.city }}, {{ basics.location.region }}, {{ basics.location.countryCode }} \\ % row = 1, col = 2
-
+  \textbf{\Huge {{ basics.name }} \vspace{2pt}} &
+  {{ basics.location.city }}, {{ basics.location.region }}, {{ isoCountriesGetName basics.location.countryCode "en" }} \\ % row = 1, col = 2
+  \href{ {{ basics.url }} }{\uline{ {{ host basics.url }} }} {{#if basics.profiles}}$|${{/if}} 
   {{#each basics.profiles }}
-  \href{ {{ this.url }} }{\uline{ {{ this.network }} }} {{#unless @last}}$|${{/unless}}  % row = 2, col = 1
+  \href{ {{ this.url }} }{\uline{ {{ this.network }} }} {{#unless @last}}$|${{/unless}} 
   {{/each}}
-  & 
-  Email: \href{ mailto:{{ basics.email }} }{\uline{ {{ basics.email }} }} $|$ % row = 2, col = 2
-  Mobile: {{ basics.phone }} \\ % row = 2, col = 2
+  & % Break row
+  \href{ mailto:{{ basics.email }} }{\uline{ {{ basics.email }} }} $|$ % row = 2, col = 2
+  \href{ tel:{{ basics.phone }} }{\uline{ {{ basics.phone }} }}\\ % row = 2, col = 2
 \end{tabular*}
 %--------------------------------------------
 
@@ -186,17 +186,35 @@
 %--------------SKILLS------------------------
 % Add or remove resumeSectionTypes according to your needs
 
+{{#if skills}}
 \section{Technical Skills}
   \resumeHeadingListStart{}
     {{#each skills}}
     \resumeSectionType{ {{ this.name }} }{:}{ {{#each this.keywords }}{{ this }}{{#unless @last}}, {{/unless}}{{/each}} }
     {{/each}}
   \resumeHeadingListEnd{}
+{{/if}}
 %--------------------------------------------
 
 
 %-----------EXPERIENCE-----------------------
 % Distill all your talking points to small bullet points which follow the pattern "challenge-action-result" for maximum efficiency. Try to quantify (use numbers) your points whenver possible, highlist words of importance
+
+
+{{#if work}}
+\section{Experience}
+\resumeHeadingListStart{}
+  {{#each work}}
+  \resumeQuadHeading{ {{ this.position }} }{ {{ shortFormatDate "en" this.startDate this.endDate }} }
+  { \href{ {{ this.url }} }{ {{ this.name }} } }{ {{ this.summary }} }
+    \resumeItemListStart{}
+      {{#each this.highlights }}
+      \resumeItem{ {{ this }} }
+      {{/each}}
+    \resumeItemListEnd{}
+  {{/each}}
+\resumeHeadingListEnd{}
+{{/if}}
 
 %---------------------------------------------
 
@@ -204,47 +222,58 @@
 %-----------EDUCATION-------------------------
 % Mention your CGPA, if its good, in the first row of second column
 
+{{#if education}}
 \section{Education}
   \resumeHeadingListStart{}
     {{#each education}}
-    \resumeQuadHeading{ {{ this.institution }} }{Anycity, Anystate, Anycountry}
-    { {{ this.area }} }{ {{ this.startDate }} -- {{#if this.endDate}}{{this.endDate}}{{else}}Today{{/if}} }
+    \resumeQuadHeading{ {{ this.institution }} }{  } % TODO location?
+    { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}} }{ {{ shortFormatDate "en" this.startDate this.endDate }} }
     {{/each}}
   \resumeHeadingListEnd{}
+{{/if}}
 %---------------------------------------------
 
 
 %-----------PROJECTS--------------------------
 % Use resumeQuadHeading if four elements are feasible (ex: demo video link), else use resumeTrioHeading. Keep the bullet points simple and concise and try to cover wide variety of skills you have used to build these projects
 
+{{#if projects}}
 \section{Projects}
   \resumeHeadingListStart{}
-    \resumeTrioHeading{\href{https://project1.com}{\uline{Project 1}}}{React.js, Redux, PHP, MySQL Git}{\href{https://proect1.com/source-code/}{\uline{Source Code}}}
+    {{#each projects}}
+    \resumeTrioHeading{ {{ this.name }} }{ {{#each this.keywords }}{{ this }}{{#unless @last}}, {{/unless}}{{/each}} }{ \href{ {{ this.url }} }{\uline{Source Code}} }
       \resumeItemListStart{}
-        \resumeItem{Designed and developed a clean and modern website using \textbf{HTML, CSS, and JavaScript}}
-        \resumeItem{Optimized website for \textbf{speed and user experience}}
-        \resumeItem{Utilized \textbf{responsive design} to ensure compatibility across all devices}
-        \resumeItem{Deployed on GitHub pages via GitHub Actions}
+        \resumeItem{ {{ this.description }} }
+        {{#each this.highlights }}
+        \resumeItem{ {{ this }} }
+        {{/each}}
       \resumeItemListEnd{}
-
-      \resumeTrioHeading{Project 2}{Node.js, Express, JavaScript, Git}{\href{https:project2.com/source-code}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{A \textbf{CRUD application} exposed using a RESTful API made with Node.js}
-        \resumeItem{Exposed POST, GET, PATCH and DELETE HTTP methods using \textbf{Express}}
-      \resumeItemListEnd{}
+    {{/each}}
   \resumeHeadingListEnd{}
+{{/if}}
 %--------------------------------------------
 
 
 %----------------OTHERS----------------------
-% You can add your acheivements, accolades, certifications etc. here.
 
+{{#if publications}}
+\section{Publications}
+  \resumeItemListStart{}
+    {{#each publications}}
+    \resumeItem{ \href{ {{ this.url }} }{ \textbf{ {{ this.name }} }, {{ this.publisher }} ({{ formatYear "en" this.releaseDate }}) {{ this.summary }} } }
+    {{/each}}
+  \resumeItemListEnd{}
+{{/if}}
+
+\iffalse % TODO You can add your acheivements, accolades, certifications etc. here.
 \section{Certifications}
   \resumeItemListStart{}
     \resumeItem{\href{https://dummy-certification.com}{\uline{Certified Web Developer by the W3C}}}
     \resumeItem{\href{https://dummy-certification.com}{\uline{Microsoft Certified: Azure Developer Associate}}}
     \resumeItem{\href{https://dummy-certification.com}{\uline{AWS Certified Developer - Associate}}}
   \resumeItemListEnd{}
+\fi
+
 %--------------------------------------------
 
 \end{document}
