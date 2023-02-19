@@ -56,19 +56,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v4
+      - uses: actions/cache@v3
         with:
-          python-version: ${{ env._PYTHON_VERSION }}
-          cache: "pip"
+          path: |
+            ~/.deno
+            ~/.cache/deno
+          key: ${{ runner.os }}-deno-${{ hashFiles('**/deno.lock') }}
+
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
 
       - uses: wtfjoke/setup-tectonic@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           tectonic-version: 0.12.0
-
-      - name: Install dependencies
-        run: |
-          make deps
 
       - name: Build resume
         run: make
