@@ -9,11 +9,9 @@ Altair's resume
 ## Required software
 
 - Python3.11
+- [Deno](https://deno.land)
 - [Tectonic](https://github.com/tectonic-typesetting/tectonic)
 - GNU Make
-- Arial Font
-
-> Note: Arial might be already installed on the system
 
 ## Building the resume
 
