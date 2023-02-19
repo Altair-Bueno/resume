@@ -6,7 +6,7 @@ SCRIPT_DIR        = scripts
 TARGET            = $(OUT_DIR)/resume.pdf
 TEMPLATE_FILE     = $(TEMPLATE_DIR)/resume.hbs
 DATA_FILE         = $(DATA_DIR)/resume.yml
-THUMBNAIL_FILE    = .github/resources/thumbnail.png
+THUMBNAIL_FILE    = $(OUT_DIR)/thumbnail.png
 
 PYTHON            = python3.11
 VENV_DIR          = .venv

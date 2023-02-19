@@ -8,11 +8,16 @@ jobs:
   UpdateLatestTag:
     name: Publish binaries
     runs-on: ubuntu-latest
-    needs: BuildResume
+    needs:
+      - UpdateThumbnail
+      - BuildResume
     steps:
       - uses: actions/download-artifact@v3
         with:
           name: "Altair Bueno.zip"
+      - uses: actions/download-artifact@v3
+        with:
+          name: "thumbnail.zip"
       - name: Upload resume to `latest`
         uses: svenstaro/upload-release-action@v2
         with:
@@ -20,6 +25,14 @@ jobs:
           file: resume.pdf
           tag: latest
           asset_name: resume.pdf
+          overwrite: true
+      - name: Upload thumbnail to `latest`
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: thumbnail.png
+          tag: latest
+          asset_name: thumbnail.png
           overwrite: true
   UpdateThumbnail:
     name: Update thumbnail
@@ -43,14 +56,12 @@ jobs:
         run: make deps/python
       - name: Create thumbnail
         run: make thumbnail
-      - name: Upload changes
-        continue-on-error: true
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add --all
-          git commit -am "Actions: Updated thumbnail"
-          git push
+      # Upload artifacts
+      - name: Upload thumbnail
+        uses: actions/upload-artifact@v2
+        with:
+          name: thumbnail.png
+          path: out/thumbnail.png
   BuildResume:
     runs-on: macos-latest # Should have Arial installed
     steps:
