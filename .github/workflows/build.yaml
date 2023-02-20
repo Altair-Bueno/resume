@@ -60,7 +60,7 @@ jobs:
         run: make thumbnail
       # Upload artifacts
       - name: Upload thumbnail
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: thumbnail.png
           path: out/thumbnail.png
@@ -96,7 +96,7 @@ jobs:
 
       # Upload artifacts
       - name: Upload resume
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: "Altair Bueno.zip"
           path: out/resume.pdf
