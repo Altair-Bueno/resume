@@ -23,22 +23,30 @@ if (args.h || args.help) {
   Deno.exit(0);
 }
 
-const data = yaml.parse(await Deno.readTextFile(args.d));
-
 // Helpers
 Handlebars.registerHelper("isoCountriesGetName", isoCountries.getName);
 Handlebars.registerHelper("urlEncode", (x) =>
   new URLSearchParams(x).toString()
 );
 Handlebars.registerHelper(
-  "shortFormatDate",
+  "formatDateRange",
   (locale: string, startDate, endDate) => {
     const from = new Date(startDate);
-    const to = new Date(endDate);
-    return Intl.DateTimeFormat(locale, {
+    const dateTimeFormat = Intl.DateTimeFormat(locale, {
       month: "short",
       year: "numeric",
-    }).formatRange(from, to);
+    });
+
+    if (endDate) {
+      return dateTimeFormat.formatRange(from, new Date(endDate));
+    } else {
+      const relativeTimeFormat = new Intl.RelativeTimeFormat(locale, {
+        numeric: "auto",
+      });
+      const today = relativeTimeFormat.format(0, "day");
+      const todayCapitalized = today[0].toUpperCase() + today.slice(1);
+      return `${dateTimeFormat.format(from)} – ${todayCapitalized}`;
+    }
   }
 );
 Handlebars.registerHelper("formatYear", (locale, date) => {
@@ -63,6 +71,8 @@ Handlebars.registerHelper("join", (sep, ...args) => {
 Handlebars.registerHelper("joinArray", (sep, array) => {
   return array.join(sep);
 });
+
+const data = yaml.parse(await Deno.readTextFile(args.d));
 
 // Compile and run
 const tasksPromises = args._.map(async (x: string | number) => {

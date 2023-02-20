@@ -205,13 +205,15 @@
 \section{Experience}
 \resumeHeadingListStart{}
   {{#each work}}
-  \resumeQuadHeading{ {{ this.position }} }{ {{ shortFormatDate "en" this.startDate this.endDate }} }
+  \resumeQuadHeading{ {{ this.position }} }{ {{ formatDateRange "en" this.startDate this.endDate }} }
   { {{ latex "href" this.url this.name }} }{ {{ this.summary }} }
+    {{#if this.highlights}}
     \resumeItemListStart{}
       {{#each this.highlights }}
       \resumeItem{ {{ this }} }
       {{/each}}
     \resumeItemListEnd{}
+    {{/if}}
   {{/each}}
 \resumeHeadingListEnd{}
 {{/if}}
@@ -226,8 +228,8 @@
 \section{Education}
   \resumeHeadingListStart{}
     {{#each education}}
-    \resumeQuadHeading{ {{ this.institution }} }{ {{ latex "href" this.url "Website" }} } % TODO location?
-    { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}} }{ {{ shortFormatDate "en" this.startDate this.endDate }} }
+    \resumeQuadHeading{ {{ this.institution }} }{ {{ latex "href" this.url "Website" }} } 
+    { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}} }{ {{ formatDateRange "en" this.startDate this.endDate }} }
     {{/each}}
   \resumeHeadingListEnd{}
 {{/if}}

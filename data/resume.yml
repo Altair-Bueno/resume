@@ -2,7 +2,7 @@ meta:
   title: Altair Bueno's Resume
   canonical: http://json-schema.org/draft-04/schema#
   version: v1.0.0
-  lastModified: 2023-02-19
+  lastModified: 2023-02-20
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
@@ -29,14 +29,16 @@ basics:
       username: Altair Bueno Calvente
       url: https://www.linkedin.com/in/altair-bueno-calvente-92155a232/
 # work:
-#   - name: Google
-#     position: Software developer
-#     url: example.org
-#     startDate: 2019-01-09
-#     endDate: 2020-01-01
-#     summary: Remote
+#   - name: ERTIS research group - University of Málaga
+#     position: Position desc
+#     url: http://ertis.uma.es/
+#     startDate: 2022-11-15
+#     # endDate:
+#     summary: Summary
 #     highlights:
-#       - "Led a team"
+#       - fizz
+#       - buzz
+
 # volunteer:
 education:
   - institution: University of Málaga
@@ -44,24 +46,24 @@ education:
     area: Software Engineering
     studyType: Bachelor
     startDate: 2019-09-01
-    endDate: 2023-06-01
-    score: "5 subjects with honors. 8.28 average mark"
+    # endDate: 2023-06-01
+    score: "6 subjects with honors. 8.34 average mark"
   - institution: Cambridge English
     url: https://www.cambridgeenglish.org/
-    area: B2 First English
+    area: B2 level. First English
     studyType: Certification
     startDate: 2016-01-01
     endDate: 2018-01-01
     score: "171 average mark"
   - institution: Cambridge English
     url: https://www.cambridgeenglish.org/
-    area: B1 Preliminary English
+    area: B1 level. Preliminary English
     studyType: Certification
     startDate: 2015-01-01
     endDate: 2016-01-01
   - institution: Trinity College London
     url: https://www.trinitycollege.com/
-    area: B1 ISE I English
+    area: B1 level. ISE I English
     studyType: Certification
     startDate: 2014-01-01
     endDate: 2015-01-01
@@ -71,16 +73,46 @@ education:
 # publications:
 skills:
   - name: Languages
-    keywords: [Rust, Java, TypeScript, Python]
+    keywords: [Rust, Java, TypeScript, Python, Bash]
   - name: Frameworks
-    keywords: [Spring Boot, Rocket, FastAPI]
-  - name: Libraries
-    keywords: [Tokio, Pydantic, Java EE, Jakarta EE]
-  - name: Databases
-    keywords: [MongoDB, PostgreSQL]
-  - name: Developer tools
     keywords:
-      [Docker, Docker compose, Kubernetes, JetBrains, Git, GitHub, Linux]
+      - Spring Boot
+      - Axum
+      - FastAPI
+      - Svelte
+      - Astro
+      - Bootstrap
+  - name: Libraries
+    keywords:
+      - Tokio
+      - Pydantic
+      - Java/Jakarta EE
+      - Hibernate
+  - name: Databases
+    keywords: [MongoDB, PostgreSQL, MySQL]
+  - name: Tools
+    keywords:
+      - Docker
+      - Kubernetes
+      - OpenAPI
+      - JetBrains
+      - Git
+      - GitHub
+      - macOS
+      - Linux
+  - name: Cloud and SaaS
+    keywords:
+      - Vercel
+      - Fly.io
+      - Auth0
+      - PayPal
+  - name: Soft Skills
+    keywords:
+      - Adaptability
+      - Leadership
+      - Time management
+      - Problem-solving
+      - Teamwork
 languages:
   - language: Spanish
     fluency: Native speaker
@@ -88,16 +120,57 @@ languages:
     fluency: Fluent
 # references:
 projects:
+  - name: axum-template
+    description: >
+      Layers, extractors and template engine wrappers for axum based Web MVC
+      applications
+    highlights:
+      - Safe Rust designed with minimal performance overhead
+      - Fully documented API that follows semantic versioning
+      - Includes CI/CD based on GitHub Actions
+    keywords:
+      - Rust
+      - Axum
+      - GitHub actions
+    startDate: 2022-08-08
+    # endDate:
+    url: https://github.com/Altair-Bueno/axum-template
+    # entity:
+    type: Library
+
+  - name: WindBnB
+    description: >
+      School project
+    highlights:
+      - Microservice architecture
+      - Oauth2 authentication, PayPal payments and image upload
+    keywords:
+      - Python
+      - FastAPI
+      - TypeScript
+      - Astro
+      - Bootstrap
+      - Fly.io
+      - Docker
+      - Vercel
+      - OpenAPI
+    startDate: 2022-10-10
+    endDate: 2022-12-31
+    url: https://github.com/Altair-Bueno/WindBnB
+    entity: Ingeniería Web - University of Málaga
+    type: Web application
+
   - name: ubay-spring
     description: Auction platform built with Spring Boot, Java and Docker
     highlights: []
     keywords: [Docker, Spring Boot, Java]
-    startDate: "2022-05-16"
-    endDate: "2022-06-06"
+    startDate: 2022-05-16
+    endDate: 2022-06-06
     url: https://github.com/Altair-Bueno/ubay-spring
     roles: [Team lead, Developer]
     entity: University of Málaga
     type: Web application
+
   - name: rquote
     description: High performant SPA built with Rust, Yew and Bootstrap
     highlights: []
@@ -105,31 +178,3 @@ projects:
     url: https://github.com/Altair-Bueno/rquote
     roles: [Main developer]
     type: Web application
-  - name: cw
-    description:
-      An alternative to GNU wc written in Rust. Exposes FFI bindings to C
-    highlights: []
-    keywords: [Rust, Tokio, wc, FFI]
-    url: https://github.com/Altair-Bueno/cw
-    roles: [Main developer]
-    type: CLI application
-  - name: resume
-    description: Resume written in LaTeX and updated using GitHub Actions
-    highlights: []
-    keywords: [GitHub Actions, Python, LaTeX, Resume]
-    url: https://github.com/Altair-Bueno/resume
-    type: Automation
-  - name: fuzzy-disco
-    description: >
-      Post sharing platform built with Rust, Rocket, MongoDB, Docker and Vue
-    highlights: []
-    keywords: [Rust, Rocket, MongoDB, Docker]
-    roles:
-      - Backend developer
-    url: https://github.com/Altair-Bueno/fuzzy-disco
-    type: Web application
-  - name: demeter
-    keywords: []
-    highlights: []
-    description: Dotfiles backup from my UNIX-like machines
-    url: https://github.com/Altair-Bueno/Demeter
