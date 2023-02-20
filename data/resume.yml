@@ -50,20 +50,20 @@ education:
     score: "6 subjects with honors. 8.34 average mark"
   - institution: Cambridge English
     url: https://www.cambridgeenglish.org/
-    area: B2 English level. First English
+    area: B2 English level. First
     studyType: Certification
     startDate: 2016-01-01
     endDate: 2018-01-01
     score: "171 average mark"
   - institution: Cambridge English
     url: https://www.cambridgeenglish.org/
-    area: B1 English level. Preliminary English
+    area: B1 English level. Preliminary
     studyType: Certification
     startDate: 2015-01-01
     endDate: 2016-01-01
   - institution: Trinity College London
     url: https://www.trinitycollege.com/
-    area: B1 English level. ISE I English
+    area: B1 English level. ISE I
     studyType: Certification
     startDate: 2014-01-01
     endDate: 2015-01-01
