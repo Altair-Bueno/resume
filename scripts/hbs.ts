@@ -47,6 +47,22 @@ Handlebars.registerHelper("formatYear", (locale, date) => {
   );
 });
 Handlebars.registerHelper("host", (x) => new URL(x).host);
+Handlebars.registerHelper(
+  "latex",
+  (command, ...args) =>
+    "\\" +
+    String(command) +
+    args
+      .slice(0, args.length - 1)
+      .map((x) => `{${x}}`)
+      .join("")
+);
+Handlebars.registerHelper("join", (sep, ...args) => {
+  return args.slice(0, args.length - 1).join(sep);
+});
+Handlebars.registerHelper("joinArray", (sep, array) => {
+  return array.join(sep);
+});
 
 // Compile and run
 const tasksPromises = args._.map(async (x: string | number) => {
