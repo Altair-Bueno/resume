@@ -8,7 +8,6 @@ Altair's resume
 
 ## Required software
 
-- Python3.11
 - [Deno](https://deno.land)
 - [Tectonic](https://github.com/tectonic-typesetting/tectonic)
 - GNU Make
@@ -22,14 +21,10 @@ will install the required dependencies and build the PDF
 ## MakeFile command list
 
 ```bash
-# Install dependencies
-make deps
 # Build the resume
 make resume
 # Generate the resume thumbnail (requires poppler-utils)
 make thumbnail
-# Install dependencies and build
-make all
 # Cleanup
 make clean
 ```
