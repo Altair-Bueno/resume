@@ -34,7 +34,7 @@ basics:
 #     url: http://ertis.uma.es/
 #     startDate: 2022-11-15
 #     # endDate:
-#     summary: Summary
+#     summary: In person
 #     highlights:
 #       - fizz
 #       - buzz
@@ -73,21 +73,28 @@ education:
 # publications:
 skills:
   - name: Languages
-    keywords: [Rust, Java, TypeScript, Python, Bash]
+    keywords:
+      - Java
+      - TypeScript
+      - Python
+      - Rust
+      - C
+      - Bash
   - name: Frameworks
     keywords:
       - Spring Boot
-      - Axum
       - FastAPI
+      - Axum
       - Svelte
       - Astro
       - Bootstrap
   - name: Libraries
     keywords:
-      - Tokio
-      - Pydantic
       - Java/Jakarta EE
+      - Lombok
       - Hibernate
+      - Pydantic
+      - Tokio
   - name: Databases
     keywords: [MongoDB, PostgreSQL, MySQL]
   - name: Tools
@@ -125,7 +132,7 @@ projects:
       Layers, extractors and template engine wrappers for axum based Web MVC
       applications
     highlights:
-      - Safe Rust designed with minimal performance overhead
+      - Safe Rust with minimal performance overhead
       - Fully documented API that follows semantic versioning
       - Includes CI/CD based on GitHub Actions
     keywords:
@@ -140,19 +147,19 @@ projects:
 
   - name: WindBnB
     description: >
-      School project
+      Online marketplace for house renting similar to AirBnB
     highlights:
-      - Microservice architecture
-      - Oauth2 authentication, PayPal payments and image upload
+      - Frontend was developed on Astro and deployed on Vercel
+      - Backend was composed of three distict REST microservices deployed on
+        Fly.io
+      - Includes Oauth2 authentication, PayPal payments, image upload, geocoding
     keywords:
       - Python
-      - FastAPI
       - TypeScript
+      - FastAPI
       - Astro
       - Bootstrap
-      - Fly.io
-      - Docker
-      - Vercel
+      - MongoDB
       - OpenAPI
     startDate: 2022-10-10
     endDate: 2022-12-31
@@ -161,20 +168,19 @@ projects:
     type: Web application
 
   - name: ubay-spring
-    description: Auction platform built with Spring Boot, Java and Docker
-    highlights: []
-    keywords: [Docker, Spring Boot, Java]
+    description: Auction and e-commerce site similar to Ebay
+    highlights:
+      - Monolithic Spring Boot web application deployed using Docker compose
+      - Includes basic authentication, CRUD and image uploads
+    keywords:
+      - Java
+      - Spring Boot
+      - PostgreSQL
+      - Minio
+      - Docker
     startDate: 2022-05-16
     endDate: 2022-06-06
     url: https://github.com/Altair-Bueno/ubay-spring
     roles: [Team lead, Developer]
-    entity: University of Málaga
-    type: Web application
-
-  - name: rquote
-    description: High performant SPA built with Rust, Yew and Bootstrap
-    highlights: []
-    keywords: [Rust, Yew, SPA, Bootstrap]
-    url: https://github.com/Altair-Bueno/rquote
-    roles: [Main developer]
+    entity: Tecnología web - University of Málaga
     type: Web application
