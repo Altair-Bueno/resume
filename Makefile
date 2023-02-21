@@ -4,7 +4,7 @@ TEMPLATE_DIR      = templates
 SCRIPT_DIR        = scripts
 
 TARGET            = $(OUT_DIR)/resume.pdf
-TEMPLATE_FILE     = $(TEMPLATE_DIR)/resume.hbs
+TEMPLATE_FILE     = $(TEMPLATE_DIR)/rezume.hbs
 DATA_FILE         = $(DATA_DIR)/resume.yml
 THUMBNAIL_FILE    = $(OUT_DIR)/thumbnail.png
 
