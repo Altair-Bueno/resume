@@ -32,4 +32,6 @@ make clean
 # License
 
 All software is licensed under the MIT license ([license](LICENSE)), except for
-the [LaTeX template](templates/resume.hbs). All the data belongs to Altair Bueno
+the templates. Please refer to each template header on the
+[`templates`](templates) directory All data under [`data`](data/) belongs to
+Altair Bueno
