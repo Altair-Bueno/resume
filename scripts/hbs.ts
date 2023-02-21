@@ -5,6 +5,7 @@
 
 import Handlebars from "npm:handlebars";
 import isoCountries from "npm:i18n-iso-countries";
+import parsePhoneNumber from "npm:libphonenumber-js";
 import { parse } from "https://deno.land/std/flags/mod.ts";
 import * as yaml from "https://deno.land/std/encoding/yaml.ts";
 
@@ -53,6 +54,10 @@ Handlebars.registerHelper("formatYear", (locale, date) => {
   return Intl.DateTimeFormat(locale, { year: "numeric" }).format(
     new Date(date)
   );
+});
+Handlebars.registerHelper("formatPhone", (phone) => {
+  const phoneNumber = parsePhoneNumber(phone);
+  return phoneNumber.formatInternational();
 });
 Handlebars.registerHelper("host", (x) => new URL(x).host);
 Handlebars.registerHelper(

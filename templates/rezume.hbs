@@ -170,7 +170,7 @@
   {{/each}}
   & % Break row
   {{ latex "href" (join "" "mailto:" basics.email) (latex "uline" basics.email) }} $|$ % row = 2, col = 2
-  {{ latex "href" (join "" "tel:" basics.phone) (latex "uline" basics.phone) }}\\ % row = 2, col = 2
+  {{ latex "href" (join "" "tel:" basics.phone) (latex "uline" (formatPhone basics.phone)) }}\\ % row = 2, col = 2
 \end{tabular*}
 %--------------------------------------------
 
