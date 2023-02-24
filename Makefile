@@ -14,7 +14,12 @@ HBS_SCRIPT        = $(SCRIPT_DIR)/hbs.ts
 THUMBNAIL_CC      = pdftoppm
 THUMBNAIL_CCFLAGS = -png -singlefile
 
-HBS_CC            = $(DENO) run -q -A $(HBS_SCRIPT)
+HBS_CC            = $(DENO) run \
+                    -q \
+                    --allow-read=. \
+					--allow-write=. \
+					--no-prompt \
+					$(HBS_SCRIPT)
 HBS_CCFLAGS       = --hbs.noEscape --hbs.strict
 
 LATEX_CC          = tectonic
