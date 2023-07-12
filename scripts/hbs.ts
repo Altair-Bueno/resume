@@ -3,11 +3,11 @@
  *
  */
 
-import Handlebars from "npm:handlebars";
-import isoCountries from "npm:i18n-iso-countries";
+import Handlebars from "npm:handlebars@4.7.7";
+import isoCountries from "npm:i18n-iso-countries@7.6.0";
 import parsePhoneNumber from "npm:libphonenumber-js";
-import { parse } from "https://deno.land/std/flags/mod.ts";
-import * as yaml from "https://deno.land/std/encoding/yaml.ts";
+import { parse } from "https://deno.land/std@0.194.0/flags/mod.ts";
+import * as yaml from "https://deno.land/std@0.194.0/yaml/mod.ts";
 
 const args = parse(Deno.args);
 
