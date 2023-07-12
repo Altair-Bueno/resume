@@ -1,8 +1,8 @@
+$schema: "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json"
 meta:
   title: Altair Bueno's Resume
-  canonical: http://json-schema.org/draft-04/schema#
-  version: v1.0.0
-  lastModified: 2023-02-20
+  version: v1.1.0
+  lastModified: 2023-07-13
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
