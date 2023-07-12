@@ -28,16 +28,23 @@ basics:
     - network: LinkedIn
       username: Altair Bueno Calvente
       url: https://www.linkedin.com/in/altair-bueno-calvente-92155a232/
-# work:
-#   - name: ERTIS research group - University of Málaga
-#     position: Position desc
-#     url: http://ertis.uma.es/
-#     startDate: 2022-11-15
-#     # endDate:
-#     summary: In person
-#     highlights:
-#       - fizz
-#       - buzz
+    - network: ORCID
+      username: 0009-0001-3124-1742
+      url: https://orcid.org/0009-0001-3124-1742
+work:
+  - name: ERTIS Research Group - University of Málaga
+    position: Technical Specialist
+    url: http://ertis.uma.es/
+    startDate: 2022-11-15
+    # endDate:
+    summary: >-
+      In person. Málaga, Spain
+    highlights:
+      - Developed a system for DDNN over existing Open Source FaaS frameworks
+      - Resolved technical issues within the OpenTwins digital platform
+      - Improved internal infrastructure based on Linux and Kubernetes that
+        improved the team's overall efficiency
+      - Enhanced team performance through effective collaboration with teammates
 
 # volunteer:
 education:
@@ -46,8 +53,8 @@ education:
     area: Software Engineering
     studyType: Bachelor
     startDate: 2019-09-01
-    # endDate: 2023-06-01
-    score: "6 subjects with honors. 8.34 average mark"
+    endDate: 2023-07-13
+    score: "6 subjects with honors. 8.38 average mark"
   - institution: Cambridge English
     url: https://www.cambridgeenglish.org/
     area: B2 English level. First
