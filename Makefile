@@ -20,7 +20,7 @@ HBS_CC            = $(DENO) run \
 					--allow-write=. \
 					--no-prompt \
 					$(HBS_SCRIPT)
-HBS_CCFLAGS       = --hbs.noEscape --hbs.strict
+HBS_CCFLAGS       = --hbs.strict
 
 LATEX_CC          = tectonic
 LATEX_CCFLAGS     =

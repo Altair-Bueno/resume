@@ -8,6 +8,7 @@ import isoCountries from "npm:i18n-iso-countries@7.6.0";
 import parsePhoneNumber from "npm:libphonenumber-js";
 import { parse } from "https://deno.land/std@0.194.0/flags/mod.ts";
 import * as yaml from "https://deno.land/std@0.194.0/yaml/mod.ts";
+import Cite from "npm:citation-js@0.6.8";
 
 const args = parse(Deno.args);
 
@@ -23,6 +24,16 @@ if (args.h || args.help) {
   });
   Deno.exit(0);
 }
+
+// Modify scape function on Handlebars
+// - https://github.com/handlebars-lang/handlebars.js/issues/1301#issuecomment-274614436
+// - https://tex.stackexchange.com/a/34586
+Handlebars.Utils.escapeExpression = (arg) =>
+  String(arg)
+    .replaceAll(/([&%$#_{}])/g, "\\$1")
+    .replaceAll("~", "\\textasciitilde")
+    .replaceAll("^", "\\textasciicircum")
+    .replaceAll("\\", "\\textbackslash");
 
 // Helpers
 Handlebars.registerHelper("isoCountriesGetName", isoCountries.getName);
@@ -75,6 +86,12 @@ Handlebars.registerHelper("join", (sep, ...args) => {
 });
 Handlebars.registerHelper("joinArray", (sep, array) => {
   return array.join(sep);
+});
+Handlebars.registerHelper("cite", (citation) => {
+  return new Cite(citation).format("bibliography", {
+    template: "apa",
+    format: "text",
+  });
 });
 
 const data = yaml.parse(await Deno.readTextFile(args.d));

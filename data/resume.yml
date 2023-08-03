@@ -78,6 +78,26 @@ education:
 # awards:
 # certificates:
 # publications:
+# Based on https://okfnlabs.org/bibjson/ instead
+#   - {
+#       "title": "Open Bibliography for Science, Technology and Medicine",
+#       "author":
+#         [
+#           { "name": "Richard Jones" },
+#           { "name": "Mark MacGillivray" },
+#           { "name": "Peter Murray-Rust" },
+#           { "name": "Jim Pitman" },
+#           { "name": "Peter Sefton" },
+#           { "name": "Ben O'Steen" },
+#           { "name": "William Waites" },
+#         ],
+#       "type": "article",
+#       "year": "2011",
+#       "journal": { "name": "Journal of Cheminformatics" },
+#       "link": [{ "url": "http://www.jcheminf.com/content/3/1/47" }],
+#       "identifier": [{ "type": "doi", "id": "10.1186/1758-2946-3-47" }],
+#     }
+
 skills:
   - name: Languages
     keywords:

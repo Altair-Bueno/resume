@@ -164,13 +164,13 @@
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{\Huge {{ basics.name }} \vspace{2pt}} &
   {{ basics.location.city }}, {{ basics.location.region }}, {{ isoCountriesGetName basics.location.countryCode "en" }} \\ % row = 1, col = 2
-  {{ latex "href" basics.url (latex "uline" (host basics.url)) }} {{#if basics.profiles}}$|${{/if}} 
+  {{{ latex "href" basics.url (latex "uline" (host basics.url)) }}} {{#if basics.profiles}}$|${{/if}} 
   {{#each basics.profiles }}
-  {{ latex "href" this.url (latex "uline" this.network) }} {{#unless @last}}$|${{/unless}} 
+  {{{ latex "href" this.url (latex "uline" this.network) }}} {{#unless @last}}$|${{/unless}} 
   {{/each}}
   & % Break row
-  {{ latex "href" (join "" "mailto:" basics.email) (latex "uline" basics.email) }} $|$ % row = 2, col = 2
-  {{ latex "href" (join "" "tel:" basics.phone) (latex "uline" (formatPhone basics.phone)) }}\\ % row = 2, col = 2
+  {{{ latex "href" (join "" "mailto:" basics.email) (latex "uline" basics.email) }}} $|$ % row = 2, col = 2
+  {{{ latex "href" (join "" "tel:" basics.phone) (latex "uline" (formatPhone basics.phone)) }}}\\ % row = 2, col = 2
 \end{tabular*}
 %--------------------------------------------
 
@@ -206,7 +206,7 @@
 \resumeHeadingListStart{}
   {{#each work}}
   \resumeQuadHeading{ {{ this.position }} }{ {{ formatDateRange "en" this.startDate this.endDate }} }
-  { {{ latex "href" this.url this.name }} }{ {{ this.summary }} }
+  { {{{ latex "href" this.url this.name }}} }{ {{ this.summary }} }
     {{#if this.highlights}}
     \resumeItemListStart{}
       {{#each this.highlights }}
@@ -228,7 +228,7 @@
 \section{Education}
   \resumeHeadingListStart{}
     {{#each education}}
-    \resumeQuadHeading{ {{ this.institution }} }{ {{ latex "href" this.url "Website" }} } 
+    \resumeQuadHeading{ {{ this.institution }} }{ {{{ latex "href" this.url "Website" }}} } 
     { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}} }{ {{ formatDateRange "en" this.startDate this.endDate }} }
     {{/each}}
   \resumeHeadingListEnd{}
@@ -243,7 +243,7 @@
 \section{Projects}
   \resumeHeadingListStart{}
     {{#each projects}}
-    \resumeTrioHeading{ {{ this.name }} }{ {{ joinArray ", " this.keywords }} }{  {{ latex "href" this.url "\uline{Source Code}" }} }
+    \resumeTrioHeading{ {{ this.name }} }{ {{ joinArray ", " this.keywords }} }{  {{{ latex "href" this.url "\uline{Source Code}" }}} }
       \resumeItemListStart{}
         \resumeItem{ {{ this.description }} }
         {{#each this.highlights }}
@@ -262,7 +262,7 @@
 \section{Publications}
   \resumeItemListStart{}
     {{#each publications}}
-    \resumeItem{ {{ latex "href" this.url (join "" (latex "textbf" this.name) ", " this.publisher "(" (formatYear "en" this.releaseDate) ")." this.summary ) }} }
+    \resumeItem{ {{ cite this }} }
     {{/each}}
   \resumeItemListEnd{}
 {{/if}}
