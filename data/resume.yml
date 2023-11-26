@@ -1,8 +1,8 @@
 $schema: "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json"
 meta:
   title: Altair Bueno's Resume
-  version: v1.1.0
-  lastModified: 2023-07-13
+  version: v1.2.0
+  lastModified: 2023-11-26
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
@@ -10,11 +10,16 @@ basics:
   email: business.altair.bueno@outlook.com
   phone: "+34655134802"
   url: "https://altair-bueno.github.io"
-  summary: >
-    Software Engineering Student with experience leading small teams. Seeking a
-    challenging job to further improve my skills. Backend developer with great
-    interest on building high performant microservices. Functional programming
-    advocate.
+  summary: >-
+    Software Engineer eager to tackle challenging roles and advance skills.
+    Enthusiastic about functional programming and dedicated to following agile
+    methodologies. Proven track record of developing innovative solutions and
+    effectively resolving technical challenges. Currently employed as a
+    Technical Specialist at ERTIS Research Group, University of Málaga, where I
+    have successfully worked on projects related to Kubernetes, IoT, and Digital
+    Twins. Proficient in various programming languages and frameworks,
+    prioritizing the delivery of cutting-edge yet high-quality software.
+    Recognized open-source contributor. Excited about continuous learning.
   location:
     # address:
     postalCode: "29001"
@@ -34,7 +39,7 @@ basics:
 work:
   - name: ERTIS Research Group - University of Málaga
     position: Technical Specialist
-    url: http://ertis.uma.es/
+    url: https://ertis.uma.es/
     startDate: 2022-11-15
     # endDate:
     summary: >-
@@ -42,12 +47,20 @@ work:
     highlights:
       - Developed a system for DDNN over existing Open Source FaaS frameworks
       - Resolved technical issues within the OpenTwins digital platform
-      - Improved internal infrastructure based on Linux and Kubernetes that
-        increased the team's overall efficiency
+      - Improved the system reliability of a huge IoT vendor
+      - Improved internal infrastructure and software based on Linux and
+        Kubernetes
       - Enhanced team performance through effective collaboration with teammates
-
 # volunteer:
 education:
+  # TODO: Add end date and score
+  # - institution: University of Málaga
+  #   url: https://www.uma.es
+  #   area: Software Engineering and Artificial Intelligence
+  #   studyType: Master
+  #   startDate: 2023-09-01
+  #   endDate:
+  #   score:
   - institution: University of Málaga
     url: https://www.uma.es
     area: Software Engineering
@@ -97,7 +110,6 @@ education:
 #       "link": [{ "url": "http://www.jcheminf.com/content/3/1/47" }],
 #       "identifier": [{ "type": "doi", "id": "10.1186/1758-2946-3-47" }],
 #     }
-
 skills:
   - name: Languages
     keywords:
@@ -107,23 +119,19 @@ skills:
       - Rust
       - C
       - Bash
-  - name: Frameworks
-    keywords:
-      - Spring Boot
-      - FastAPI
-      - Axum
-      - Svelte
-      - Astro
-      - Bootstrap
   - name: Libraries
     keywords:
-      - Java/Jakarta EE
-      - Lombok
-      - Hibernate
       - Pydantic
+      - FastAPI
+      - Axum
       - Tokio
+      - Spring Boot
+      - Java/Jakarta EE
+      - Hibernate
+      - Svelte
+      - Astro
   - name: Databases
-    keywords: [MongoDB, PostgreSQL, MySQL]
+    keywords: [MongoDB, PostgreSQL, MySQL, InfluxDB]
   - name: Tools
     keywords:
       - Docker
@@ -171,43 +179,42 @@ projects:
     url: https://github.com/Altair-Bueno/axum-template
     # entity:
     type: Library
-
-  - name: WindBnB
-    description: >
-      Online marketplace for house renting similar to AirBnB
-    highlights:
-      - Frontend was developed on Astro and deployed on Vercel
-      - Backend was composed of three distict REST microservices deployed on
-        Fly.io
-      - Includes Oauth2 authentication, PayPal payments, image upload, geocoding
-    keywords:
-      - Python
-      - TypeScript
-      - FastAPI
-      - Astro
-      - Bootstrap
-      - MongoDB
-      - OpenAPI
-    startDate: 2022-10-10
-    endDate: 2022-12-31
-    url: https://github.com/Altair-Bueno/WindBnB
-    entity: Ingeniería Web - University of Málaga
-    type: Web application
-
-  - name: ubay-spring
-    description: Auction and e-commerce site similar to Ebay
-    highlights:
-      - Monolithic Spring Boot web application deployed using Docker compose
-      - Includes basic authentication, CRUD and image uploads
-    keywords:
-      - Java
-      - Spring Boot
-      - PostgreSQL
-      - Minio
-      - Docker
-    startDate: 2022-05-16
-    endDate: 2022-06-06
-    url: https://github.com/Altair-Bueno/ubay-spring
-    roles: [Team lead, Developer]
-    entity: Tecnología web - University of Málaga
-    type: Web application
+#   - name: WindBnB
+#     description: >
+#       Online marketplace for house renting similar to AirBnB
+#     highlights:
+#       - Frontend was developed on Astro and deployed on Vercel
+#       - Backend was composed of three distict REST microservices deployed on
+#         Fly.io
+#       - Includes Oauth2 authentication, PayPal payments, image upload, geocoding
+#     keywords:
+#       - Python
+#       - TypeScript
+#       - FastAPI
+#       - Astro
+#       - Bootstrap
+#       - MongoDB
+#       - OpenAPI
+#     startDate: 2022-10-10
+#     endDate: 2022-12-31
+#     url: https://github.com/Altair-Bueno/WindBnB
+#     entity: Ingeniería Web - University of Málaga
+#     type: Web application
+#
+#   - name: ubay-spring
+#     description: Auction and e-commerce site similar to Ebay
+#     highlights:
+#       - Monolithic Spring Boot web application deployed using Docker compose
+#       - Includes basic authentication, CRUD and image uploads
+#     keywords:
+#       - Java
+#       - Spring Boot
+#       - PostgreSQL
+#       - Minio
+#       - Docker
+#     startDate: 2022-05-16
+#     endDate: 2022-06-06
+#     url: https://github.com/Altair-Bueno/ubay-spring
+#     roles: [Team lead, Developer]
+#     entity: Tecnología web - University of Málaga
+#     type: Web application

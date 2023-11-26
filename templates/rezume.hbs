@@ -240,7 +240,7 @@
 % Use resumeQuadHeading if four elements are feasible (ex: demo video link), else use resumeTrioHeading. Keep the bullet points simple and concise and try to cover wide variety of skills you have used to build these projects
 
 {{#if projects}}
-\section{Projects}
+\section{Open Source projects}
   \resumeHeadingListStart{}
     {{#each projects}}
     \resumeTrioHeading{ {{ this.name }} }{ {{ joinArray ", " this.keywords }} }{  {{{ latex "href" this.url "\uline{Source Code}" }}} }
