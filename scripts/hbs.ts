@@ -1,14 +1,13 @@
 /**
  * Compile Handlebars templates using Deno
- *
  */
 
-import Handlebars from "npm:handlebars@4.7.7";
-import isoCountries from "npm:i18n-iso-countries@7.6.0";
-import parsePhoneNumber from "npm:libphonenumber-js";
 import { parse } from "https://deno.land/std@0.194.0/flags/mod.ts";
 import * as yaml from "https://deno.land/std@0.194.0/yaml/mod.ts";
 import Cite from "npm:citation-js@0.6.8";
+import Handlebars from "npm:handlebars@4.7.7";
+import isoCountries from "npm:i18n-iso-countries@7.6.0";
+import parsePhoneNumber from "npm:libphonenumber-js";
 
 const args = parse(Deno.args);
 
@@ -30,15 +29,17 @@ if (args.h || args.help) {
 // - https://tex.stackexchange.com/a/34586
 Handlebars.Utils.escapeExpression = (arg) =>
   String(arg)
-    .replaceAll(/([&%$#_{}])/g, "\\$1")
+    .replaceAll(/(\\[&%$#_{}])/g, "$1")
+    .replaceAll("\\", "\\textbackslash")
     .replaceAll("~", "\\textasciitilde")
     .replaceAll("^", "\\textasciicircum")
-    .replaceAll("\\", "\\textbackslash");
+    .replaceAll(/([&%$#_{}])/g, "\\$1");
 
 // Helpers
 Handlebars.registerHelper("isoCountriesGetName", isoCountries.getName);
-Handlebars.registerHelper("urlEncode", (x) =>
-  new URLSearchParams(x).toString()
+Handlebars.registerHelper(
+  "urlEncode",
+  (x) => new URLSearchParams(x).toString(),
 );
 Handlebars.registerHelper(
   "formatDateRange",
@@ -59,11 +60,11 @@ Handlebars.registerHelper(
       const todayCapitalized = today[0].toUpperCase() + today.slice(1);
       return `${dateTimeFormat.format(from)} – ${todayCapitalized}`;
     }
-  }
+  },
 );
 Handlebars.registerHelper("formatYear", (locale, date) => {
   return Intl.DateTimeFormat(locale, { year: "numeric" }).format(
-    new Date(date)
+    new Date(date),
   );
 });
 Handlebars.registerHelper("formatPhone", (phone) => {
@@ -79,7 +80,7 @@ Handlebars.registerHelper(
     args
       .slice(0, args.length - 1)
       .map((x) => `{${x}}`)
-      .join("")
+      .join(""),
 );
 Handlebars.registerHelper("join", (sep, ...args) => {
   return args.slice(0, args.length - 1).join(sep);
@@ -88,10 +89,11 @@ Handlebars.registerHelper("joinArray", (sep, array) => {
   return array.join(sep);
 });
 Handlebars.registerHelper("cite", (citation) => {
-  return new Cite(citation).format("bibliography", {
+  const s = new Cite(citation).format("bibliography", {
     template: "apa",
     format: "text",
   });
+  return new Handlebars.SafeString(s);
 });
 
 const data = yaml.parse(await Deno.readTextFile(args.d));

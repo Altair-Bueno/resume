@@ -90,8 +90,25 @@ education:
     score: Reading and writing skills with merit
 # awards:
 # certificates:
-# publications:
-# Based on https://okfnlabs.org/bibjson/ instead
+publications:
+  # Based on https://okfnlabs.org/bibjson/ instead
+  - title:
+      Functions as a service for distributed deep neural network inference over
+      the cloud-to-things continuum
+    author:
+      - name: Bueno, Altair
+      - name: Rubio, Bartolome
+      - name: Martin, Cristian
+      - name: Diaz, Manuel
+    type: article
+    year: "2024"
+    journal:
+      name: "Software: Practice and Experience"
+    link:
+      - url: https://onlinelibrary.wiley.com/doi/abs/10.1002/spe.3318
+    identifier:
+      - type: doi
+        id: 10.1002/spe.3318
 #   - {
 #       "title": "Open Bibliography for Science, Technology and Medicine",
 #       "author":
