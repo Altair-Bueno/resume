@@ -15,8 +15,8 @@ basics:
     Enthusiastic about functional programming and dedicated to following agile
     methodologies. Proven track record of developing innovative solutions and
     effectively resolving technical challenges. Currently employed as a
-    Technical Specialist at ERTIS Research Group, University of Málaga, where I
-    have successfully worked on projects related to Kubernetes, IoT, and Digital
+    researcher at ERTIS Research Group, University of Málaga, where I have
+    successfully worked on projects related to Kubernetes, IoT, and Digital
     Twins. Proficient in various programming languages and frameworks,
     prioritizing the delivery of cutting-edge yet high-quality software.
     Recognized open-source contributor. Excited about continuous learning.
@@ -38,7 +38,7 @@ basics:
       url: https://orcid.org/0009-0001-3124-1742
 work:
   - name: ERTIS Research Group - University of Málaga
-    position: Technical Specialist
+    position: Researcher
     url: https://ertis.uma.es/
     startDate: 2022-11-15
     # endDate:
@@ -48,19 +48,18 @@ work:
       - Developed a system for DDNN over existing Open Source FaaS frameworks
       - Resolved technical issues within the OpenTwins digital platform
       - Improved the system reliability of a huge IoT vendor
-      - Improved internal infrastructure and software based on Linux and
-        Kubernetes
-      - Enhanced team performance through effective collaboration with teammates
+      - Developed an embedded MQTT client in Rust for a huge IoT vendor
+      - Improved internal infrastructure based on Linux and Kubernetes
 # volunteer:
 education:
   # TODO: Add end date and score
-  # - institution: University of Málaga
-  #   url: https://www.uma.es
-  #   area: Software Engineering and Artificial Intelligence
-  #   studyType: Master
-  #   startDate: 2023-09-01
-  #   endDate:
-  #   score:
+  - institution: University of Málaga
+    url: https://www.uma.es
+    area: Software Engineering and Artificial Intelligence
+    studyType: Master
+    startDate: 2023-09-01
+    endDate: 2024-09-01
+    # score:
   - institution: University of Málaga
     url: https://www.uma.es
     area: Software Engineering
