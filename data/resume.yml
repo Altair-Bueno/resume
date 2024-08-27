@@ -11,15 +11,14 @@ basics:
   phone: "+34655134802"
   url: "https://altair-bueno.github.io"
   summary: >-
-    Software Engineer eager to tackle challenging roles and advance skills.
-    Enthusiastic about functional programming and dedicated to following agile
-    methodologies. Proven track record of developing innovative solutions and
-    effectively resolving technical challenges. Currently employed as a
-    researcher at ERTIS Research Group, University of Málaga, where I have
-    successfully worked on projects related to Kubernetes, IoT, and Digital
-    Twins. Proficient in various programming languages and frameworks,
-    prioritizing the delivery of cutting-edge yet high-quality software.
-    Recognized open-source contributor. Excited about continuous learning.
+    Software Engineer committed to innovation, currently working as a Research Technician
+    at the University of Málaga's ERTIS Research Group. I develop cutting-edge solutions
+    in IoT, Kubernetes, and Digital Twins, with a focus on enhancing system reliability and
+    efficiency. My expertise spans languages like Rust and Python, along with cloud
+    technologies. With a proven track record in resolving complex technical challenges
+    within the IoT industry, I am an active open-source contributor and published author,
+    continuously advancing my skills and knowledge.
+
   location:
     # address:
     postalCode: "29001"
@@ -38,17 +37,26 @@ basics:
       url: https://orcid.org/0009-0001-3124-1742
 work:
   - name: ERTIS Research Group - University of Málaga
-    position: Researcher
+    position: Research technician
     url: https://ertis.uma.es/
     startDate: 2022-11-15
     # endDate:
     summary: >-
       In person. Málaga, Spain
     highlights:
-      - Developed a system for DDNN over existing Open Source FaaS frameworks
       - Resolved technical issues within the OpenTwins digital platform
       - Improved the system reliability of a huge IoT vendor
       - Developed an embedded MQTT client in Rust for a huge IoT vendor
+
+  - name: ERTIS Research Group - University of Málaga
+    position: Research intern
+    url: https://ertis.uma.es/
+    startDate: 2022-11-15
+    endDate: 2023-09-25
+    summary: >-
+      In person. Málaga, Spain
+    highlights:
+      - Developed a system for DDNN over existing Open Source FaaS frameworks
       - Improved internal infrastructure based on Linux and Kubernetes
 # volunteer:
 education:
@@ -80,13 +88,13 @@ education:
     studyType: Certification
     startDate: 2015-01-01
     endDate: 2016-01-01
-  - institution: Trinity College London
-    url: https://www.trinitycollege.com/
-    area: B1 English level. ISE I
-    studyType: Certification
-    startDate: 2014-01-01
-    endDate: 2015-01-01
-    score: Reading and writing skills with merit
+  # - institution: Trinity College London
+  #   url: https://www.trinitycollege.com/
+  #   area: B1 English level. ISE I
+  #   studyType: Certification
+  #   startDate: 2014-01-01
+  #   endDate: 2015-01-01
+  #   score: Reading and writing skills with merit
 # awards:
 # certificates:
 publications:
@@ -183,7 +191,6 @@ projects:
       Layers, extractors and template engine wrappers for axum based Web MVC
       applications
     highlights:
-      - Safe Rust with minimal performance overhead
       - Fully documented API that follows semantic versioning
       - Includes CI/CD based on GitHub Actions
     keywords:
