@@ -140,6 +140,7 @@ skills:
       - Docker (Compose, Swarm)
       - GitHub (Actions, Issues, Projects)
       - JetBrains (PyCharm, IntelliJ IDEA, RustRover)
+      - Message brokers (Apache Kafka, MQTT)
       - VSCode
       - Grafana
       - K6
