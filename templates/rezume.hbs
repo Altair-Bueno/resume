@@ -10,7 +10,7 @@
 
 
 %------------PACKAGES----------------
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,10pt]{article}
 
 \usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
 
@@ -164,7 +164,7 @@
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{\Huge {{ basics.name }} \vspace{2pt}} &
   {{ basics.location.city }}, {{ basics.location.region }}, {{ isoCountriesGetName basics.location.countryCode "en" }} \\ % row = 1, col = 2
-  {{{ latex "href" basics.url (latex "uline" (host basics.url)) }}} {{#if basics.profiles}}$|${{/if}} 
+  {{{ latex "href" basics.url (latex "uline" "Website") }}} {{#if basics.profiles}}$|${{/if}} 
   {{#each basics.profiles }}
   {{{ latex "href" this.url (latex "uline" this.network) }}} {{#unless @last}}$|${{/unless}} 
   {{/each}}
@@ -187,11 +187,14 @@
 % Add or remove resumeSectionTypes according to your needs
 
 {{#if skills}}
-\section{Technical Skills}
+\section{Skills}
   \resumeHeadingListStart{}
     {{#each skills}}
     \resumeSectionType{ {{ this.name }} }{:}{ {{ joinArray ", " this.keywords }} }
     {{/each}}
+    {{#if languages}}
+    \resumeSectionType{Languages}{:}{ {{#each languages}}{{this.language}} ({{this.fluency}}){{#unless @last}}, {{/unless}}{{/each}} }
+    {{/if}}
   \resumeHeadingListEnd{}
 {{/if}}
 %--------------------------------------------

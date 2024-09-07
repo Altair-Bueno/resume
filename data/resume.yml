@@ -2,7 +2,7 @@ $schema: "https://raw.githubusercontent.com/jsonresume/resume-schema/master/sche
 meta:
   title: Altair Bueno's Resume
   version: v1.2.0
-  lastModified: 2023-11-26
+  lastModified: 2024-09-07
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
@@ -11,14 +11,13 @@ basics:
   phone: "+34655134802"
   url: "https://altair-bueno.github.io"
   summary: >-
-    Software Engineer committed to innovation, currently working as a Research Technician
-    at the University of Málaga's ERTIS Research Group. I develop cutting-edge solutions
-    in IoT, Kubernetes, and Digital Twins, with a focus on enhancing system reliability and
-    efficiency. My expertise spans languages like Rust and Python, along with cloud
-    technologies. With a proven track record in resolving complex technical challenges
-    within the IoT industry, I am an active open-source contributor and published author,
-    continuously advancing my skills and knowledge.
-
+    Software Engineer committed to innovation, currently working as a Research
+    Technician at the University of Málaga's ERTIS Research Group. I develop
+    cutting-edge solutions in IoT, Kubernetes, and Digital Twins using Python
+    and Rust, with a focus on enhancing system reliability and efficiency. I
+    excel at teamwork and adaptability, with a proven track record in resolving
+    complex technical challenges in a fast-paced environment. Additionally, I am
+    an active open-source contributor and published author.
   location:
     # address:
     postalCode: "29001"
@@ -44,10 +43,11 @@ work:
     summary: >-
       In person. Málaga, Spain
     highlights:
-      - Resolved technical issues within the OpenTwins digital platform
-      - Improved the system reliability of a huge IoT vendor
-      - Developed an embedded MQTT client in Rust for a huge IoT vendor
-
+      - Conducted load testing on Airzone Cloud by utilizing K6 and Grafana to
+        evaluate the system's performance and reliability
+      - Developed an embedded MQTT client in Rust for Airzone smart thermostats
+      - Wrote a paper about techniques that IoT companies can leverage to reduce
+        cloud cost
   - name: ERTIS Research Group - University of Málaga
     position: Research intern
     url: https://ertis.uma.es/
@@ -56,8 +56,14 @@ work:
     summary: >-
       In person. Málaga, Spain
     highlights:
-      - Developed a system for DDNN over existing Open Source FaaS frameworks
-      - Improved internal infrastructure based on Linux and Kubernetes
+      - Developed a system for Distributed Deep Neural Network inference
+        leveraging Python functions that run TensorFlow models on Kubernetes and
+        communicate using Apache Kafka
+      - Resolved several issues within the OpenTwins framework that arose from
+        Eclipse Ditto digital twin platform
+      - Supported the research work of my colleagues by managing several
+        Kubernetes instances, SQL and NoSQL databases, linux servers and CI/CD
+        pipelines
 # volunteer:
 education:
   # TODO: Add end date and score
@@ -82,19 +88,6 @@ education:
     startDate: 2016-01-01
     endDate: 2018-01-01
     score: "171 average mark"
-  - institution: Cambridge English
-    url: https://www.cambridgeenglish.org/
-    area: B1 English level. Preliminary
-    studyType: Certification
-    startDate: 2015-01-01
-    endDate: 2016-01-01
-  # - institution: Trinity College London
-  #   url: https://www.trinitycollege.com/
-  #   area: B1 English level. ISE I
-  #   studyType: Certification
-  #   startDate: 2014-01-01
-  #   endDate: 2015-01-01
-  #   score: Reading and writing skills with merit
 # awards:
 # certificates:
 publications:
@@ -135,50 +128,30 @@ publications:
 #       "identifier": [{ "type": "doi", "id": "10.1186/1758-2946-3-47" }],
 #     }
 skills:
-  - name: Languages
+  - name: Technical Skills
     keywords:
-      - Java
-      - TypeScript
-      - Python
-      - Rust
-      - C
-      - Bash
-  - name: Libraries
-    keywords:
-      - Pydantic
-      - FastAPI
-      - Axum
-      - Tokio
-      - Spring Boot
-      - Java/Jakarta EE
-      - Hibernate
-      - Svelte
-      - Astro
-  - name: Databases
-    keywords: [MongoDB, PostgreSQL, MySQL, InfluxDB]
+      - Python (Pydantic, FastAPI, Tortoise)
+      - Rust (Axum, Tokio, smol, paho-mqtt)
+      - C (POSIX)
+      - OpenAPI (Swagger, Redoc, openapi-generator)
   - name: Tools
     keywords:
-      - Docker
-      - Kubernetes
-      - OpenAPI
-      - JetBrains
-      - Git
-      - GitHub
+      - Kubernetes (kubectl, Helm, Kustomize)
+      - Docker (Compose, Swarm)
+      - GitHub (Actions, Issues, Projects)
+      - JetBrains (PyCharm, IntelliJ IDEA, RustRover)
+      - VSCode
+      - Grafana
+      - K6
       - macOS
       - Linux
-  - name: Cloud and SaaS
+  - name: Databases
+    keywords: [MongoDB, PostgreSQL, MySQL, InfluxDB]
+  - name: Cloud
     keywords:
       - Vercel
       - Fly.io
-      - Auth0
-      - PayPal
-  - name: Soft Skills
-    keywords:
-      - Adaptability
-      - Leadership
-      - Time management
-      - Problem-solving
-      - Teamwork
+      - AWS
 languages:
   - language: Spanish
     fluency: Native speaker
@@ -202,42 +175,3 @@ projects:
     url: https://github.com/Altair-Bueno/axum-template
     # entity:
     type: Library
-#   - name: WindBnB
-#     description: >
-#       Online marketplace for house renting similar to AirBnB
-#     highlights:
-#       - Frontend was developed on Astro and deployed on Vercel
-#       - Backend was composed of three distict REST microservices deployed on
-#         Fly.io
-#       - Includes Oauth2 authentication, PayPal payments, image upload, geocoding
-#     keywords:
-#       - Python
-#       - TypeScript
-#       - FastAPI
-#       - Astro
-#       - Bootstrap
-#       - MongoDB
-#       - OpenAPI
-#     startDate: 2022-10-10
-#     endDate: 2022-12-31
-#     url: https://github.com/Altair-Bueno/WindBnB
-#     entity: Ingeniería Web - University of Málaga
-#     type: Web application
-#
-#   - name: ubay-spring
-#     description: Auction and e-commerce site similar to Ebay
-#     highlights:
-#       - Monolithic Spring Boot web application deployed using Docker compose
-#       - Includes basic authentication, CRUD and image uploads
-#     keywords:
-#       - Java
-#       - Spring Boot
-#       - PostgreSQL
-#       - Minio
-#       - Docker
-#     startDate: 2022-05-16
-#     endDate: 2022-06-06
-#     url: https://github.com/Altair-Bueno/ubay-spring
-#     roles: [Team lead, Developer]
-#     entity: Tecnología web - University of Málaga
-#     type: Web application
