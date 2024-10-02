@@ -66,14 +66,13 @@ work:
         pipelines
 # volunteer:
 education:
-  # TODO: Add end date and score
   - institution: University of Málaga
     url: https://www.uma.es
     area: Software Engineering and Artificial Intelligence
     studyType: Master
     startDate: 2023-09-01
-    endDate: 2024-09-01
-    # score:
+    endDate: 2024-10-02
+    score: "8.5 average mark"
   - institution: University of Málaga
     url: https://www.uma.es
     area: Software Engineering
