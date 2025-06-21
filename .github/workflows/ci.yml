@@ -45,10 +45,13 @@ jobs:
         with:
           path: out/thumbnail.png
           name: thumbnail
-      - uses: elgohr/Github-Release-Action@v5
-        if: startsWith(github.ref, 'refs/tags/')
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/') || (github.ref == 'refs/heads/master')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           title: ${{ github.ref_name }}
           tag: ${{ github.ref_name }}
+          files: |
+            out/resume.pdf
+            out/thumbnail.png
