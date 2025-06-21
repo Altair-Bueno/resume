@@ -2,7 +2,7 @@
 
 Altair's resume
 
-![Thumbnail](https://github.com/Altair-Bueno/resume/releases/download/latest/thumbnail.png)
+![Thumbnail](https://github.com/Altair-Bueno/resume/releases/latest/download/thumbnail.png)
 
 # Building
 
