@@ -13,7 +13,7 @@ meta:
     ruler: true
     skills:
       cols: 5
-  keywords: [ Sample ]
+  keywords: [Sample]
 
 basics:
   name: John Appleseed
@@ -23,10 +23,10 @@ basics:
   phone: +1-202-555-0125
   url: https://example.com
   summary: >
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-    tempor incididunt ut labore et dolore magna aliqua. Duis ultricies lacus 
-    sed turpis tincidunt. Commodo ullamcorper a lacus vestibulum sed. A 
-    pellentesque sit amet porttitor eget dolor morbi non. Molestie a iaculis at 
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Duis ultricies lacus
+    sed turpis tincidunt. Commodo ullamcorper a lacus vestibulum sed. A
+    pellentesque sit amet porttitor eget dolor morbi non. Molestie a iaculis at
     erat pellentesque adipiscing commodo elit
   location:
     address: 2712 Broadway St
@@ -46,8 +46,8 @@ work:
     url: https://apple.com
     startDate: "2020-01-10"
     endDate: "2021-04-02"
-    summary: > 
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+    summary: >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua
     highlights:
       - Ut enim ad minim veniam
@@ -59,7 +59,7 @@ work:
     startDate: "2021-01-10"
     endDate: "2021-04-02"
     summary: >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua
     highlights:
       - Ut enim ad minim veniam
@@ -72,7 +72,7 @@ volunteer:
     startDate: "2017-04-03"
     endDate: "2018-03-04"
     summary: >
-      Quis imperdiet massa tincidunt nunc pulvinar sapien et. Habitant morbi 
+      Quis imperdiet massa tincidunt nunc pulvinar sapien et. Habitant morbi
       tristique senectus et netus
     highlights:
       - Auctor neque vitae tempus quam pellentesque nec nam aliquam
@@ -96,14 +96,14 @@ certificates:
   - name: ESX management
     issuer: VMWare
     url: https://vmware.com
-    date: '2020-03-03'
+    date: "2020-03-03"
 publications:
   - name: Serverless service maintenance
     publisher: MIT
     releaseDate: "2010-01-01"
     url: https://example.org
     summary: >
-      Non curabitur gravida arcu ac tortor dignissim convallis aenean et. 
+      Non curabitur gravida arcu ac tortor dignissim convallis aenean et.
       Aliquam ultrices sagittis orci a scelerisque purus semper eget
 skills:
   - name: Web Development
@@ -138,4 +138,3 @@ projects:
       - Team lead
     entity: MIT
     type: Web Application
-

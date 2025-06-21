@@ -1,0 +1,10 @@
+{
+  "imports": {
+    "@std/cli": "jsr:@std/cli@^1.0.20",
+    "@std/yaml": "jsr:@std/yaml@^1.0.8",
+    "citation-js": "npm:citation-js@^0.7.19",
+    "handlebars": "npm:handlebars@^4.7.8",
+    "i18n-iso-countries": "npm:i18n-iso-countries@^7.14.0",
+    "libphonenumber-js": "npm:libphonenumber-js@^1.12.9"
+  }
+}

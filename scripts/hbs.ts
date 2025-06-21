@@ -2,14 +2,14 @@
  * Compile Handlebars templates using Deno
  */
 
-import { parse } from "https://deno.land/std@0.194.0/flags/mod.ts";
-import * as yaml from "https://deno.land/std@0.194.0/yaml/mod.ts";
-import Cite from "npm:citation-js@0.6.8";
-import Handlebars from "npm:handlebars@4.7.7";
-import isoCountries from "npm:i18n-iso-countries@7.6.0";
-import parsePhoneNumber from "npm:libphonenumber-js";
+import { parseArgs } from "@std/cli/parse-args";
+import * as yaml from "@std/yaml";
+import Cite from "citation-js";
+import Handlebars from "handlebars";
+import isoCountries from "i18n-iso-countries";
+import parsePhoneNumber from "libphonenumber-js";
 
-const args = parse(Deno.args);
+const args = parseArgs(Deno.args);
 
 if (args.h || args.help) {
   console.log("USAGE: ./hbs -d DATA [...FILES]");
