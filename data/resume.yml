@@ -2,7 +2,7 @@ $schema: "https://raw.githubusercontent.com/jsonresume/resume-schema/master/sche
 meta:
   title: Altair Bueno's Resume
   version: v1.2.0
-  lastModified: 2024-09-07
+  lastModified: 2025-06-21
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
@@ -11,13 +11,16 @@ basics:
   phone: "+34655134802"
   url: "https://altair-bueno.github.io"
   summary: >-
-    Software Engineer committed to innovation, currently working as a Research
-    Technician at the University of Málaga's ERTIS Research Group. I develop
-    cutting-edge solutions in IoT, Kubernetes, and Digital Twins using Python
-    and Rust, with a focus on enhancing system reliability and efficiency. I
-    excel at teamwork and adaptability, with a proven track record in resolving
-    complex technical challenges in a fast-paced environment. Additionally, I am
-    an active open-source contributor and published author.
+    Software Engineer committed to innovation, currently working as an R&D Cloud
+    Software Engineer at Airzone (Altra corporation). I specialize in developing
+    cutting-edge solutions in IoT and Digital Twins using Rust, C and Python,
+    with a focus on enhancing system reliability and efficiency. My expertise
+    includes low-level Linux system programming, cloud cost optimization, and
+    distributed deep neural network inference. I excel at teamwork and
+    adaptability, with a proven track record in resolving complex technical
+    challenges in fast-paced environments. Additionally, I am an active
+    open-source contributor, published author, and developer of tools that
+    empower teams to work more efficiently.
   location:
     # address:
     postalCode: "29001"
@@ -35,13 +38,29 @@ basics:
       username: 0009-0001-3124-1742
       url: https://orcid.org/0009-0001-3124-1742
 work:
+  - name: Airzone (Altra corporation)
+    position: R&D Cloud Software Engineer (platform team)
+    url: https://www.airzonecontrol.com/
+    startDate: 2024-10-21
+    # endDate:
+    summary: In person. Málaga, Spain
+    highlights:
+      - Rewrote critical modules related to connectivity, significantly reducing
+        the number of disconnections and downtime of Airzone's IoT devices
+      - Worked on low-level Linux system programming and design of IMX and STM
+        based devices, including the development of user space software, device
+        trees, kernel modules and drivers using tools like Yocto, u-boot, and
+        manufacturer SDKs
+      - Developed several new tools for internal use, including Administration
+        tools for Airzone Cloud, IoT dashboards, Dev Containers for cross
+        compilation and more, empowering the team to work more efficiently,
+        gather better insights and improve the overall development process
   - name: ERTIS Research Group - University of Málaga
     position: Research technician
     url: https://ertis.uma.es/
     startDate: 2023-09-25
-    # endDate:
-    summary: >-
-      In person. Málaga, Spain
+    endDate: 2024-10-20
+    summary: In person. Málaga, Spain
     highlights:
       - Conducted load testing on Airzone Cloud by utilizing K6 and Grafana to
         evaluate the system's performance and reliability
@@ -53,8 +72,7 @@ work:
     url: https://ertis.uma.es/
     startDate: 2022-11-15
     endDate: 2023-09-25
-    summary: >-
-      In person. Málaga, Spain
+    summary: In person. Málaga, Spain
     highlights:
       - Developed a system for Distributed Deep Neural Network inference
         leveraging Python functions that run TensorFlow models on Kubernetes and
@@ -129,29 +147,28 @@ publications:
 skills:
   - name: Technical Skills
     keywords:
+      - Rust (Axum, Tokio, smol, paho-mqtt, serde, cxx, bindgen, FFI)
+      - C (POSIX, OpenSSL, Make, CMake)
       - Python (Pydantic, FastAPI, Tortoise)
-      - Rust (Axum, Tokio, smol, paho-mqtt)
-      - C (POSIX)
       - OpenAPI (Swagger, Redoc, openapi-generator)
+      - Linux (kernel modules, device trees, Yocto, u-boot, systemd)
   - name: Tools
     keywords:
       - Kubernetes (kubectl, Helm, Kustomize)
       - Docker (Compose, Swarm)
       - GitHub (Actions, Issues, Projects)
-      - JetBrains (PyCharm, IntelliJ IDEA, RustRover)
+      - GitLab (Pipelines, Issues, Projects)
       - Message brokers (Apache Kafka, MQTT)
-      - VSCode
-      - Grafana
-      - K6
-      - macOS
-      - Linux
+      - Grafana (Cloud, K6, Sef-hosted)
+      - Editors (PyCharm, IntelliJ IDEA, RustRover, VSCode, Zed)
+      - Operating Systems (macOS, Linux, FreeBSD)
   - name: Databases
     keywords: [MongoDB, PostgreSQL, MySQL, InfluxDB]
   - name: Cloud
     keywords:
+      - AWS
       - Vercel
       - Fly.io
-      - AWS
 languages:
   - language: Spanish
     fluency: Native speaker
@@ -159,6 +176,38 @@ languages:
     fluency: Fluent
 # references:
 projects:
+  - name: encode
+    description: >
+      A simple framework for encoding binary data.
+    highlights:
+      - Provides a set of combinators and traits to make it easy to write UTF-8
+        and raw byte encoders
+      - no_std and no_alloc compatible with no unsafe code
+      - Includes CI/CD based on GitHub Actions
+    keywords:
+      - Rust
+      - encoding
+      - no_std
+      - no_alloc
+    url: https://github.com/Altair-Bueno/encode
+    startDate: 2025-02-15
+    type: Library
+  - name: cjson-rs
+    description:
+      High level, no_std bindings for cJSON, an ultralightweight JSON parser in
+      ANSI C.
+    highlights:
+      - no_std and no_alloc compatible
+      - Implements serde's Serialize and Deserialize traits
+      - Includes CI/CD based on GitHub Actions
+    keywords:
+      - Rust
+      - cJSON
+      - no_std
+      - no_alloc
+    url: https://github.com/Corporacion-Empresarial-Altra-R-D/cjsonrs
+    startDate: 2024-12-16
+    entity: Airzone Control - Altra corporation
   - name: axum-template
     description: >
       Layers, extractors and template engine wrappers for axum based Web MVC
