@@ -31,8 +31,11 @@ jobs:
           deno-version: v2.x
           cache: true
       - uses: wtfjoke/setup-tectonic@v3
-      - name: Install apt packages
-        run: apt-get update && apt-get install -y poppler-utils
+      - name: Cache APT Packages
+        uses: awalsh128/cache-apt-pkgs-action@v1.5.0
+        with:
+          packages: poppler-utils
+          version: 1.0
       - run: make resume thumbnail
       - uses: actions/upload-artifact@v4
         with:
