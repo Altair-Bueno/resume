@@ -106,7 +106,11 @@ education:
     endDate: 2018-01-01
     score: "171 average mark"
 # awards:
-# certificates:
+certificates:
+  - name: Yocto Project and OpenEmbedded System Development
+    issuer: Bootlin
+    date: 2025-09-01
+    url: https://bootlin.com/doc/training/certificates/2025/yocto-stm32/altair-bueno-d58b5c89007fba420bd2ae2119744534c786ea49/
 publications:
   # Based on https://okfnlabs.org/bibjson/ instead
   - title:
