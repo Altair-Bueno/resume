@@ -53,7 +53,7 @@ jobs:
     if: >
       startsWith(github.ref, 'refs/heads/main')
       || startsWith(github.ref, 'refs/heads/master')
-      || (contains(github.ref, 'refs/heads/') && /^\d+(\.\d+)?\.x$/.test(github.ref.replace('refs/heads/', '')))
+      || (contains(github.ref, 'refs/heads/') && (github.ref.replace('refs/heads/', '')  && (github.ref.replace('refs/heads/', '')  | match('^\\d+(\\.\\d+)?\\.x$'))))
     steps:
       - name: Download resume artifact
         uses: actions/download-artifact@v4
