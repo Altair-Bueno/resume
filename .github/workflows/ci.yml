@@ -22,8 +22,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs:
-      - fmt
     steps:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
@@ -45,12 +43,35 @@ jobs:
         with:
           path: out/thumbnail.png
           name: thumbnail
-      - uses: softprops/action-gh-release@v2
-        if: github.ref_type == 'tag'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  ci-check:
+    name: Check all statuses are green
+    if: always()
+    needs:
+      - fmt
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@v1.2.2
         with:
-          make_latest: true
-          files: |
-            out/resume.pdf
-            out/thumbnail.png
+          jobs: ${{ toJSON(needs) }}
+  publish:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    if: >
+      startsWith(github.ref, 'refs/heads/main')
+      || startsWith(github.ref, 'refs/heads/master')
+    steps:
+      - name: Download resume artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: resume
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
