@@ -41,27 +41,13 @@ Handlebars.registerHelper(
   "urlEncode",
   (x) => new URLSearchParams(x).toString(),
 );
-Handlebars.registerHelper(
-  "formatDateRange",
-  (locale: string, startDate, endDate) => {
-    const from = new Date(startDate);
-    const dateTimeFormat = Intl.DateTimeFormat(locale, {
-      month: "short",
-      year: "numeric",
-    });
 
-    if (endDate) {
-      return dateTimeFormat.formatRange(from, new Date(endDate));
-    } else {
-      const relativeTimeFormat = new Intl.RelativeTimeFormat(locale, {
-        numeric: "auto",
-      });
-      const today = relativeTimeFormat.format(0, "day");
-      const todayCapitalized = today[0].toUpperCase() + today.slice(1);
-      return `${dateTimeFormat.format(from)} – ${todayCapitalized}`;
-    }
-  },
-);
+Handlebars.registerHelper("formatMonth", (locale: string, date) => {
+  return Intl.DateTimeFormat(locale, {
+    month: "short",
+    year: "numeric",
+  }).format(new Date(date));
+});
 Handlebars.registerHelper("formatYear", (locale, date) => {
   return Intl.DateTimeFormat(locale, { year: "numeric" }).format(
     new Date(date),
