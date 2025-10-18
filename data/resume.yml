@@ -155,7 +155,7 @@ skills:
       - C (POSIX, OpenSSL, Make, CMake)
       - Python (Pydantic, FastAPI, Tortoise)
       - OpenAPI (Swagger, Redoc, openapi-generator)
-      - Linux (kernel modules, device trees, Yocto, u-boot, systemd, bash, sh)
+      - Linux (kernel modules, device trees, Yocto, OpenEmbedded, u-boot, systemd, bash, sh)
   - name: Tools
     keywords:
       - Kubernetes (kubectl, Helm, Kustomize)
