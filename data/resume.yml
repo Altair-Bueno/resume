@@ -1,8 +1,8 @@
 $schema: "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json"
 meta:
   title: Altair Bueno's Resume
-  version: v1.3.0
-  lastModified: 2025-06-21
+  version: v1.4.0
+  lastModified: 2026-09-13
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
@@ -12,15 +12,15 @@ basics:
   url: "https://altair-bueno.github.io"
   summary: >-
     Software Engineer committed to innovation, currently working as an R&D Cloud
-    Software Engineer at Airzone (Altra corporation). I specialize in developing
-    cutting-edge solutions in IoT and Digital Twins using Rust, C and Python,
-    with a focus on enhancing system reliability and efficiency. My expertise
-    includes low-level Linux system programming, cloud cost optimization, and
-    distributed deep neural network inference. I excel at teamwork and
-    adaptability, with a proven track record in resolving complex technical
-    challenges in fast-paced environments. Additionally, I am an active
-    open-source contributor, published author, and developer of tools that
-    empower teams to work more efficiently.
+    Software Engineer at Airzone. I specialize in cutting-edge solutions for IoT
+    and Digital Twins using Rust, C, Bash and Python, with a focus on enhancing
+    system reliability and efficiency. My expertise includes low-level Linux
+    system programming, maintenance of Yocto-based embedded Linux distros and
+    cloud-to-things continuum. I excel at teamwork and adaptability, with a
+    proven track record in resolving complex technical challenges in fast-paced
+    environments. Additionally, I am an active open-source contributor,
+    published author, and developer of several tools that empower teams to work
+    more efficiently.
   location:
     # address:
     postalCode: "29001"
@@ -45,8 +45,9 @@ work:
     # endDate:
     summary: In person. Málaga, Spain
     highlights:
-      - Rewrote critical modules related to connectivity, significantly reducing
-        the number of disconnections and downtime of Airzone's IoT devices
+      - Rewrote critical modules related to Wi-Fi connectivity, significantly
+        reducing the number of disconnections and downtime of Airzone's IoT
+        devices
       - Worked on low-level Linux system programming and design of IMX and STM
         based devices, including the development of user space software, device
         trees, kernel modules and drivers using tools like Yocto, u-boot, and
@@ -149,35 +150,35 @@ publications:
 #       "identifier": [{ "type": "doi", "id": "10.1186/1758-2946-3-47" }],
 #     }
 skills:
-  - name: Technical Skills
+  - name: Technical skills
     keywords:
-      - Rust (Axum, Tokio, smol, paho-mqtt, serde, cxx, bindgen, FFI)
-      - C (POSIX, OpenSSL, Make, CMake)
-      - Python (Pydantic, FastAPI, Tortoise)
-      - OpenAPI (Swagger, Redoc, openapi-generator)
-      - Linux (kernel modules, device trees, Yocto, OpenEmbedded, u-boot, systemd, bash, sh)
+      - Rust (axum, tokio, smol, ffi, no_std, no_alloc, cargo)
+      - C (posix, openssl, epoll, make, cmake)
+      - Python (pydantic, fastapi, tortoise, pytest)
+      - Protocols (homekit, matter, mqtt, websockets, d-bus, rest, json, grpc)
+  - name: IoT
+    keywords:
+      - Yocto (poky, bitbake, openembedded)
+      - BSP (stm32, imx, esp32)
+      - Bootloaders (u-boot)
+      - Kernel modules (murata, quectel)
+      - Userspace tools & daemons (systemd, busybox, wpa_supplicant, bluez,
+        ostree, initramfs)
   - name: Tools
     keywords:
-      - Kubernetes (kubectl, Helm, Kustomize)
-      - Docker (Compose, Swarm)
-      - GitHub (Actions, Issues, Projects)
-      - GitLab (Pipelines, Issues, Projects)
-      - Message brokers (Apache Kafka, MQTT)
-      - Grafana (Cloud, K6, Sef-hosted)
-      - Editors (PyCharm, IntelliJ IDEA, RustRover, VSCode, Zed)
-      - Operating Systems (macOS, Linux, FreeBSD)
-  - name: Databases
-    keywords: [MongoDB, PostgreSQL, MySQL, InfluxDB]
-  - name: Cloud
-    keywords:
-      - AWS
-      - Vercel
-      - Fly.io
+      - AI (claude, llama, superpowers, opencode)
+      - Docker (compose, swarm, devcontainers)
+      - CI/CD (github, gitlab, pipelines)
+      - Message brokers (apache kafka, mqtt)
+      - Grafana (cloud, k6, sef-hosted)
+      - Kubernetes (kubectl, helm, kustomize)
 languages:
   - language: Spanish
     fluency: Native speaker
   - language: English
     fluency: Fluent
+  - language: German
+    fluency: Beginner
 # references:
 projects:
   - name: encode

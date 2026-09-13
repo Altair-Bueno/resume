@@ -8,56 +8,103 @@ on:
 permissions:
   contents: read # for checkout
 
+# This workflow is the only definition of how the resume is built. Each stage
+# runs in the image that owns its toolchain, and hands the next stage its
+# output as an artifact - no stage needs another stage's tools installed.
 jobs:
   fmt:
     runs-on: ubuntu-latest
+    container: denoland/deno:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-          cache: true
       - run: deno fmt --check
 
-  build:
+  render:
+    name: Render LaTeX from resume data
     runs-on: ubuntu-latest
+    container: denoland/deno:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-          cache: true
-      - uses: wtfjoke/setup-tectonic@v3
-      - name: Cache APT Packages
-        uses: awalsh128/cache-apt-pkgs-action@v1.5.0
-        with:
-          packages: poppler-utils
-          version: 1.0
-      - run: make resume thumbnail
+      - run: mkdir -p out
+      - run: |
+          deno run -q \
+            --allow-read=. \
+            --allow-write=. \
+            --no-prompt \
+            scripts/hbs.ts \
+            --hbs.strict \
+            -d data/resume.yml \
+            templates/rezume.hbs \
+            -o out/resume.tex
       - uses: actions/upload-artifact@v4
         with:
-          path: out/resume.pdf
+          name: tex
+          path: out/resume.tex
+
+  compile:
+    name: Compile PDF
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    needs:
+      - render
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: tex
+          path: out
+      # LuaTeX specifically, not XeTeX/tectonic. Both need the sourcesanspro
+      # "type1" option to emit real space glyphs, but xdvipdfmx additionally
+      # maps f-ligature glyphs to U+FB01/U+FB02, which leaves words like
+      # "InfluxDB" and "CERTIFICATIONS" unsearchable in the extracted text.
+      - run: |
+          lualatex \
+            -interaction=nonstopmode \
+            -halt-on-error \
+            -output-directory=out \
+            out/resume.tex
+      - uses: actions/upload-artifact@v4
+        with:
           name: resume
+          path: out/resume.pdf
+
+  thumbnail:
+    name: Render thumbnail
+    runs-on: ubuntu-latest
+    container: minidocks/poppler:latest
+    needs:
+      - compile
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: resume
+          path: out
+      - run: pdftoppm -png -singlefile out/resume.pdf out/thumbnail
       - uses: actions/upload-artifact@v4
         with:
-          path: out/thumbnail.png
           name: thumbnail
+          path: out/thumbnail.png
+
   ci-check:
     name: Check all statuses are green
     if: always()
     needs:
       - fmt
-      - build
+      - render
+      - compile
+      - thumbnail
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
         uses: re-actors/alls-green@v1.2.2
         with:
           jobs: ${{ toJSON(needs) }}
+
   publish:
     runs-on: ubuntu-latest
+    container: node:lts
     needs:
-      - build
+      - compile
+      - thumbnail
     permissions:
       contents: write # to be able to publish a GitHub release
       issues: write # to be able to comment on released issues
@@ -68,13 +115,16 @@ jobs:
       || startsWith(github.ref, 'refs/heads/master')
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # semantic-release needs the full commit history
       - uses: actions/download-artifact@v4
         with:
-          path: out/
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+          name: resume
+          path: out
+      - uses: actions/download-artifact@v4
         with:
-          node-version: "lts/*"
+          name: thumbnail
+          path: out
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
