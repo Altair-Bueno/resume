@@ -37,11 +37,22 @@
 \usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
 %-----------------------------------------
 
+% NOTE: these are pdfTeX primitives and have no effect under Tectonic (XeTeX).
+% ATS readability is handled by the type1 font option below instead.
 %\input glyphtounicode % converts glyph names to unicode
 %\pdfgentounicode=1 % ensures pdfs generated are ats readable
 
 %----------FONT OPTIONS-------------------
-\usepackage[default]{sourcesanspro} % uses the font source sans pro
+% The type1 option is required for ATS readability. Without it, XeTeX embeds
+% Source Sans Pro as an Identity-H CID font and xdvipdfmx derives the ToUnicode
+% map by reverse-cmap lookup, which breaks text extraction three ways:
+%   - words are positioned with TJ kerning offsets instead of space glyphs, so
+%     pypdf/pdfplumber return the whole document as one run-together string
+%   - every "-" extracts as U+2011 NON-BREAKING HYPHEN, so keyword scans for
+%     "low-level", "paho-mqtt", "open-source" etc. all miss
+%   - small-caps "I" extracts as lowercase "i", 1turning the section headers into
+%     SKiLLS / EXPERiENCE / EDUCATiON, which no ATS section detector matches
+\usepackage[default,type1]{sourcesanspro} % uses the font source sans pro
 \urlstyle{same} % changes url font from default urlfont to font being used by the document
 %-----------------------------------------
 
@@ -231,8 +242,12 @@
 \section{Education}
   \resumeHeadingListStart{}
     {{#each education}}
-    \resumeQuadHeading{ {{ this.institution }} }{ {{{ latex "href" this.url "Website" }}} }
-    { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}} }{ {{ formatMonth "en" this.startDate }} - {{#if this.endDate}}{{ formatMonth "en" this.endDate }}{{else}}Present{{/if}} }
+    % The date is folded into the third cell rather than right-aligned in the
+    % fourth. Stacked short entries in the right-hand column form a separate
+    % layout region, so text extractors emit all the dates together after the
+    % following section - detaching every date from its degree.
+    \resumeQuadHeading{ {{ this.institution }} }{ \uline{ {{{ latex "href" this.url "Website" }}} } }
+    { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}}, {{ formatMonth "en" this.startDate }} - {{#if this.endDate}}{{ formatMonth "en" this.endDate }}{{else}}Present{{/if}} }{ }
     {{/each}}
   \resumeHeadingListEnd{}
 {{/if}}
@@ -241,14 +256,14 @@
 %-----------CERTIFICATES----------------------
 
 {{#if certificates}}
-\section{Certificates}
-  \resumeHeadingListStart{}
+\section{Certifications}
+  \resumeItemListStart{}
     {{#each certificates}}
-    \resumeQuadHeading{ {{ this.issuer }} }{ {{{ latex "href" this.url "Certificate" }}} }
-    { {{ this.name }} }{ {{ formatMonth "en" this.date }} }
+    \resumeItem{\uline{ {{{ latex "href" this.url (join "" this.name " from " this.issuer " - " (formatMonth "en" this.date)) }}} }}
     {{/each}}
-  \resumeHeadingListEnd{}
+  \resumeItemListEnd{}
 {{/if}}
+
 %---------------------------------------------
 
 
@@ -282,15 +297,6 @@
     {{/each}}
   \resumeItemListEnd{}
 {{/if}}
-
-\iffalse % TODO You can add your acheivements, accolades, certifications etc. here.
-\section{Certifications}
-  \resumeItemListStart{}
-    \resumeItem{\href{https://dummy-certification.com}{\uline{Certified Web Developer by the W3C}}}
-    \resumeItem{\href{https://dummy-certification.com}{\uline{Microsoft Certified: Azure Developer Associate}}}
-    \resumeItem{\href{https://dummy-certification.com}{\uline{AWS Certified Developer - Associate}}}
-  \resumeItemListEnd{}
-\fi
 
 %--------------------------------------------
 
