@@ -125,6 +125,13 @@ jobs:
         with:
           name: thumbnail
           path: out
+      # actions/checkout registers the workspace as a safe.directory, but does
+      # so under a temporarily overridden HOME, so the entry is gone by the time
+      # the next step runs. In a container the workspace is owned by the runner
+      # UID while steps run as root, so without this git rejects the repo for
+      # dubious ownership and semantic-release fails with ENOGITREPO.
+      - name: Mark workspace as a safe git directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
