@@ -164,8 +164,6 @@ skills:
       - GitLab (Pipelines, Issues, Projects)
       - Message brokers (Apache Kafka, MQTT)
       - Grafana (Cloud, K6, Sef-hosted)
-      - Editors (PyCharm, IntelliJ IDEA, RustRover, VSCode, Zed)
-      - Operating Systems (macOS, Linux, FreeBSD)
   - name: Databases
     keywords: [MongoDB, PostgreSQL, MySQL, InfluxDB]
   - name: Cloud
