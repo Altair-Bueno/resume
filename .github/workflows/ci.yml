@@ -101,7 +101,6 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    container: node:lts
     needs:
       - compile
       - thumbnail
@@ -111,8 +110,8 @@ jobs:
       pull-requests: write # to be able to comment on released pull requests
       id-token: write # to enable use of OIDC for npm provenance
     if: >
-      startsWith(github.ref, 'refs/heads/main')
-      || startsWith(github.ref, 'refs/heads/master')
+      startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref,
+      'refs/heads/master')
     steps:
       - uses: actions/checkout@v4
         with:
