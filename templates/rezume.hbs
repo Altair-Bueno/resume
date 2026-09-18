@@ -121,9 +121,14 @@
 \newcommand{\resumeItemListEnd}{\end{itemize}}
 
 % resumeSectionType renders a bolded type to be used under a section, used as skill type here, middle element is used to keep ":"s in the same vertical line
+% The label column is right-aligned so the label ends flush against the colon.
+% Left-aligned, a short label like "IoT" ends ~63pt before its values begin, so
+% text extractors emit label and values as separate layout boxes and cluster the
+% narrow labels into a column of their own - which leaves a parser guessing
+% which value list belongs to which label.
 \newcommand{\resumeSectionType}[3]{
   \item\begin{tabular*}{0.96\textwidth}[t]{
-    p{0.15\linewidth}p{0.02\linewidth}p{0.81\linewidth}
+    >{\raggedleft\arraybackslash}p{0.15\linewidth}p{0.02\linewidth}p{0.81\linewidth}
   }
     \textbf{#1} & #2 & #3
   \end{tabular*}\vspace{-2pt}
