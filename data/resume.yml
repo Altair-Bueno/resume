@@ -170,7 +170,7 @@ skills:
       - Docker (compose, swarm, devcontainers)
       - CI/CD (github, gitlab, pipelines)
       - Message brokers (apache kafka, mqtt)
-      - Grafana (cloud, k6, sef-hosted)
+      - Grafana (cloud, k6, self-hosted)
       - Kubernetes (kubectl, helm, kustomize)
 languages:
   - language: Spanish
