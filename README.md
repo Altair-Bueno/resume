@@ -40,10 +40,16 @@ docker run --rm -v "$PWD:/w" -w /w minidocks/poppler:latest \
 rm -rf out
 ```
 
-Use LuaTeX, not XeTeX. Both need the `sourcesanspro` `type1` option to emit real
-space glyphs, but XeTeX's `xdvipdfmx` additionally maps f-ligature glyphs to
-U+FB01/U+FB02, which leaves words like `InfluxDB` and `CERTIFICATIONS`
-unsearchable in the extracted text.
+Use LuaTeX, not XeTeX, and keep the `sourcesanspro` `type1` option.
+
+No TeX engine emits space glyphs — there are none in the PDF at all. Word gaps
+are `TJ` offsets, and text extractors tell them apart from letter kerns by
+magnitude. `type1` is what makes that work: TeX kerns only a handful of letter
+pairs, so word gaps stand out as distinctly larger. Without it XeTeX positions
+every glyph through HarfBuzz and the two blur together, at which point `pypdf`
+returns the whole document as one run-together string. XeTeX also maps
+f-ligature glyphs to U+FB01/U+FB02, leaving words like `InfluxDB` and
+`CERTIFICATIONS` unsearchable.
 
 # License
 
