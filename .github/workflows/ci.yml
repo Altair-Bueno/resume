@@ -52,10 +52,13 @@ jobs:
         with:
           name: tex
           path: out
-      # LuaTeX specifically, not XeTeX/tectonic. Both need the sourcesanspro
-      # "type1" option to emit real space glyphs, but xdvipdfmx additionally
-      # maps f-ligature glyphs to U+FB01/U+FB02, which leaves words like
-      # "InfluxDB" and "CERTIFICATIONS" unsearchable in the extracted text.
+      # LuaTeX specifically, not XeTeX/tectonic. No engine emits space glyphs -
+      # word gaps are TJ offsets, and extractors tell them from letter kerns by
+      # magnitude. The sourcesanspro "type1" option is what makes that possible:
+      # TeX kerns only a few letter pairs, leaving word gaps distinctly larger,
+      # whereas XeTeX positions every glyph via HarfBuzz and the gaps blur
+      # together. XeTeX also maps f-ligature glyphs to U+FB01/U+FB02, leaving
+      # words like "InfluxDB" and "CERTIFICATIONS" unsearchable.
       - run: |
           lualatex \
             -interaction=nonstopmode \
