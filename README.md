@@ -22,10 +22,7 @@ The three commands below are the same ones CI runs, in the same images.
 mkdir -p out
 
 # 1. Render the LaTeX source from data/resume.yml
-docker run --rm -v "$PWD:/w" -w /w denoland/deno:latest \
-  deno run -q --allow-read=. --allow-write=. --no-prompt \
-    scripts/hbs.ts --hbs.strict \
-    -d data/resume.yml templates/rezume.hbs -o out/resume.tex
+docker run --rm -v "$PWD:/w" -w /w denoland/deno:latest deno task render
 
 # 2. Compile the PDF
 docker run --rm -v "$PWD:/w" -w /w texlive/texlive:latest \

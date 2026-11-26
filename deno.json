@@ -1,4 +1,7 @@
 {
+  "tasks": {
+    "render": "deno run -q --allow-read=. --allow-write=. --no-prompt scripts/hbs.ts --hbs.strict -d data/resume.yml templates/rezume.hbs -o out/resume.tex"
+  },
   "imports": {
     "@std/cli": "jsr:@std/cli@^1.0.20",
     "@std/yaml": "jsr:@std/yaml@^1.0.8",

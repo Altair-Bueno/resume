@@ -29,7 +29,6 @@ if (args.h || args.help) {
 // - https://tex.stackexchange.com/a/34586
 Handlebars.Utils.escapeExpression = (arg) =>
   String(arg)
-    .replaceAll(/(\\[&%$#_{}])/g, "$1")
     .replaceAll("\\", "\\textbackslash")
     .replaceAll("~", "\\textasciitilde")
     .replaceAll("^", "\\textasciicircum")
@@ -37,10 +36,6 @@ Handlebars.Utils.escapeExpression = (arg) =>
 
 // Helpers
 Handlebars.registerHelper("isoCountriesGetName", isoCountries.getName);
-Handlebars.registerHelper(
-  "urlEncode",
-  (x) => new URLSearchParams(x).toString(),
-);
 
 Handlebars.registerHelper("formatMonth", (locale: string, date) => {
   return Intl.DateTimeFormat(locale, {
@@ -48,16 +43,10 @@ Handlebars.registerHelper("formatMonth", (locale: string, date) => {
     year: "numeric",
   }).format(new Date(date));
 });
-Handlebars.registerHelper("formatYear", (locale, date) => {
-  return Intl.DateTimeFormat(locale, { year: "numeric" }).format(
-    new Date(date),
-  );
-});
 Handlebars.registerHelper("formatPhone", (phone) => {
   const phoneNumber = parsePhoneNumber(phone);
   return phoneNumber.formatInternational();
 });
-Handlebars.registerHelper("host", (x) => new URL(x).host);
 Handlebars.registerHelper(
   "latex",
   (command, ...args) =>
@@ -69,10 +58,7 @@ Handlebars.registerHelper(
       .join(""),
 );
 Handlebars.registerHelper("join", (sep, ...args) => {
-  return args.slice(0, args.length - 1).join(sep);
-});
-Handlebars.registerHelper("joinArray", (sep, array) => {
-  return array.join(sep);
+  return args.slice(0, args.length - 1).flat().join(sep);
 });
 Handlebars.registerHelper("cite", (citation) => {
   const s = new Cite(citation).format("bibliography", {
