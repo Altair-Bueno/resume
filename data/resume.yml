@@ -1,30 +1,26 @@
-$schema: "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json"
-meta:
-  title: Altair Bueno's Resume
-  locale: en
-basics:
+# yaml-language-server: $schema=./resume.schema.json
+title: Altair Bueno's Resume
+locale: en
+
+variants:
+  full: {}
+  embedded:
+    tags: [embedded]
+  cloud:
+    tags: [cloud]
+
+person:
   name: Altair Bueno Calvente
-  label: Software Engineer
-  image: https://avatars.githubusercontent.com/u/67512202
+  headline: Software Engineer
+  photo: https://avatars.githubusercontent.com/u/67512202
   email: business.altair.bueno@outlook.com
-  phone: "+34655134802"
-  url: "https://altair-bueno.github.io"
-  summary: >-
-    Software Engineer specialising in Rust and C for embedded Linux, currently
-    working as an R&D Cloud Software Engineer at Airzone. I build and maintain
-    Yocto-based distributions for IMX and STM32 devices, covering kernel
-    modules, device trees, bootloaders and userspace daemons, along with the
-    cloud services those devices talk to. I rewrote the Wi-Fi connectivity stack
-    behind Airzone's IoT fleet, cutting device disconnections and downtime.
-    Published author on the cloud-to-things continuum, active open-source
-    contributor, and developer of several tools that empower teams to work more
-    efficiently.
-  location:
-    # address:
-    postalCode: "29001"
+  phone: "+34 655 13 48 02"
+  website: https://altair-bueno.github.io
+  address:
+    postal-code: "29001"
     city: Málaga
-    countryCode: ES
     region: Málaga
+    country: Spain
   profiles:
     - network: GitHub
       username: Altair-Bueno
@@ -35,13 +31,57 @@ basics:
     - network: ORCID
       username: 0009-0001-3124-1742
       url: https://orcid.org/0009-0001-3124-1742
-work:
-  - name: Airzone (Altra corporation)
-    position: R&D Cloud Software Engineer (platform team)
-    url: https://www.airzonecontrol.com/
-    startDate: 2024-10-21
-    # endDate:
+  summary: >-
+    Software Engineer specialising in Rust and C for embedded Linux, currently
+    working as an R&D Cloud Software Engineer at Airzone. I build and maintain
+    Yocto-based distributions for IMX and STM32 devices, covering kernel
+    modules, device trees, bootloaders and userspace daemons, along with the
+    cloud services those devices talk to. I rewrote the Wi-Fi connectivity stack
+    behind Airzone's IoT fleet, cutting device disconnections and downtime.
+    Published author on the cloud-to-things continuum, active open-source
+    contributor, and developer of several tools that empower teams to work more
+    efficiently.
+
+skills:
+  - name: Embedded Linux
+    tags: [embedded]
+    items:
+      - Yocto (poky, bitbake, openembedded)
+      - BSP (stm32, imx, esp32)
+      - Bootloaders (u-boot)
+      - Kernel modules (mlan/moal, murata, quectel)
+      - Userspace tools & daemons (systemd, busybox, wpa_supplicant, bluez,
+        ostree, ota updates, initramfs)
+  - name: Programming
+    items:
+      - Rust (axum, tokio, smol, ffi, no_std, no_alloc, cargo)
+      - C (posix, pthreads, epoll, netlink, openssl, cmake)
+      - Python (pydantic, fastapi, tortoise, pytest)
+      - Protocols (homekit, mqtt, websockets, d-bus, rest, json, grpc)
+  - name: Tools
+    items:
+      - Docker (compose, swarm, devcontainers)
+      - CI/CD (github, gitlab, pipelines)
+      - Message brokers (apache kafka, mqtt)
+      - Digital twins (eclipse ditto, opentwins)
+      - Grafana (cloud, k6, self-hosted)
+      - Kubernetes (kubectl, helm, kustomize)
+
+languages:
+  - name: Spanish
+    level: Native speaker
+  - name: English
+    level: Fluent
+  - name: German
+    level: Beginner
+
+experience:
+  - title: R&D Cloud Software Engineer (platform team)
+    organization:
+      name: Airzone (Altra corporation)
+      url: https://www.airzonecontrol.com/
     location: Málaga, Spain (on-site)
+    start: 2024-10
     highlights:
       - Rewrote critical Wi-Fi connectivity modules in C/Rust, significantly
         reducing the number of disconnections and downtime of Airzone's IoT
@@ -54,177 +94,112 @@ work:
         tools for Airzone Cloud, IoT dashboards, Dev Containers for cross
         compilation and more, empowering the team to work more efficiently,
         gather better insights and improve the overall development process
-  - name: ERTIS Research Group - University of Málaga
-    position: Research technician
-    url: https://ertis.uma.es/
-    startDate: 2023-09-25
-    endDate: 2024-10-20
+  - title: Research technician
+    organization: &ertis
+      name: ERTIS Research Group - University of Málaga
+      url: https://ertis.uma.es/
     location: Málaga, Spain (on-site)
+    start: 2023-09
+    end: 2024-10
     highlights:
-      - Conducted load testing on Airzone Cloud by utilizing K6 and Grafana to
-        evaluate the system's performance and reliability
-      - Developed an embedded MQTT client in Rust for Airzone smart thermostats
+      - text: Conducted load testing on Airzone Cloud by utilizing K6 and
+          Grafana to evaluate the system's performance and reliability
+        tags: [cloud]
+      - text: Developed an embedded MQTT client in Rust for Airzone smart
+          thermostats
+        tags: [embedded]
       - Wrote a paper about techniques that IoT companies can leverage to reduce
         cloud cost
-  - name: ERTIS Research Group - University of Málaga
-    position: Research intern
-    url: https://ertis.uma.es/
-    startDate: 2022-11-15
-    endDate: 2023-09-25
+  - title: Research intern
+    organization: *ertis
     location: Málaga, Spain (on-site)
+    start: 2022-11
+    end: 2023-09
     highlights:
-      - Resolved several issues within the OpenTwins framework that arose from
-        Eclipse Ditto digital twin platform
+      - text: Resolved several issues within the OpenTwins framework that arose
+          from Eclipse Ditto digital twin platform
+        tags: [cloud]
       - Developed a system for Distributed Deep Neural Network inference
         leveraging Python functions that run TensorFlow models on Kubernetes and
         communicate using Apache Kafka
-      - Supported the research work of my colleagues by managing several
-        Kubernetes instances, SQL and NoSQL databases, linux servers and CI/CD
-        pipelines
-# volunteer:
+      - text: Supported the research work of my colleagues by managing several
+          Kubernetes instances, SQL and NoSQL databases, linux servers and CI/CD
+          pipelines
+        tags: [cloud]
+
 education:
-  - institution: University of Málaga
-    url: https://www.uma.es
-    area: Software Engineering and Artificial Intelligence
-    studyType: Master
-    startDate: 2023-09-01
-    endDate: 2024-10-02
-    score: "8.5 average mark"
-  - institution: University of Málaga
-    url: https://www.uma.es
-    area: Software Engineering
-    studyType: Bachelor
-    startDate: 2019-09-01
-    endDate: 2023-07-13
-    score: "6 subjects with honors. 8.38 average mark"
-# awards:
-certificates:
+  - degree: Master
+    field: Software Engineering and Artificial Intelligence
+    institution: &uma
+      name: University of Málaga
+      url: https://www.uma.es
+    start: 2023-09
+    end: 2024-10
+    grade: 8.5 average mark
+  - degree: Bachelor
+    field: Software Engineering
+    institution: *uma
+    start: 2019-09
+    end: 2023-07
+    grade: 6 subjects with honors. 8.38 average mark
+
+certifications:
   - name: Yocto Project and OpenEmbedded System Development
     issuer: Bootlin
-    date: 2025-09-01
+    date: 2025-09
     url: https://bootlin.com/doc/training/certificates/2025/yocto-stm32/altair-bueno-d58b5c89007fba420bd2ae2119744534c786ea49/
   - name: B2 First (FCE), score 171
     issuer: Cambridge English
-    date: 2018-01-01
+    date: 2018-01
     url: https://www.cambridgeenglish.org/
-publications:
-  # Based on https://okfnlabs.org/bibjson/ instead
-  - title:
-      Functions as a service for distributed deep neural network inference over
-      the cloud-to-things continuum
-    author:
-      - name: Bueno, Altair
-      - name: Rubio, Bartolome
-      - name: Martin, Cristian
-      - name: Diaz, Manuel
-    type: article
-    year: "2024"
-    journal:
-      name: "Software: Practice and Experience"
-    link:
-      - url: https://onlinelibrary.wiley.com/doi/abs/10.1002/spe.3318
-    identifier:
-      - type: doi
-        id: 10.1002/spe.3318
-#   - {
-#       "title": "Open Bibliography for Science, Technology and Medicine",
-#       "author":
-#         [
-#           { "name": "Richard Jones" },
-#           { "name": "Mark MacGillivray" },
-#           { "name": "Peter Murray-Rust" },
-#           { "name": "Jim Pitman" },
-#           { "name": "Peter Sefton" },
-#           { "name": "Ben O'Steen" },
-#           { "name": "William Waites" },
-#         ],
-#       "type": "article",
-#       "year": "2011",
-#       "journal": { "name": "Journal of Cheminformatics" },
-#       "link": [{ "url": "http://www.jcheminf.com/content/3/1/47" }],
-#       "identifier": [{ "type": "doi", "id": "10.1186/1758-2946-3-47" }],
-#     }
-skills:
-  - name: Embedded Linux
-    keywords:
-      - Yocto (poky, bitbake, openembedded)
-      - BSP (stm32, imx, esp32)
-      - Bootloaders (u-boot)
-      - Kernel modules (mlan/moal, murata, quectel)
-      - Userspace tools & daemons (systemd, busybox, wpa_supplicant, bluez,
-        ostree, ota updates, initramfs)
-  - name: Programming
-    keywords:
-      - Rust (axum, tokio, smol, ffi, no_std, no_alloc, cargo)
-      - C (posix, pthreads, epoll, netlink, openssl, cmake)
-      - Python (pydantic, fastapi, tortoise, pytest)
-      - Protocols (homekit, mqtt, websockets, d-bus, rest, json, grpc)
-  - name: Tools
-    keywords:
-      - Docker (compose, swarm, devcontainers)
-      - CI/CD (github, gitlab, pipelines)
-      - Message brokers (apache kafka, mqtt)
-      - Digital twins (eclipse ditto, opentwins)
-      - Grafana (cloud, k6, self-hosted)
-      - Kubernetes (kubectl, helm, kustomize)
-languages:
-  - language: Spanish
-    fluency: Native speaker
-  - language: English
-    fluency: Fluent
-  - language: German
-    fluency: Beginner
-# references:
+
 projects:
   - name: encode
-    description: >
-      A simple framework for encoding binary data.
+    tags: [embedded]
+    kind: Library
+    url: https://github.com/Altair-Bueno/encode
+    start: 2025-02
+    keywords: [Rust, encoding, no_std, no_alloc, embedded]
+    summary: A simple framework for encoding binary data.
     highlights:
       - Provides a set of combinators and traits to make it easy to write UTF-8
         and raw byte encoders
       - no_std and no_alloc compatible with no unsafe code
       - Includes CI/CD based on GitHub Actions
-    keywords:
-      - Rust
-      - encoding
-      - no_std
-      - no_alloc
-      - embedded
-    url: https://github.com/Altair-Bueno/encode
-    startDate: 2025-02-15
-    type: Library
   - name: cjson-rs
-    description:
-      High level, no_std bindings for cJSON, an ultralightweight JSON parser in
-      ANSI C.
+    kind: Library
+    url: https://github.com/Corporacion-Empresarial-Altra-R-D/cjsonrs
+    start: 2024-12
+    organization: Airzone Control - Altra corporation
+    keywords: [Rust, C, FFI, cJSON, no_std, serde]
+    summary: High level, no_std bindings for cJSON, an ultralightweight JSON
+      parser in ANSI C.
     highlights:
       - no_std and no_alloc compatible
       - Implements serde's Serialize and Deserialize traits
       - Includes CI/CD based on GitHub Actions
-    keywords:
-      - Rust
-      - C
-      - FFI
-      - cJSON
-      - no_std
-      - serde
-    url: https://github.com/Corporacion-Empresarial-Altra-R-D/cjsonrs
-    startDate: 2024-12-16
-    entity: Airzone Control - Altra corporation
-    type: Library
   - name: axum-template
-    description: >
-      Layers, extractors and template engine wrappers for axum based Web MVC
-      applications
+    tags: [cloud]
+    kind: Library
+    url: https://github.com/Altair-Bueno/axum-template
+    start: 2022-08
+    keywords: [Rust, Axum, GitHub actions]
+    summary: Layers, extractors and template engine wrappers for axum based Web
+      MVC applications
     highlights:
       - Fully documented API that follows semantic versioning
       - Includes CI/CD based on GitHub Actions
-    keywords:
-      - Rust
-      - Axum
-      - GitHub actions
-    startDate: 2022-08-08
-    # endDate:
-    url: https://github.com/Altair-Bueno/axum-template
-    # entity:
-    type: Library
+
+publications:
+  - id: bueno2024faas
+    type: article
+    title: Functions as a service for distributed deep neural network inference
+      over the cloud-to-things continuum
+    authors:
+      - Bueno, Altair
+      - Rubio, Bartolome
+      - Martin, Cristian
+      - Diaz, Manuel
+    year: 2024
+    journal: "Software: Practice and Experience"
+    doi: 10.1002/spe.3318

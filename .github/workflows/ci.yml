@@ -12,83 +12,87 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref_name != github.event.repository.default_branch }}
 
-# This workflow is the only definition of how the resume is built. Each stage
-# runs in the image that owns its toolchain, and hands the next stage its
-# output as an artifact - no stage needs another stage's tools installed.
+env:
+  TYPST_ROOT: .
+  TYPST_FONT_PATHS: fonts
+  TYPST_IGNORE_SYSTEM_FONTS: "true"
+
+# This workflow is the only definition of how the resume is built.
 jobs:
   fmt:
     runs-on: ubuntu-latest
     container: denoland/deno:latest@sha256:a0d88a7fcbd44f062cba2748e19df67d30290ad12aa203c7c1e0b12462c483f0
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - run: deno fmt --check
+      - run: deno fmt --check .
 
-  render:
-    name: Render LaTeX from resume data
+  validate:
+    name: Validate resume data against its schema
     runs-on: ubuntu-latest
-    container: denoland/deno:latest@sha256:a0d88a7fcbd44f062cba2748e19df67d30290ad12aa203c7c1e0b12462c483f0
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          path: /deno-dir
-          key: deno-${{ hashFiles('deno.lock') }}
-      - run: deno task validate
-      - run: mkdir -p out
-      - run: deno task render
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: tex
-          path: out/resume.tex
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: .github/validate/requirements.txt
+      - run: pip install -r .github/validate/requirements.txt
+      - run: check-jsonschema --check-metaschema data/resume.schema.json
+      - run: check-jsonschema --schemafile data/resume.schema.json data/resume.yml
+
+  variants:
+    name: List resume variants
+    runs-on: ubuntu-latest
+    needs:
+      - validate
+    container: ghcr.io/typst/typst:0.15.1@sha256:032e292249bcd378480cc7c142cfa324b63ef8aadeb88d7e7230320c4c9c422f
+    outputs:
+      list: ${{ steps.list.outputs.list }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - id: list
+        run: |
+          list=$(typst eval 'query(<variants>).first().value' --in templates/resume.typ)
+          echo "list=$list" >> "$GITHUB_OUTPUT"
 
   compile:
-    name: Compile PDF
+    name: Compile ${{ matrix.variant }} resume
     runs-on: ubuntu-latest
-    container: texlive/texlive:latest@sha256:540d736c78e2803cdd7b6a196bd21339c30185948db55e04e75a415959102ca8
+    container: ghcr.io/typst/typst:0.15.1@sha256:032e292249bcd378480cc7c142cfa324b63ef8aadeb88d7e7230320c4c9c422f
     needs:
-      - render
+      - variants
+    strategy:
+      matrix:
+        variant: ${{ fromJSON(needs.variants.outputs.list) }}
+    env:
+      VARIANT: ${{ matrix.variant }}
     steps:
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-        with:
-          name: tex
-          path: out
-      # LuaTeX specifically, not XeTeX/tectonic; see the README for why.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      # Typst reports a missing font as a warning, so fail on any diagnostic.
       - run: |
-          lualatex \
-            -interaction=nonstopmode \
-            -halt-on-error \
-            -output-directory=out \
-            out/resume.tex
+          if [ "$VARIANT" = full ]; then name=resume; else name="resume-$VARIANT"; fi
+          mkdir -p out
+          {
+            typst compile --input "variant=$VARIANT" templates/resume.typ "out/$name.pdf" &&
+            if [ "$VARIANT" = full ]; then
+              typst compile --pages 1 --ppi 150 templates/resume.typ out/thumbnail.png
+            fi
+          } 2> diagnostics.txt || { cat diagnostics.txt; exit 1; }
+          cat diagnostics.txt
+          test ! -s diagnostics.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: resume
-          path: out/resume.pdf
-
-  thumbnail:
-    name: Render thumbnail
-    runs-on: ubuntu-latest
-    container: minidocks/poppler:latest@sha256:213f4337c9e21ba7301058ba8c456a9c82acbb603caef05e4a78585af2e6964e
-    needs:
-      - compile
-    steps:
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-        with:
-          name: resume
-          path: out
-      - run: pdftoppm -png -singlefile out/resume.pdf out/thumbnail
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: thumbnail
-          path: out/thumbnail.png
+          name: resume-${{ matrix.variant }}
+          path: out/
 
   ci-check:
     name: Check all statuses are green
     if: always()
     needs:
       - fmt
-      - render
+      - validate
+      - variants
       - compile
-      - thumbnail
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
@@ -100,7 +104,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - compile
-      - thumbnail
     permissions:
       contents: write # to be able to publish a GitHub release
       issues: write # to be able to comment on released issues
@@ -112,7 +115,7 @@ jobs:
           fetch-depth: 0 # semantic-release needs the full commit history
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          pattern: "{resume,thumbnail}"
+          pattern: resume-*
           merge-multiple: true
           path: out
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
