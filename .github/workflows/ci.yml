@@ -115,7 +115,13 @@ jobs:
           pattern: "{resume,thumbnail}"
           merge-multiple: true
           path: out
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .github/release/package.json
+          cache: npm
+          cache-dependency-path: .github/release/package-lock.json
+      - run: npm ci --prefix .github/release
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+        run: .github/release/node_modules/.bin/semantic-release
