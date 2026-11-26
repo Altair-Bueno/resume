@@ -1,8 +1,14 @@
 {
+  "tasks": {
+    "validate": "deno run -q --frozen --allow-read=. --no-prompt scripts/validate.ts data/resume.yml",
+    "render": "deno run -q --frozen --allow-read=. --allow-write=. --no-prompt scripts/hbs.ts --hbs.strict -d data/resume.yml templates/rezume.hbs -o out/resume.tex"
+  },
   "imports": {
+    "@jsonresume/schema": "npm:@jsonresume/schema@^1.11.0",
     "@std/cli": "jsr:@std/cli@^1.0.20",
     "@std/yaml": "jsr:@std/yaml@^1.0.8",
     "citation-js": "npm:citation-js@^0.7.19",
+    "escape-latex": "npm:escape-latex@^1.2.0",
     "handlebars": "npm:handlebars@^4.7.8",
     "i18n-iso-countries": "npm:i18n-iso-countries@^7.14.0",
     "libphonenumber-js": "npm:libphonenumber-js@^1.12.9"

@@ -5,6 +5,7 @@
 import { parseArgs } from "@std/cli/parse-args";
 import * as yaml from "@std/yaml";
 import Cite from "citation-js";
+import escapeLatex from "escape-latex";
 import Handlebars from "handlebars";
 import isoCountries from "i18n-iso-countries";
 import parsePhoneNumber from "libphonenumber-js";
@@ -24,23 +25,15 @@ if (args.h || args.help) {
   Deno.exit(0);
 }
 
-// Modify scape function on Handlebars
-// - https://github.com/handlebars-lang/handlebars.js/issues/1301#issuecomment-274614436
-// - https://tex.stackexchange.com/a/34586
-Handlebars.Utils.escapeExpression = (arg) =>
-  String(arg)
-    .replaceAll(/(\\[&%$#_{}])/g, "$1")
-    .replaceAll("\\", "\\textbackslash")
-    .replaceAll("~", "\\textasciitilde")
-    .replaceAll("^", "\\textasciicircum")
-    .replaceAll(/([&%$#_{}])/g, "\\$1");
+// https://github.com/handlebars-lang/handlebars.js/issues/1301#issuecomment-274614436
+const tex = (arg: unknown) =>
+  arg instanceof Handlebars.SafeString
+    ? arg.toHTML()
+    : escapeLatex(String(arg));
+Handlebars.Utils.escapeExpression = tex;
 
 // Helpers
 Handlebars.registerHelper("isoCountriesGetName", isoCountries.getName);
-Handlebars.registerHelper(
-  "urlEncode",
-  (x) => new URLSearchParams(x).toString(),
-);
 
 Handlebars.registerHelper("formatMonth", (locale: string, date) => {
   return Intl.DateTimeFormat(locale, {
@@ -48,38 +41,27 @@ Handlebars.registerHelper("formatMonth", (locale: string, date) => {
     year: "numeric",
   }).format(new Date(date));
 });
-Handlebars.registerHelper("formatYear", (locale, date) => {
-  return Intl.DateTimeFormat(locale, { year: "numeric" }).format(
-    new Date(date),
-  );
-});
 Handlebars.registerHelper("formatPhone", (phone) => {
   const phoneNumber = parsePhoneNumber(phone);
   return phoneNumber.formatInternational();
 });
-Handlebars.registerHelper("host", (x) => new URL(x).host);
 Handlebars.registerHelper(
-  "latex",
-  (command, ...args) =>
-    "\\" +
-    String(command) +
-    args
-      .slice(0, args.length - 1)
-      .map((x) => `{${x}}`)
-      .join(""),
+  "link",
+  (url, text, options) =>
+    new Handlebars.SafeString(
+      `\\${options.hash.plain ? "href" : "resumeLink"}{${
+        String(url).replaceAll(/[%#&]/g, "\\$&")
+      }}{${tex(text)}}`,
+    ),
 );
 Handlebars.registerHelper("join", (sep, ...args) => {
-  return args.slice(0, args.length - 1).join(sep);
-});
-Handlebars.registerHelper("joinArray", (sep, array) => {
-  return array.join(sep);
+  return args.slice(0, args.length - 1).flat().join(sep);
 });
 Handlebars.registerHelper("cite", (citation) => {
-  const s = new Cite(citation).format("bibliography", {
+  return new Cite(citation).format("bibliography", {
     template: "apa",
     format: "text",
   });
-  return new Handlebars.SafeString(s);
 });
 
 const data = yaml.parse(await Deno.readTextFile(args.d));

@@ -12,8 +12,6 @@
 %------------PACKAGES----------------
 \documentclass[a4paper,10pt]{article}
 
-\usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
-
 \usepackage{titlesec} % provides an interface to sectioning commands i.e. custom elements
 
 \usepackage{color} % provides both foreground and background color management
@@ -24,10 +22,6 @@
 
 \usepackage{tabularx} % defines an environment tabularx, extension of "tabular" with an extra designator x, paragraph like column whose width automatically expands to fill the width of the environment
 
-\usepackage{latexsym} % provides mathematical symbols
-
-\usepackage{marvosym} % provides martin vogel's symbol font which contains various symbols
-
 \usepackage[empty]{fullpage} % sets margins to one inch and removes headers, footers etc..
 
 \usepackage[hidelinks]{hyperref} % removes color and shadow of hyperlinks
@@ -37,21 +31,11 @@
 \usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
 %-----------------------------------------
 
-% NOTE: these are pdfTeX primitives and have no effect under Tectonic (XeTeX).
-% ATS readability is handled by the type1 font option below instead.
-%\input glyphtounicode % converts glyph names to unicode
-%\pdfgentounicode=1 % ensures pdfs generated are ats readable
-
 %----------FONT OPTIONS-------------------
-% The type1 option is required for ATS readability. Without it, XeTeX embeds
-% Source Sans Pro as an Identity-H CID font and xdvipdfmx derives the ToUnicode
-% map by reverse-cmap lookup, which breaks text extraction three ways:
-%   - words are positioned with TJ kerning offsets instead of space glyphs, so
-%     pypdf/pdfplumber return the whole document as one run-together string
-%   - every "-" extracts as U+2011 NON-BREAKING HYPHEN, so keyword scans for
-%     "low-level", "paho-mqtt", "open-source" etc. all miss
-%   - small-caps "I" extracts as lowercase "i", 1turning the section headers into
-%     SKiLLS / EXPERiENCE / EDUCATiON, which no ATS section detector matches
+% LuaTeX and the type1 option are both required for ATS readability; see the
+% README for why.
+\usepackage{iftex}
+\RequireLuaTeX
 \usepackage[default,type1]{sourcesanspro} % uses the font source sans pro
 \urlstyle{same} % changes url font from default urlfont to font being used by the document
 %-----------------------------------------
@@ -111,6 +95,9 @@
 %--------CUSTOM COMMANDS--------------
 %\vspace{} defines a vertical space of given size, modifying this in custom commands can help stretch or shrink resume to remove or add content
 
+% resumeLink renders an underlined hyperlink
+\newcommand{\resumeLink}[2]{\href{#1}{\uline{#2}}}
+
 % resumeItem renders a bullet point
 \newcommand{\resumeItem}[1]{
   \item\small{#1}
@@ -154,11 +141,16 @@
   \end{tabular*}
 }
 
-% resumeQuadHeadingChild renders the second row of resumeQuadHeading, can be used for experience if different roles in the same company need to added
-\newcommand{\resumeQuadHeadingChild}[2]{
+% resumeStackedHeading renders the first row of resumeQuadHeading and a single
+% italicized second row, with nothing right-aligned below the first row.
+% Stacked short entries in the right-hand column form a separate layout region,
+% so text extractors would emit them all together after the following section -
+% detaching every date from its degree. Fold such values into #3 instead.
+\newcommand{\resumeStackedHeading}[3]{
   \item
   \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
-    \textbf{\small#1} & {\small#2} \\
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \\
   \end{tabular*}
 }
 
@@ -173,20 +165,26 @@
 %__________________RESUME____________________
 % You can rearrange sections in any order you may prefer
 \begin{document}
+{{#*inline "dateRange"}}{{ formatMonth @root.meta.locale this.startDate }} - {{#if this.endDate}}{{ formatMonth @root.meta.locale this.endDate }}{{else}}Present{{/if}}{{/inline}}
+{{#*inline "highlights"}}
+{{#each this.highlights}}
+\resumeItem{ {{ this }} }
+{{/each}}
+{{/inline}}
 
 %-----------CONTACT DETAILS------------------
 % Make sure all the details are correct, you can add more links in the first row of second column if needed
 
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{\Huge {{ basics.name }} \vspace{2pt}} &
-  {{ basics.location.city }}, {{ basics.location.region }}, {{ isoCountriesGetName basics.location.countryCode "en" }} \\ % row = 1, col = 2
-  {{{ latex "href" basics.url (latex "uline" "Website") }}} {{#if basics.profiles}}$|${{/if}}
+  {{ basics.location.city }}, {{ basics.location.region }}, {{ isoCountriesGetName basics.location.countryCode @root.meta.locale }} \\ % row = 1, col = 2
+  {{ link basics.url "Website" }} {{#if basics.profiles}}$|${{/if}}
   {{#each basics.profiles }}
-  {{{ latex "href" this.url (latex "uline" this.network) }}} {{#unless @last}}$|${{/unless}}
+  {{ link this.url this.network }} {{#unless @last}}$|${{/unless}}
   {{/each}}
   & % Break row
-  {{{ latex "href" (join "" "mailto:" basics.email) (latex "uline" basics.email) }}} $|$ % row = 2, col = 2
-  {{{ latex "href" (join "" "tel:" basics.phone) (latex "uline" (formatPhone basics.phone)) }}}\\ % row = 2, col = 2
+  {{ link (join "" "mailto:" basics.email) basics.email }} $|$ % row = 2, col = 2
+  {{ link (join "" "tel:" basics.phone) (formatPhone basics.phone) }}\\ % row = 2, col = 2
 \end{tabular*}
 %--------------------------------------------
 
@@ -206,7 +204,7 @@
 \section{Skills}
   \resumeHeadingListStart{}
     {{#each skills}}
-    \resumeSectionType{ {{ this.name }} }{:}{ {{ joinArray ", " this.keywords }} }
+    \resumeSectionType{ {{ this.name }} }{:}{ {{ join ", " this.keywords }} }
     {{/each}}
     {{#if languages}}
     \resumeSectionType{Languages}{:}{ {{#each languages}}{{this.language}} ({{this.fluency}}){{#unless @last}}, {{/unless}}{{/each}} }
@@ -224,13 +222,11 @@
 \section{Experience}
 \resumeHeadingListStart{}
   {{#each work}}
-  \resumeQuadHeading{ {{ this.position }} }{ {{ formatMonth "en" this.startDate }} - {{#if this.endDate}}{{ formatMonth "en" this.endDate }}{{else}}Present{{/if}} }
-  { {{{ latex "href" this.url this.name }}} }{ {{ this.summary }} }
+  \resumeQuadHeading{ {{ this.position }} }{ {{> dateRange }} }
+  { {{ link this.url this.name plain=true }} }{ {{ this.location }} }
     {{#if this.highlights}}
     \resumeItemListStart{}
-      {{#each this.highlights }}
-      \resumeItem{ {{ this }} }
-      {{/each}}
+      {{> highlights }}
     \resumeItemListEnd{}
     {{/if}}
   {{/each}}
@@ -247,12 +243,8 @@
 \section{Education}
   \resumeHeadingListStart{}
     {{#each education}}
-    % The date is folded into the third cell rather than right-aligned in the
-    % fourth. Stacked short entries in the right-hand column form a separate
-    % layout region, so text extractors emit all the dates together after the
-    % following section - detaching every date from its degree.
-    \resumeQuadHeading{ {{ this.institution }} }{ \uline{ {{{ latex "href" this.url "Website" }}} } }
-    { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}}, {{ formatMonth "en" this.startDate }} - {{#if this.endDate}}{{ formatMonth "en" this.endDate }}{{else}}Present{{/if}} }{ }
+    \resumeStackedHeading{ {{ this.institution }} }{ {{ link this.url "Website" }} }
+    { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}}, {{> dateRange }} }
     {{/each}}
   \resumeHeadingListEnd{}
 {{/if}}
@@ -264,7 +256,7 @@
 \section{Certifications}
   \resumeItemListStart{}
     {{#each certificates}}
-    \resumeItem{\uline{ {{{ latex "href" this.url (join "" this.name " from " this.issuer " - " (formatMonth "en" this.date)) }}} }}
+    \resumeItem{ {{ link this.url (join "" this.name " from " this.issuer " - " (formatMonth @root.meta.locale this.date)) }} }
     {{/each}}
   \resumeItemListEnd{}
 {{/if}}
@@ -279,12 +271,10 @@
 \section{Open Source projects}
   \resumeHeadingListStart{}
     {{#each projects}}
-    \resumeTrioHeading{ {{ this.name }} }{ {{ joinArray ", " this.keywords }} }{  {{{ latex "href" this.url "\uline{Source Code}" }}} }
+    \resumeTrioHeading{ {{ this.name }} }{ {{ join ", " this.keywords }} }{  {{ link this.url "Source Code" }} }
       \resumeItemListStart{}
         \resumeItem{ {{ this.description }} }
-        {{#each this.highlights }}
-        \resumeItem{ {{ this }} }
-        {{/each}}
+        {{> highlights }}
       \resumeItemListEnd{}
     {{/each}}
   \resumeHeadingListEnd{}

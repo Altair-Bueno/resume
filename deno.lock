@@ -3,7 +3,9 @@
   "specifiers": {
     "jsr:@std/cli@^1.0.20": "1.0.20",
     "jsr:@std/yaml@^1.0.8": "1.0.8",
+    "npm:@jsonresume/schema@^1.11.0": "1.11.0",
     "npm:citation-js@~0.7.19": "0.7.19_@citation-js+core@0.7.18",
+    "npm:escape-latex@^1.2.0": "1.2.0",
     "npm:handlebars@^4.7.8": "4.7.8",
     "npm:i18n-iso-countries@^7.14.0": "7.14.0",
     "npm:libphonenumber-js@^1.12.9": "1.12.9"
@@ -95,6 +97,12 @@
         "@larsgw/wikibase-sdk"
       ]
     },
+    "@jsonresume/schema@1.11.0": {
+      "integrity": "sha512-YqA4fpvGYBJTJNiM5LJge6PRtrRu+jUIUVjhMdy/dA8gLaLx95BgRzFW6kFfYPuBFPY2wcT1YhA3wxAayjcMOw==",
+      "dependencies": [
+        "jsonschema"
+      ]
+    },
     "@larsgw/wikibase-sdk@10.2.1": {
       "integrity": "sha512-tn5SsNJnM/zwe0sW+oKBZIJVlQSaq0hIWbZ3F0Zxnhh/AsgqZseP63xRGmwdgkvpI8NyRfjvdMQnzIavTMPglA=="
     },
@@ -134,6 +142,9 @@
     "diacritics@1.3.0": {
       "integrity": "sha512-wlwEkqcsaxvPJML+rDh/2iS824jbREk6DUMUKkEaSlxdYHeS43cClJtsWglvw2RfeXGm6ohKDqsXteJ5sP5enA=="
     },
+    "escape-latex@1.2.0": {
+      "integrity": "sha512-nV5aVWW1K0wEiUIEdZ4erkGGH8mDxGyxSeqPzRNtWP7ataw+/olFObw7hujFWlVjNsaDFw5VZ5NzVSIqRgfTiw=="
+    },
     "fetch-ponyfill@7.1.0": {
       "integrity": "sha512-FhbbL55dj/qdVO3YNK7ZEkshvj3eQ7EuIGV2I6ic/2YiocvyWv+7jg2s4AyS0wdRU75s3tA8ZxI/xPigb0v5Aw==",
       "dependencies": [
@@ -161,6 +172,9 @@
     },
     "ieee754@1.2.1": {
       "integrity": "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA=="
+    },
+    "jsonschema@1.5.0": {
+      "integrity": "sha512-K+A9hhqbn0f3pJX17Q/7H6yQfD/5OXgdrR5UE12gMXCiN9D5Xq2o5mddV2QEcX/bjla99ASsAAQUyMCCRWAEhw=="
     },
     "libphonenumber-js@1.12.9": {
       "integrity": "sha512-VWwAdNeJgN7jFOD+wN4qx83DTPMVPPAUyx9/TUkBXKLiNkuWWk6anV0439tgdtwaJDrEdqkvdN22iA6J4bUCZg=="
@@ -215,7 +229,9 @@
     "dependencies": [
       "jsr:@std/cli@^1.0.20",
       "jsr:@std/yaml@^1.0.8",
+      "npm:@jsonresume/schema@^1.11.0",
       "npm:citation-js@~0.7.19",
+      "npm:escape-latex@^1.2.0",
       "npm:handlebars@^4.7.8",
       "npm:i18n-iso-countries@^7.14.0",
       "npm:libphonenumber-js@^1.12.9"

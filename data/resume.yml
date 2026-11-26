@@ -1,8 +1,7 @@
 $schema: "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json"
 meta:
   title: Altair Bueno's Resume
-  version: v1.5.0
-  lastModified: 2026-09-28
+  locale: en
 basics:
   name: Altair Bueno Calvente
   label: Software Engineer
@@ -42,7 +41,7 @@ work:
     url: https://www.airzonecontrol.com/
     startDate: 2024-10-21
     # endDate:
-    summary: In person. Málaga, Spain
+    location: Málaga, Spain (on-site)
     highlights:
       - Rewrote critical Wi-Fi connectivity modules in C/Rust, significantly
         reducing the number of disconnections and downtime of Airzone's IoT
@@ -60,7 +59,7 @@ work:
     url: https://ertis.uma.es/
     startDate: 2023-09-25
     endDate: 2024-10-20
-    summary: In person. Málaga, Spain
+    location: Málaga, Spain (on-site)
     highlights:
       - Conducted load testing on Airzone Cloud by utilizing K6 and Grafana to
         evaluate the system's performance and reliability
@@ -72,7 +71,7 @@ work:
     url: https://ertis.uma.es/
     startDate: 2022-11-15
     endDate: 2023-09-25
-    summary: In person. Málaga, Spain
+    location: Málaga, Spain (on-site)
     highlights:
       - Resolved several issues within the OpenTwins framework that arose from
         Eclipse Ditto digital twin platform
@@ -98,19 +97,16 @@ education:
     startDate: 2019-09-01
     endDate: 2023-07-13
     score: "6 subjects with honors. 8.38 average mark"
-  - institution: Cambridge English
-    url: https://www.cambridgeenglish.org/
-    area: B2 English level. First
-    studyType: Certification
-    startDate: 2016-01-01
-    endDate: 2018-01-01
-    score: "171 average mark"
 # awards:
 certificates:
   - name: Yocto Project and OpenEmbedded System Development
     issuer: Bootlin
     date: 2025-09-01
     url: https://bootlin.com/doc/training/certificates/2025/yocto-stm32/altair-bueno-d58b5c89007fba420bd2ae2119744534c786ea49/
+  - name: B2 First (FCE), score 171
+    issuer: Cambridge English
+    date: 2018-01-01
+    url: https://www.cambridgeenglish.org/
 publications:
   # Based on https://okfnlabs.org/bibjson/ instead
   - title:
