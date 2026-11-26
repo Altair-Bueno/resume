@@ -95,6 +95,9 @@
 %--------CUSTOM COMMANDS--------------
 %\vspace{} defines a vertical space of given size, modifying this in custom commands can help stretch or shrink resume to remove or add content
 
+% resumeLink renders an underlined hyperlink
+\newcommand{\resumeLink}[2]{\href{#1}{\uline{#2}}}
+
 % resumeItem renders a bullet point
 \newcommand{\resumeItem}[1]{
   \item\small{#1}
@@ -157,13 +160,13 @@
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{\Huge {{ basics.name }} \vspace{2pt}} &
   {{ basics.location.city }}, {{ basics.location.region }}, {{ isoCountriesGetName basics.location.countryCode "en" }} \\ % row = 1, col = 2
-  {{{ latex "href" basics.url (latex "uline" "Website") }}} {{#if basics.profiles}}$|${{/if}}
+  {{ link basics.url "Website" }} {{#if basics.profiles}}$|${{/if}}
   {{#each basics.profiles }}
-  {{{ latex "href" this.url (latex "uline" this.network) }}} {{#unless @last}}$|${{/unless}}
+  {{ link this.url this.network }} {{#unless @last}}$|${{/unless}}
   {{/each}}
   & % Break row
-  {{{ latex "href" (join "" "mailto:" basics.email) (latex "uline" basics.email) }}} $|$ % row = 2, col = 2
-  {{{ latex "href" (join "" "tel:" basics.phone) (latex "uline" (formatPhone basics.phone)) }}}\\ % row = 2, col = 2
+  {{ link (join "" "mailto:" basics.email) basics.email }} $|$ % row = 2, col = 2
+  {{ link (join "" "tel:" basics.phone) (formatPhone basics.phone) }}\\ % row = 2, col = 2
 \end{tabular*}
 %--------------------------------------------
 
@@ -202,7 +205,7 @@
 \resumeHeadingListStart{}
   {{#each work}}
   \resumeQuadHeading{ {{ this.position }} }{ {{> dateRange }} }
-  { {{{ latex "href" this.url this.name }}} }{ {{ this.summary }} }
+  { {{ link this.url this.name plain=true }} }{ {{ this.summary }} }
     {{#if this.highlights}}
     \resumeItemListStart{}
       {{#each this.highlights }}
@@ -228,7 +231,7 @@
     % fourth. Stacked short entries in the right-hand column form a separate
     % layout region, so text extractors emit all the dates together after the
     % following section - detaching every date from its degree.
-    \resumeQuadHeading{ {{ this.institution }} }{ \uline{ {{{ latex "href" this.url "Website" }}} } }
+    \resumeQuadHeading{ {{ this.institution }} }{ {{ link this.url "Website" }} }
     { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}}, {{> dateRange }} }{ }
     {{/each}}
   \resumeHeadingListEnd{}
@@ -241,7 +244,7 @@
 \section{Certifications}
   \resumeItemListStart{}
     {{#each certificates}}
-    \resumeItem{\uline{ {{{ latex "href" this.url (join "" this.name " from " this.issuer " - " (formatMonth "en" this.date)) }}} }}
+    \resumeItem{ {{ link this.url (join "" this.name " from " this.issuer " - " (formatMonth "en" this.date)) }} }
     {{/each}}
   \resumeItemListEnd{}
 {{/if}}
@@ -256,7 +259,7 @@
 \section{Open Source projects}
   \resumeHeadingListStart{}
     {{#each projects}}
-    \resumeTrioHeading{ {{ this.name }} }{ {{ join ", " this.keywords }} }{  {{{ latex "href" this.url "\uline{Source Code}" }}} }
+    \resumeTrioHeading{ {{ this.name }} }{ {{ join ", " this.keywords }} }{  {{ link this.url "Source Code" }} }
       \resumeItemListStart{}
         \resumeItem{ {{ this.description }} }
         {{#each this.highlights }}
