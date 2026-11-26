@@ -223,7 +223,7 @@
 \resumeHeadingListStart{}
   {{#each work}}
   \resumeQuadHeading{ {{ this.position }} }{ {{> dateRange }} }
-  { {{ link this.url this.name plain=true }} }{ {{ this.summary }} }
+  { {{ link this.url this.name plain=true }} }{ {{ this.location }} }
     {{#if this.highlights}}
     \resumeItemListStart{}
       {{> highlights }}
