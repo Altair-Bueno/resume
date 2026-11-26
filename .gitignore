@@ -1,7 +1,6 @@
 out
 .vscode
 .idea
-.venv
 *.log
 **.local
-**__pycache__node_modules
+node_modules
