@@ -18,25 +18,25 @@ concurrency:
 jobs:
   fmt:
     runs-on: ubuntu-latest
-    container: denoland/deno:latest
+    container: denoland/deno:latest@sha256:a0d88a7fcbd44f062cba2748e19df67d30290ad12aa203c7c1e0b12462c483f0
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - run: deno fmt --check
 
   render:
     name: Render LaTeX from resume data
     runs-on: ubuntu-latest
-    container: denoland/deno:latest
+    container: denoland/deno:latest@sha256:a0d88a7fcbd44f062cba2748e19df67d30290ad12aa203c7c1e0b12462c483f0
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: /deno-dir
           key: deno-${{ hashFiles('deno.lock') }}
       - run: deno task validate
       - run: mkdir -p out
       - run: deno task render
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: tex
           path: out/resume.tex
@@ -44,11 +44,11 @@ jobs:
   compile:
     name: Compile PDF
     runs-on: ubuntu-latest
-    container: texlive/texlive:latest
+    container: texlive/texlive:latest@sha256:540d736c78e2803cdd7b6a196bd21339c30185948db55e04e75a415959102ca8
     needs:
       - render
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: tex
           path: out
@@ -59,7 +59,7 @@ jobs:
             -halt-on-error \
             -output-directory=out \
             out/resume.tex
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: resume
           path: out/resume.pdf
@@ -67,16 +67,16 @@ jobs:
   thumbnail:
     name: Render thumbnail
     runs-on: ubuntu-latest
-    container: minidocks/poppler:latest
+    container: minidocks/poppler:latest@sha256:213f4337c9e21ba7301058ba8c456a9c82acbb603caef05e4a78585af2e6964e
     needs:
       - compile
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: resume
           path: out
       - run: pdftoppm -png -singlefile out/resume.pdf out/thumbnail
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: thumbnail
           path: out/thumbnail.png
@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
-        uses: re-actors/alls-green@v1.2.2
+        uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe # v1.2.2
         with:
           jobs: ${{ toJSON(needs) }}
 
@@ -107,15 +107,15 @@ jobs:
       pull-requests: write # to be able to comment on released pull requests
     if: github.ref_name == github.event.repository.default_branch
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0 # semantic-release needs the full commit history
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           pattern: "{resume,thumbnail}"
           merge-multiple: true
           path: out
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .github/release/package.json
           cache: npm
