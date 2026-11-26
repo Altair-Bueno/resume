@@ -4,5 +4,12 @@
     "config:recommended",
     "docker:pinDigests",
     "helpers:pinGitHubActionDigests"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions",
+      "automerge": true
+    }
   ]
 }
