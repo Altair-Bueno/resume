@@ -141,6 +141,19 @@
   \end{tabular*}
 }
 
+% resumeStackedHeading renders the first row of resumeQuadHeading and a single
+% italicized second row, with nothing right-aligned below the first row.
+% Stacked short entries in the right-hand column form a separate layout region,
+% so text extractors would emit them all together after the following section -
+% detaching every date from its degree. Fold such values into #3 instead.
+\newcommand{\resumeStackedHeading}[3]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \\
+  \end{tabular*}
+}
+
 % commands to start and end itemization of resumeQuadHeading, lefmargin for left indent of 0.15in for resumeItems
 \newcommand{\resumeHeadingListStart}{
   \begin{itemize}[leftmargin=0.15in, label={}]
@@ -152,14 +165,19 @@
 %__________________RESUME____________________
 % You can rearrange sections in any order you may prefer
 \begin{document}
-{{#*inline "dateRange"}}{{ formatMonth "en" this.startDate }} - {{#if this.endDate}}{{ formatMonth "en" this.endDate }}{{else}}Present{{/if}}{{/inline}}
+{{#*inline "dateRange"}}{{ formatMonth @root.meta.locale this.startDate }} - {{#if this.endDate}}{{ formatMonth @root.meta.locale this.endDate }}{{else}}Present{{/if}}{{/inline}}
+{{#*inline "highlights"}}
+{{#each this.highlights}}
+\resumeItem{ {{ this }} }
+{{/each}}
+{{/inline}}
 
 %-----------CONTACT DETAILS------------------
 % Make sure all the details are correct, you can add more links in the first row of second column if needed
 
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{\Huge {{ basics.name }} \vspace{2pt}} &
-  {{ basics.location.city }}, {{ basics.location.region }}, {{ isoCountriesGetName basics.location.countryCode "en" }} \\ % row = 1, col = 2
+  {{ basics.location.city }}, {{ basics.location.region }}, {{ isoCountriesGetName basics.location.countryCode @root.meta.locale }} \\ % row = 1, col = 2
   {{ link basics.url "Website" }} {{#if basics.profiles}}$|${{/if}}
   {{#each basics.profiles }}
   {{ link this.url this.network }} {{#unless @last}}$|${{/unless}}
@@ -208,9 +226,7 @@
   { {{ link this.url this.name plain=true }} }{ {{ this.summary }} }
     {{#if this.highlights}}
     \resumeItemListStart{}
-      {{#each this.highlights }}
-      \resumeItem{ {{ this }} }
-      {{/each}}
+      {{> highlights }}
     \resumeItemListEnd{}
     {{/if}}
   {{/each}}
@@ -227,12 +243,8 @@
 \section{Education}
   \resumeHeadingListStart{}
     {{#each education}}
-    % The date is folded into the third cell rather than right-aligned in the
-    % fourth. Stacked short entries in the right-hand column form a separate
-    % layout region, so text extractors emit all the dates together after the
-    % following section - detaching every date from its degree.
-    \resumeQuadHeading{ {{ this.institution }} }{ {{ link this.url "Website" }} }
-    { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}}, {{> dateRange }} }{ }
+    \resumeStackedHeading{ {{ this.institution }} }{ {{ link this.url "Website" }} }
+    { {{ this.studyType }} of {{ this.area }}{{#if this.score}}. {{ this.score }}{{/if}}, {{> dateRange }} }
     {{/each}}
   \resumeHeadingListEnd{}
 {{/if}}
@@ -244,7 +256,7 @@
 \section{Certifications}
   \resumeItemListStart{}
     {{#each certificates}}
-    \resumeItem{ {{ link this.url (join "" this.name " from " this.issuer " - " (formatMonth "en" this.date)) }} }
+    \resumeItem{ {{ link this.url (join "" this.name " from " this.issuer " - " (formatMonth @root.meta.locale this.date)) }} }
     {{/each}}
   \resumeItemListEnd{}
 {{/if}}
@@ -262,9 +274,7 @@
     \resumeTrioHeading{ {{ this.name }} }{ {{ join ", " this.keywords }} }{  {{ link this.url "Source Code" }} }
       \resumeItemListStart{}
         \resumeItem{ {{ this.description }} }
-        {{#each this.highlights }}
-        \resumeItem{ {{ this }} }
-        {{/each}}
+        {{> highlights }}
       \resumeItemListEnd{}
     {{/each}}
   \resumeHeadingListEnd{}
