@@ -29,6 +29,7 @@ jobs:
     container: denoland/deno:latest
     steps:
       - uses: actions/checkout@v4
+      - run: deno task validate
       - run: mkdir -p out
       - run: deno task render
       - uses: actions/upload-artifact@v4
