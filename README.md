@@ -21,8 +21,9 @@ The three commands below are the same ones CI runs, in the same images.
 ```bash
 mkdir -p out
 
-# 1. Render the LaTeX source from data/resume.yml
-docker run --rm -v "$PWD:/w" -w /w denoland/deno:latest deno task render
+# 1. Validate data/resume.yml and render the LaTeX source from it
+docker run --rm -v "$PWD:/w" -w /w denoland/deno:latest \
+  sh -c "deno task validate && deno task render"
 
 # 2. Compile the PDF
 docker run --rm -v "$PWD:/w" -w /w texlive/texlive:latest \
