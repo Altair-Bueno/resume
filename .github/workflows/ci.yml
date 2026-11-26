@@ -29,6 +29,10 @@ jobs:
     container: denoland/deno:latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: /deno-dir
+          key: deno-${{ hashFiles('deno.lock') }}
       - run: deno task validate
       - run: mkdir -p out
       - run: deno task render

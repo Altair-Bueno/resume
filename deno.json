@@ -1,7 +1,7 @@
 {
   "tasks": {
-    "validate": "deno run -q --allow-read=. --no-prompt scripts/validate.ts data/resume.yml",
-    "render": "deno run -q --allow-read=. --allow-write=. --no-prompt scripts/hbs.ts --hbs.strict -d data/resume.yml templates/rezume.hbs -o out/resume.tex"
+    "validate": "deno run -q --frozen --allow-read=. --no-prompt scripts/validate.ts data/resume.yml",
+    "render": "deno run -q --frozen --allow-read=. --allow-write=. --no-prompt scripts/hbs.ts --hbs.strict -d data/resume.yml templates/rezume.hbs -o out/resume.tex"
   },
   "imports": {
     "@jsonresume/schema": "npm:@jsonresume/schema@^1.11.0",
