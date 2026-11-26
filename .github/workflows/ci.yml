@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read # for checkout
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref_name != github.event.repository.default_branch }}
+
 # This workflow is the only definition of how the resume is built. Each stage
 # runs in the image that owns its toolchain, and hands the next stage its
 # output as an artifact - no stage needs another stage's tools installed.
@@ -26,16 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: mkdir -p out
-      - run: |
-          deno run -q \
-            --allow-read=. \
-            --allow-write=. \
-            --no-prompt \
-            scripts/hbs.ts \
-            --hbs.strict \
-            -d data/resume.yml \
-            templates/rezume.hbs \
-            -o out/resume.tex
+      - run: deno task render
       - uses: actions/upload-artifact@v4
         with:
           name: tex
@@ -52,13 +47,7 @@ jobs:
         with:
           name: tex
           path: out
-      # LuaTeX specifically, not XeTeX/tectonic. No engine emits space glyphs -
-      # word gaps are TJ offsets, and extractors tell them from letter kerns by
-      # magnitude. The sourcesanspro "type1" option is what makes that possible:
-      # TeX kerns only a few letter pairs, leaving word gaps distinctly larger,
-      # whereas XeTeX positions every glyph via HarfBuzz and the gaps blur
-      # together. XeTeX also maps f-ligature glyphs to U+FB01/U+FB02, leaving
-      # words like "InfluxDB" and "CERTIFICATIONS" unsearchable.
+      # LuaTeX specifically, not XeTeX/tectonic; see the README for why.
       - run: |
           lualatex \
             -interaction=nonstopmode \
@@ -111,21 +100,15 @@ jobs:
       contents: write # to be able to publish a GitHub release
       issues: write # to be able to comment on released issues
       pull-requests: write # to be able to comment on released pull requests
-      id-token: write # to enable use of OIDC for npm provenance
-    if: >
-      startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref,
-      'refs/heads/master')
+    if: github.ref_name == github.event.repository.default_branch
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # semantic-release needs the full commit history
       - uses: actions/download-artifact@v4
         with:
-          name: resume
-          path: out
-      - uses: actions/download-artifact@v4
-        with:
-          name: thumbnail
+          pattern: "{resume,thumbnail}"
+          merge-multiple: true
           path: out
       - name: Release
         env:
