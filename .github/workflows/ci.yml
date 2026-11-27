@@ -67,7 +67,7 @@ jobs:
   thumbnail:
     name: Render thumbnail
     runs-on: ubuntu-latest
-    container: minidocks/poppler:latest@sha256:213f4337c9e21ba7301058ba8c456a9c82acbb603caef05e4a78585af2e6964e
+    container: minidocks/poppler:latest@sha256:9a87f7f864107b9b3ea7976a32a69d4763bd4957e9d48865506a6867d0816c5f
     needs:
       - compile
     steps:
