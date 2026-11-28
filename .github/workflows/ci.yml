@@ -99,9 +99,21 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: resume-${{ matrix.variant }}
-          path: |
-            out/*.pdf
-            out/*.png
+          path: out/resume-${{ matrix.variant }}.pdf
+
+  thumbnail:
+    name: Render the thumbnail
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        with:
+          install_args: typst conda:poppler
+      - run: mise run thumbnail
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: resume-thumbnail
+          path: out/thumbnail.png
 
   ci-check:
     name: Check all statuses are green
@@ -113,6 +125,7 @@ jobs:
       - reading-order
       - variants
       - compile
+      - thumbnail
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
@@ -124,6 +137,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - compile
+      - thumbnail
       - test
       - reading-order
     permissions:

@@ -13,7 +13,7 @@
     },
     "variants": {
       "type": "object",
-      "description": "Resume variants, keyed by name. Each one becomes resume-<name>.pdf, except `full`, which becomes resume.pdf.",
+      "description": "Resume variants, keyed by name. Each one becomes resume-<name>.pdf.",
       "required": ["full"],
       "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
       "additionalProperties": { "$ref": "#/$defs/variant" }
