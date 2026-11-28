@@ -1,0 +1,28 @@
+Ada Example
+Software Engineer
+Springfield, Exampleland · example.com · github.com/ada-example · ada@example.com · +34 600 00 00 00
+Fixture summary with an apostrophe’s worth of text.
+Skills
+Systems: Rust (tokio, no_std), Alpha-only skill
+Beta group: Beta skill
+Languages: English (Native speaker)
+Experience
+Position One
+Org One · Remote · Oct 2024 – Present
+• Shared highlight
+• Hidden in alpha
+Position Two
+Org Two · Jan 2020 – Jun 2022
+• Beta position highlight
+Education
+Master of Examples
+Example University · 9.0 average mark · Sep 2018 – Jul 2020
+Certifications
+Example Certificate · Example Issuer · Mar 2021
+Open Source Projects
+example-project · github.com/ada-example/example-project
+Rust, Typst
+• Fixture project summary.
+• Project highlight
+Publications
+Example, A. (2024). An example article. Journal of Examples. https://doi.org/10.1000/example

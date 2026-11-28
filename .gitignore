@@ -1,4 +1,6 @@
 out
+tests/**/diff/
+tests/**/out/
 .vscode
 .idea
 *.log

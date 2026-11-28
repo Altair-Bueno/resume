@@ -8,6 +8,7 @@ variants:
     tags: [embedded]
   cloud:
     tags: [cloud]
+    pages: 1
 
 person:
   name: Altair Bueno Calvente

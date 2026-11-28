@@ -17,6 +17,8 @@ Each profile under `variants` decides what it shows:
   every variant. Omit `tags` to show everything, as `full` does.
 - `hide`: leave out specific items by `id`.
 - `headline` and `summary`: replace the person's defaults.
+- `sections`: which sections to show, in order. Omitted sections are hidden.
+- `pages`: fail the build if the variant runs longer than this.
 
 Sections, skill items and highlights can all carry `id` and `tags`:
 
@@ -52,9 +54,14 @@ variant), `thumbnail.png`, and `resume-<variant>.pdf` for every other variant.
   with the `ghcr.io/typst/typst` image
 - [check-jsonschema](https://github.com/python-jsonschema/check-jsonschema)
   (e.g. `brew install check-jsonschema`) to validate the data
+- [tytanic](https://github.com/typst-community/tytanic) (e.g.
+  `brew install tytanic`) and poppler (e.g. `brew install poppler`) to run the
+  tests
 
 Fonts are vendored in [`fonts`](fonts) so builds don't depend on what is
-installed on the machine.
+installed on the machine. The first build downloads two packages from
+[Typst Universe](https://typst.app/universe), `datify` and `linguify`, and
+caches them.
 
 ## Building the resume
 
@@ -64,11 +71,11 @@ export TYPST_ROOT=. TYPST_FONT_PATHS=fonts TYPST_IGNORE_SYSTEM_FONTS=true
 # Validate the data
 check-jsonschema --schemafile data/resume.schema.json data/resume.yml
 
-# Full resume
-typst compile templates/resume.typ out/resume.pdf
+# Full resume, checked against PDF/UA-1 (accessible, tagged PDF)
+typst compile --pdf-standard ua-1 templates/resume.typ out/resume.pdf
 
 # A specific variant
-typst compile --input variant=embedded templates/resume.typ out/resume-embedded.pdf
+typst compile --pdf-standard ua-1 --input variant=embedded templates/resume.typ out/resume-embedded.pdf
 
 # Thumbnail
 typst compile --pages 1 --ppi 150 templates/resume.typ out/thumbnail.png
@@ -77,10 +84,43 @@ typst compile --pages 1 --ppi 150 templates/resume.typ out/thumbnail.png
 typst watch templates/resume.typ out/resume.pdf
 ```
 
+## Layout
+
+[`templates/resume.typ`](templates/resume.typ) only loads the data. The template
+lives in [`lib`](lib):
+
+- [`select.typ`](lib/select.typ) applies a variant to the data and checks
+  references. It does no layout.
+- [`components.typ`](lib/components.typ) holds the building blocks: header,
+  section, entry.
+- [`resume.typ`](lib/resume.typ) maps each section of the data to components.
+- [`lang.toml`](lib/lang.toml) holds the template's own strings, per language.
+
+Everything is set flush left on purpose. Text extractors such as poppler detach
+right-aligned columns from the entry they belong to, so dates would end up away
+from their job.
+
+## Testing
+
+Tests run against [`tests/fixtures/resume.yml`](tests/fixtures/resume.yml), not
+the real data, so editing the resume never breaks them.
+
+```bash
+# Unit tests for variant selection, and a reference-image test of the layout
+tt run --font-path fonts --no-use-system-fonts
+
+# Accept an intended layout change
+tt update --font-path fonts --no-use-system-fonts
+
+# Check that extracted text keeps its reading order
+typst compile --pdf-standard ua-1 --input data=/tests/fixtures/resume.yml templates/resume.typ out/fixture.pdf
+tests/reading-order.sh out/fixture.pdf tests/fixtures/reading-order.txt
+```
+
 # License
 
 All software is licensed under the MIT license ([license](LICENSE)), except for
-the templates and fonts. Please refer to each template header on the
-[`templates`](templates) directory, and to
-[`fonts/LICENSE.txt`](fonts/LICENSE.txt) (SIL Open Font License 1.1) for Source
-Sans 3. All data under [`data`](data/) belongs to Altair Bueno
+the templates and fonts. Please refer to the header of
+[`lib/components.typ`](lib/components.typ) for the layout it derives from, and
+to [`fonts/LICENSE.txt`](fonts/LICENSE.txt) (SIL Open Font License 1.1) for
+Source Sans 3. All data under [`data`](data/) belongs to Altair Bueno

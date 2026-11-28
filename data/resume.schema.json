@@ -8,9 +8,8 @@
   "properties": {
     "title": { "type": "string", "description": "PDF document title" },
     "locale": {
-      "type": "string",
-      "pattern": "^[a-z]{2}$",
-      "description": "ISO 639-1 language code"
+      "enum": ["en"],
+      "description": "ISO 639-1 code of a language in lib/lang.toml"
     },
     "variants": {
       "type": "object",
@@ -119,7 +118,28 @@
           "description": "Ids of items to leave out of this variant"
         },
         "headline": { "$ref": "#/$defs/text" },
-        "summary": { "$ref": "#/$defs/text" }
+        "summary": { "$ref": "#/$defs/text" },
+        "pages": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Fail the build if this variant takes more pages"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "skills",
+              "languages",
+              "experience",
+              "education",
+              "certifications",
+              "projects",
+              "publications"
+            ]
+          },
+          "uniqueItems": true,
+          "description": "Sections to show, in order. Omitted sections are hidden. Defaults to every section in this order."
+        }
       }
     },
     "person": {
