@@ -1,4 +1,4 @@
-#import "/lib/resume.typ": resume
+#import "/src/lib/resume.typ": resume
 
 #let data = yaml(sys.inputs.at("data", default: "/data/resume.yml"))
 

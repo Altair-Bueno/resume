@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Altair-Bueno/resume/data/resume.schema.json",
+  "$id": "https://github.com/Altair-Bueno/resume/docs/resume.schema.json",
   "title": "Resume",
   "type": "object",
   "additionalProperties": false,
@@ -9,7 +9,7 @@
     "title": { "type": "string", "description": "PDF document title" },
     "locale": {
       "enum": ["en"],
-      "description": "ISO 639-1 code of a language in lib/lang.toml"
+      "description": "ISO 639-1 code of a language in src/lib/lang.toml"
     },
     "variants": {
       "type": "object",
@@ -145,14 +145,7 @@
     "person": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "name",
-        "headline",
-        "email",
-        "phone",
-        "address",
-        "summary"
-      ],
+      "required": ["name", "headline", "email", "phone", "address", "summary"],
       "properties": {
         "name": { "$ref": "#/$defs/text" },
         "headline": { "$ref": "#/$defs/text" },

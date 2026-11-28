@@ -1,4 +1,4 @@
-#import "/lib/select.typ": check, select
+#import "/src/lib/select.typ": check, select
 
 #let data = yaml("/tests/fixtures/resume.yml")
 #let texts(entry) = entry.highlights

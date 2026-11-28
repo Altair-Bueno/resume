@@ -1,7 +1,7 @@
 [package]
 name = "resume"
 version = "0.0.0"
-entrypoint = "templates/resume.typ"
+entrypoint = "src/templates/resume.typ"
 
 [tool.tytanic]
 tests = "tests"

@@ -1,0 +1,81 @@
+min_version = "2026.11.14"
+
+[tools]
+typst = "0.15.1"
+"github:typst-community/tytanic" = "0.4.1"
+jsonschema = "17.3.3"
+"conda:poppler" = "26.11.0"
+typstyle = "0.15.3"
+"aqua:oxc-project/oxc/oxfmt" = "0.80.0"
+node = "26.13.1"
+"npm:semantic-release" = "26.0.1"
+
+[env]
+TYPST_ROOT = "{{config_root}}"
+TYPST_FONT_PATHS = "{{config_root}}/src/fonts"
+TYPST_IGNORE_SYSTEM_FONTS = "true"
+
+[tasks.fmt]
+description = "Check formatting"
+run = ["typstyle --check src tests", "oxfmt --check ."]
+
+[tasks.validate]
+description = "Validate the schema and the resume data against it"
+run = [
+  "jsonschema metaschema docs/resume.schema.json",
+  "jsonschema validate --format-assertion docs/resume.schema.json data/resume.yml tests/fixtures/resume.yml",
+]
+
+[tasks.test]
+description = "Run the template tests"
+run = "tt run"
+
+[tasks.fixture]
+description = "Compile the fixture resume to out/fixture.pdf"
+run = [
+  "mkdir -p out",
+  "typst compile --pdf-standard ua-1 --input data=/tests/fixtures/resume.yml src/templates/resume.typ out/fixture.pdf",
+]
+
+[tasks.reading-order]
+description = "Check that text extracted from the fixture keeps its reading order"
+depends = ["fixture"]
+run = "tests/reading-order.sh out/fixture.pdf tests/fixtures/reading-order.txt"
+
+[tasks.variants]
+description = "Print the resume variants as a JSON array"
+run = "typst eval 'query(<variants>).first().value' --in src/templates/resume.typ"
+
+[tasks.build]
+description = "Compile a resume variant into out/, plus the thumbnail for full"
+usage = 'arg "[variant]" default="full"'
+# Typst reports a missing font as a warning, so fail on any warning.
+# Package download progress also goes to stderr, so match on the label.
+run = '''
+#!/usr/bin/env sh
+set -eu
+variant="${usage_variant:-full}"
+if [ "$variant" = full ]; then name=resume; else name="resume-$variant"; fi
+mkdir -p out
+{
+  typst compile --pdf-standard ua-1 --input "variant=$variant" src/templates/resume.typ "out/$name.pdf" &&
+  if [ "$variant" = full ]; then
+    typst compile --pages 1 --ppi 150 src/templates/resume.typ out/thumbnail.png
+  fi
+} 2> out/diagnostics.txt || { cat out/diagnostics.txt; exit 1; }
+cat out/diagnostics.txt
+! grep -q '^warning' out/diagnostics.txt
+'''
+
+[tasks.watch]
+description = "Recompile a resume variant on every change"
+usage = 'arg "[variant]" default="full"'
+run = 'mkdir -p out && typst watch --input "variant=${usage_variant:-full}" src/templates/resume.typ out/resume.pdf'
+
+[tasks.release]
+description = "Publish a GitHub release with the files in out/"
+run = "semantic-release"
+
+[tasks.pre-commit]
+description = "Run the fast checks before each commit"
+depends = ["fmt", "validate", "test", "reading-order"]

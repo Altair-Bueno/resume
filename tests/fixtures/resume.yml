@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../../data/resume.schema.json
+# yaml-language-server: $schema=../../docs/resume.schema.json
 title: Fixture Resume
 locale: en
 

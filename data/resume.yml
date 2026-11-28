@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=./resume.schema.json
+# yaml-language-server: $schema=../docs/resume.schema.json
 title: Altair Bueno's Resume
 locale: en
 
