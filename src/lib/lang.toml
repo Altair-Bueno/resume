@@ -1,0 +1,13 @@
+[conf]
+default-lang = "en"
+
+[lang.en]
+present = "Present"
+degree-of = "of"
+skills = "Skills"
+languages = "Languages"
+experience = "Experience"
+education = "Education"
+certifications = "Certifications"
+projects = "Open Source Projects"
+publications = "Publications"

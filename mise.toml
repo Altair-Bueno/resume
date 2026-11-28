@@ -1,0 +1,75 @@
+min_version = "2026.11.14"
+
+[tools]
+typst = "0.15.1"
+"github:typst-community/tytanic" = "0.4.1"
+jsonschema = "17.3.3"
+"conda:poppler" = "26.11.0"
+typstyle = "0.15.3"
+"aqua:oxc-project/oxc/oxfmt" = "0.80.0"
+node = "26.13.1"
+"npm:semantic-release" = "26.0.1"
+
+[env]
+TYPST_ROOT = "{{config_root}}"
+TYPST_FONT_PATHS = "{{config_root}}/src/fonts"
+TYPST_IGNORE_SYSTEM_FONTS = "true"
+
+[tasks.fmt]
+description = "Check formatting"
+run = ["typstyle --check src tests", "oxfmt --check ."]
+
+[tasks.validate]
+description = "Validate the schema and the resume data against it"
+run = [
+  "jsonschema metaschema --extension .schema.json docs",
+  "jsonschema validate --format-assertion --extension .yml --extension .yaml docs/resume.schema.json data tests",
+]
+
+[tasks.test]
+description = "Run the template tests"
+run = "tt run"
+
+[tasks.out]
+hide = true
+run = "mkdir -p out"
+
+[tasks.fixture]
+description = "Compile the fixture resume to out/fixture.pdf"
+depends = ["out"]
+run = "typst compile --pdf-standard ua-1 --input data=/tests/fixtures/resume.yml src/templates/resume.typ out/fixture.pdf"
+
+[tasks.reading-order]
+description = "Check that text extracted from the fixture keeps its reading order"
+depends = ["fixture"]
+run = "tests/reading-order.sh out/fixture.pdf tests/fixtures/reading-order.txt"
+
+[tasks.variants]
+description = "Print the resume variants as a JSON array"
+run = "typst eval 'query(<variants>).first().value' --in src/templates/resume.typ"
+
+[tasks.build]
+description = "Compile a resume variant to out/resume-<variant>.pdf"
+usage = 'arg "[variant]" default="full"'
+depends = ["out"]
+run = 'typst compile --pdf-standard ua-1 --input "variant=${usage_variant}" src/templates/resume.typ "out/resume-${usage_variant}.pdf"'
+
+[tasks.thumbnail]
+description = "Render the first page of a resume variant to out/thumbnail.png"
+usage = 'arg "[variant]" default="full"'
+depends = ["build {{usage.variant}}"]
+run = "pdftoppm -png -r 150 -f 1 -l 1 -singlefile out/resume-${usage_variant}.pdf out/thumbnail"
+
+[tasks.watch]
+description = "Recompile a resume variant on every change"
+usage = 'arg "[variant]" default="full"'
+depends = ["out"]
+run = 'typst watch --input "variant=${usage_variant}" src/templates/resume.typ "out/resume-${usage_variant}.pdf"'
+
+[tasks.release]
+description = "Publish a GitHub release with the files in out/"
+run = "semantic-release"
+
+[tasks.pre-commit]
+description = "Run the fast checks before each commit"
+depends = ["fmt", "validate", "test", "reading-order"]
