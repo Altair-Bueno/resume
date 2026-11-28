@@ -4,81 +4,116 @@ on:
       - "**"
     tags:
       - "*"
+  workflow_dispatch:
 
 permissions:
-  contents: read # for checkout
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref_name != github.event.repository.default_branch }}
 
-# This workflow is the only definition of how the resume is built. Each stage
-# runs in the image that owns its toolchain, and hands the next stage its
-# output as an artifact - no stage needs another stage's tools installed.
+env:
+  MISE_TASK_RUN_AUTO_INSTALL: "false"
+
 jobs:
   fmt:
     runs-on: ubuntu-latest
-    container: denoland/deno:latest@sha256:a0d88a7fcbd44f062cba2748e19df67d30290ad12aa203c7c1e0b12462c483f0
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - run: deno fmt --check
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        with:
+          install_args: typstyle aqua:oxc-project/oxc/oxfmt
+      - run: mise run fmt
 
-  render:
-    name: Render LaTeX from resume data
+  validate:
+    name: Validate resume data against its schema
     runs-on: ubuntu-latest
-    container: denoland/deno:latest@sha256:a0d88a7fcbd44f062cba2748e19df67d30290ad12aa203c7c1e0b12462c483f0
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
         with:
-          path: /deno-dir
-          key: deno-${{ hashFiles('deno.lock') }}
-      - run: deno task validate
-      - run: mkdir -p out
-      - run: deno task render
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+          install_args: jsonschema
+      - run: mise run validate
+
+  test:
+    name: Run template tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
         with:
-          name: tex
-          path: out/resume.tex
+          install_args: github:typst-community/tytanic
+      - run: mise run test
+      - if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: test-diffs
+          path: tests/**/diff/
+
+  reading-order:
+    name: Check text extraction order
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        with:
+          install_args: typst conda:poppler
+      - run: mise run reading-order
+      - if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: fixture
+          path: out/fixture.pdf
+
+  variants:
+    name: List resume variants
+    runs-on: ubuntu-latest
+    needs:
+      - validate
+    outputs:
+      list: ${{ steps.list.outputs.list }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        with:
+          install_args: typst
+      - id: list
+        run: echo "list=$(mise run --quiet variants)" >> "$GITHUB_OUTPUT"
 
   compile:
-    name: Compile PDF
+    name: Compile ${{ matrix.variant }} resume
     runs-on: ubuntu-latest
-    container: texlive/texlive:latest@sha256:540d736c78e2803cdd7b6a196bd21339c30185948db55e04e75a415959102ca8
     needs:
-      - render
+      - variants
+    strategy:
+      matrix:
+        variant: ${{ fromJSON(needs.variants.outputs.list) }}
+    env:
+      VARIANT: ${{ matrix.variant }}
     steps:
-      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
         with:
-          name: tex
-          path: out
-      # LuaTeX specifically, not XeTeX/tectonic; see the README for why.
-      - run: |
-          lualatex \
-            -interaction=nonstopmode \
-            -halt-on-error \
-            -output-directory=out \
-            out/resume.tex
+          install_args: typst
+      - run: mise run build "$VARIANT"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
-          name: resume
-          path: out/resume.pdf
+          name: resume-${{ matrix.variant }}
+          path: out/resume-${{ matrix.variant }}.pdf
 
   thumbnail:
-    name: Render thumbnail
+    name: Render the thumbnail
     runs-on: ubuntu-latest
-    container: minidocks/poppler:latest@sha256:6dff94bb1043176beca09f2a3df288c09fcfe5866138c7fa9bb20d104dd0c2c7
-    needs:
-      - compile
     steps:
-      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
         with:
-          name: resume
-          path: out
-      - run: pdftoppm -png -singlefile out/resume.pdf out/thumbnail
+          install_args: typst conda:poppler
+      - run: mise run thumbnail
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
-          name: thumbnail
+          name: resume-thumbnail
           path: out/thumbnail.png
 
   ci-check:
@@ -86,7 +121,10 @@ jobs:
     if: always()
     needs:
       - fmt
-      - render
+      - validate
+      - test
+      - reading-order
+      - variants
       - compile
       - thumbnail
     runs-on: ubuntu-latest
@@ -99,29 +137,25 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     needs:
-      - compile
-      - thumbnail
+      - ci-check
     permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-    if: github.ref_name == github.event.repository.default_branch
+      contents: write
+      issues: write
+      pull-requests: write
+    if: github.event_name == 'workflow_dispatch' && github.ref_name == github.event.repository.default_branch
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          fetch-depth: 0 # semantic-release needs the full commit history
+          fetch-depth: 0
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
-          pattern: "{resume,thumbnail}"
+          pattern: resume-*
           merge-multiple: true
           path: out
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
         with:
-          node-version-file: .github/release/package.json
-          cache: npm
-          cache-dependency-path: .github/release/package-lock.json
-      - run: npm ci --prefix .github/release
+          install_args: node npm:semantic-release
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: .github/release/node_modules/.bin/semantic-release
+        run: mise run release

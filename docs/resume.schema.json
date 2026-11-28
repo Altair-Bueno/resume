@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Altair-Bueno/resume/docs/resume.schema.json",
+  "title": "Resume",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "locale", "variants", "person"],
+  "properties": {
+    "title": { "type": "string", "description": "PDF document title" },
+    "locale": {
+      "enum": ["en"],
+      "description": "ISO 639-1 code of a language in src/lib/lang.toml"
+    },
+    "variants": {
+      "type": "object",
+      "description": "Resume variants, keyed by name. Each one becomes resume-<name>.pdf.",
+      "required": ["full"],
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": { "$ref": "#/$defs/variant" }
+    },
+    "person": { "$ref": "#/$defs/person" },
+    "skills": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/skill-group" }
+    },
+    "languages": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/language" }
+    },
+    "experience": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/position" }
+    },
+    "education": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/degree" }
+    },
+    "certifications": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/certification" }
+    },
+    "projects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/project" }
+    },
+    "publications": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/publication" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Stable identifier, referenced by a variant's `hide` list"
+    },
+    "tag": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "text": { "type": "string", "minLength": 1 },
+    "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+    "month": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$",
+      "description": "Year and month, as YYYY-MM"
+    },
+    "selectable": {
+      "description": "Fields shared by everything a variant can show or hide",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tag" },
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "Variants showing any of these tags include this item. Untagged items appear in every variant."
+        }
+      }
+    },
+    "text-item": {
+      "description": "Plain text shown in every variant, or text with selection fields",
+      "oneOf": [
+        { "$ref": "#/$defs/text" },
+        {
+          "type": "object",
+          "$ref": "#/$defs/selectable",
+          "unevaluatedProperties": false,
+          "required": ["text"],
+          "properties": { "text": { "$ref": "#/$defs/text" } }
+        }
+      ]
+    },
+    "text-items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/text-item" }
+    },
+    "organization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "url": { "$ref": "#/$defs/url" }
+      }
+    },
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tag" },
+          "uniqueItems": true,
+          "description": "Show tagged items carrying any of these tags. Omit to show every item."
+        },
+        "hide": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true,
+          "description": "Ids of items to leave out of this variant"
+        },
+        "headline": { "$ref": "#/$defs/text" },
+        "summary": { "$ref": "#/$defs/text" },
+        "pages": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Fail the build if this variant takes more pages"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "skills",
+              "languages",
+              "experience",
+              "education",
+              "certifications",
+              "projects",
+              "publications"
+            ]
+          },
+          "uniqueItems": true,
+          "description": "Sections to show, in order. Omitted sections are hidden. Defaults to every section in this order."
+        }
+      }
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "headline", "email", "phone", "address", "summary"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "headline": { "$ref": "#/$defs/text" },
+        "photo": { "$ref": "#/$defs/url" },
+        "email": { "type": "string", "format": "email" },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+[0-9 ]+$",
+          "description": "International format, as displayed"
+        },
+        "website": { "$ref": "#/$defs/url" },
+        "address": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["city", "region", "country"],
+          "properties": {
+            "postal-code": { "type": "string" },
+            "city": { "$ref": "#/$defs/text" },
+            "region": { "$ref": "#/$defs/text" },
+            "country": { "$ref": "#/$defs/text" }
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["network", "url"],
+            "properties": {
+              "network": { "$ref": "#/$defs/text" },
+              "username": { "type": "string" },
+              "url": { "$ref": "#/$defs/url" }
+            }
+          }
+        },
+        "summary": { "$ref": "#/$defs/text" }
+      }
+    },
+    "skill-group": {
+      "type": "object",
+      "$ref": "#/$defs/selectable",
+      "unevaluatedProperties": false,
+      "required": ["name", "items"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "items": { "$ref": "#/$defs/text-items", "minItems": 1 }
+      }
+    },
+    "language": {
+      "type": "object",
+      "$ref": "#/$defs/selectable",
+      "unevaluatedProperties": false,
+      "required": ["name", "level"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "level": { "$ref": "#/$defs/text" }
+      }
+    },
+    "position": {
+      "type": "object",
+      "$ref": "#/$defs/selectable",
+      "unevaluatedProperties": false,
+      "required": ["title", "organization", "start"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "organization": { "$ref": "#/$defs/organization" },
+        "location": { "$ref": "#/$defs/text" },
+        "start": { "$ref": "#/$defs/month" },
+        "end": {
+          "$ref": "#/$defs/month",
+          "description": "Omit while ongoing"
+        },
+        "highlights": { "$ref": "#/$defs/text-items" }
+      }
+    },
+    "degree": {
+      "type": "object",
+      "$ref": "#/$defs/selectable",
+      "unevaluatedProperties": false,
+      "required": ["degree", "field", "institution", "start", "end"],
+      "properties": {
+        "degree": { "$ref": "#/$defs/text" },
+        "field": { "$ref": "#/$defs/text" },
+        "institution": { "$ref": "#/$defs/organization" },
+        "start": { "$ref": "#/$defs/month" },
+        "end": { "$ref": "#/$defs/month" },
+        "grade": { "$ref": "#/$defs/text" }
+      }
+    },
+    "certification": {
+      "type": "object",
+      "$ref": "#/$defs/selectable",
+      "unevaluatedProperties": false,
+      "required": ["name", "issuer", "date", "url"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "issuer": { "$ref": "#/$defs/text" },
+        "date": { "$ref": "#/$defs/month" },
+        "url": { "$ref": "#/$defs/url" }
+      }
+    },
+    "project": {
+      "type": "object",
+      "$ref": "#/$defs/selectable",
+      "unevaluatedProperties": false,
+      "required": ["name", "url", "keywords", "summary"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "kind": { "$ref": "#/$defs/text" },
+        "url": { "$ref": "#/$defs/url" },
+        "start": { "$ref": "#/$defs/month" },
+        "end": { "$ref": "#/$defs/month" },
+        "organization": { "$ref": "#/$defs/text" },
+        "keywords": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/text" },
+          "minItems": 1
+        },
+        "summary": { "$ref": "#/$defs/text" },
+        "highlights": { "$ref": "#/$defs/text-items" }
+      }
+    },
+    "publication": {
+      "type": "object",
+      "$ref": "#/$defs/selectable",
+      "unevaluatedProperties": false,
+      "required": ["id", "type", "title", "authors", "year", "journal"],
+      "properties": {
+        "type": { "enum": ["article"] },
+        "title": { "$ref": "#/$defs/text" },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[^,]+, [^,]+$",
+            "description": "Family name, given name"
+          },
+          "minItems": 1
+        },
+        "year": { "type": "integer" },
+        "journal": { "$ref": "#/$defs/text" },
+        "doi": { "type": "string", "pattern": "^10\\.[0-9]+/" }
+      }
+    }
+  }
+}

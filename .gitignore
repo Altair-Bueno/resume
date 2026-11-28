@@ -1,6 +1,7 @@
 out
+tests/**/diff/
+tests/**/out/
 .vscode
 .idea
 *.log
 **.local
-node_modules

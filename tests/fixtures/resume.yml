@@ -1,0 +1,102 @@
+# yaml-language-server: $schema=../../docs/resume.schema.json
+title: Fixture Resume
+locale: en
+
+variants:
+  full: {}
+  alpha:
+    tags: [alpha]
+    hide: [shared-hidden]
+    headline: Alpha Engineer
+    pages: 1
+  beta:
+    tags: [beta]
+  reordered:
+    sections: [education, experience]
+
+person:
+  name: Ada Example
+  headline: Software Engineer
+  email: ada@example.com
+  phone: "+34 600 00 00 00"
+  website: https://example.com/
+  address:
+    city: Springfield
+    region: Springfield
+    country: Exampleland
+  profiles:
+    - network: GitHub
+      url: https://github.com/ada-example
+  summary: Fixture summary with an apostrophe's worth of text.
+
+skills:
+  - name: Systems
+    items:
+      - Rust (tokio, no_std)
+      - text: Alpha-only skill
+        tags: [alpha]
+  - name: Beta group
+    tags: [beta]
+    items: [Beta skill]
+
+languages:
+  - name: English
+    level: Native speaker
+
+experience:
+  - title: Position One
+    organization:
+      name: Org One
+      url: https://example.com/one
+    location: Remote
+    start: 2024-10
+    highlights:
+      - Shared highlight
+      - text: Alpha highlight
+        tags: [alpha]
+      - text: Beta highlight
+        tags: [beta]
+      - id: shared-hidden
+        text: Hidden in alpha
+  - title: Position Two
+    organization:
+      name: Org Two
+      url: https://example.com/two
+    start: 2020-01
+    end: 2022-06
+    tags: [beta]
+    highlights:
+      - Beta position highlight
+
+education:
+  - degree: Master
+    field: Examples
+    institution:
+      name: Example University
+      url: https://example.com/university
+    start: 2018-09
+    end: 2020-07
+    grade: 9.0 average mark
+
+certifications:
+  - name: Example Certificate
+    issuer: Example Issuer
+    date: 2021-03
+    url: https://example.com/certificate
+
+projects:
+  - name: example-project
+    url: https://github.com/ada-example/example-project
+    keywords: [Rust, Typst]
+    summary: Fixture project summary.
+    highlights:
+      - Project highlight
+
+publications:
+  - id: example2024
+    type: article
+    title: An example article
+    authors: ["Example, Ada"]
+    year: 2024
+    journal: Journal of Examples
+    doi: 10.1000/example
