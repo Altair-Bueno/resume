@@ -22,8 +22,8 @@ run = ["typstyle --check src tests", "oxfmt --check ."]
 [tasks.validate]
 description = "Validate the schema and the resume data against it"
 run = [
-  "jsonschema metaschema docs/resume.schema.json",
-  "jsonschema validate --format-assertion docs/resume.schema.json data/resume.yml tests/fixtures/resume.yml",
+  "jsonschema metaschema --extension .schema.json docs",
+  "jsonschema validate --format-assertion --extension .yml --extension .yaml docs/resume.schema.json data tests",
 ]
 
 [tasks.test]
@@ -49,8 +49,6 @@ run = "typst eval 'query(<variants>).first().value' --in src/templates/resume.ty
 [tasks.build]
 description = "Compile a resume variant into out/, plus the thumbnail for full"
 usage = 'arg "[variant]" default="full"'
-# Typst reports a missing font as a warning, so fail on any warning.
-# Package download progress also goes to stderr, so match on the label.
 run = '''
 #!/usr/bin/env sh
 set -eu
