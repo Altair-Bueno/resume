@@ -40,6 +40,14 @@ mise run fmt            # Check formatting
 mise x -- tt update     # Accept an intended layout change
 ```
 
+# Release
+
+Releases are manual. Run the CI workflow on `master` from the Actions tab, or:
+
+```bash
+gh workflow run ci.yml --ref master
+```
+
 # License
 
 The software is MIT licensed ([LICENSE](LICENSE)). The layout derives from
